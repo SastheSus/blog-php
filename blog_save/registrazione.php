@@ -58,7 +58,7 @@ session_start();
                             <input type="text" id='emailReg'></input>
                             <input type="password" id='passwordReg'></input>
                             <div id="pulsantieraReg">
-                                <a href="./login.php">Sei già registrato?</a>
+                                <a href="./login.php">Hai già un account?</a>
                                 <input type="button" id='buttonReg' onclick='registrati()' value="Registrati"></input>
                             </div>
                             <p id="warningReg"></p>

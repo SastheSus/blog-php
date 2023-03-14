@@ -13,7 +13,6 @@ const accedi = () =>{
             warning.innerHTML="Email o password incorrette"
         }
         else{
-            alert(xhr.response);
             window.location.replace("./index.php");
         }
     }
@@ -132,4 +131,24 @@ const goTo = ($i) =>{
             xmlhttp.open("GET", "uploader.php?title=" + title.innerHTML + "&img=" + img.innerHTML + "&content=" + content.innerHTML, true);
             xmlhttp.send();
         }
+    }
+
+
+    const input = document.getElementById("editorInputImg");
+    const editorImgArt = document.getElementById("editorImgArt");
+    
+    input.addEventListener("change", function () {
+        getImgData();
+    });
+    
+    function getImgData() {
+      const files = input.files;
+      if (files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function () {
+            editorImgArt.style.display = "block";
+            editorImgArt.innerHTML = '<img src="' + this.result + '" />';
+        });    
+      }
     }

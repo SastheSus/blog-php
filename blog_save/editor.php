@@ -58,11 +58,10 @@ session_start();
                         </div>
                         <textarea id='editorDescArt'></textarea>
                         <div id='editorImmagine'>
-                            <img id='editorImgArt' src={img} alt="sample" />
                         </div>
                         <div id='editorInputs'>
-                            <input id="editorInputImg" type="file" accept=".png, .jpg, .jpeg" onChange={image}/>
-                            <input type="button" onClick={invia}/>
+                            <input id="editorInputImg" type="file" accept="image/*"/>
+                            <input type="button"/>
                         </div>
                     </article>
                 </div>
