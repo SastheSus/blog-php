@@ -117,19 +117,29 @@ const goTo = ($i) =>{
         }
     }
     const invia = () =>{
-        const title = document.getElementById('editorTitolo');
-        const img = document.getElementById('editorImgArt');
-        const content = document.getElementById('editorInputImg');
+        const title = document.getElementById('editorTitolo')
+        const img = document.getElementById('editorImgArt')
+        const content = document.getElementById('editorInputImg')
+        var warning = document.getElementById('warningReg')
 
         if(title!=null && img!=null && content!=null){
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                alert("DAJE ROMA = "+img.innerHTML);
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "uploader.php?title=" + title.innerHTML + "&img=" + img.innerHTML + "&content=" + content.innerHTML, true);
+            xhr.send();
+            xhr.onload = () => {
+                if(xhr.response=="none"){
+                    email.value=""
+                    password.value=""
+                    warning.style.display="block"
+                    warning.innerHTML="Email o password incorrette"
+                }
+                else{
+                    console.log('foto piedi')
+                }
             }
-            };
-            xmlhttp.open("GET", "uploader.php?title=" + title.innerHTML + "&img=" + img.innerHTML + "&content=" + content.innerHTML, true);
-            xmlhttp.send();
+            xhr.onerror = function() {
+                alert(`Network Error`);
+            }
         }
     }
 

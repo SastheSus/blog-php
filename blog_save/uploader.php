@@ -1,14 +1,15 @@
 <?php
 session_start();
-$email = $_REQUEST["email"];
-$password = $_REQUEST["password"];
+$title = $_REQUEST["title"];
+$img = $_REQUEST["img"];
+$content = $_REQUEST["content"];
 $hint = "";
 $user = "";
 try{
     try{
       $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
       
-      $text = "SELECT email, username, password FROM utenti WHERE email = ?";
+      $text = "INSERT INTO articoli(titolo, ";
       
       $query= $pdo->prepare($text);
       $query->execute([$email]);
