@@ -6,6 +6,8 @@ $password = password_hash($_REQUEST["password"], PASSWORD_DEFAULT);
 $hint = "";
 $user = "";
 $result = "";
+if($email!="" && $username!="" && !(password_verify("", $password))){
+  
 try{
   $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
   
@@ -31,5 +33,7 @@ try{
       echo "Impossibile connettersi al server di database. ".$e;
       exit();
   }
+  
+}
   echo $result === "" ? "none" : $result;
 ?>

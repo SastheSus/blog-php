@@ -35,7 +35,7 @@ const registrati = () =>{
             email.value=""
             password.value=""
             warning.style.display="block"
-            warning.innerHTML="Email o username gia' presente"
+            warning.innerHTML="Impossibile creare questo utente"
         }
         else{
             window.location.replace("./index.php");

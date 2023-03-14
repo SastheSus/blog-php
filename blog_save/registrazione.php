@@ -53,10 +53,10 @@ session_start();
             <div id='bodyReg'>
                 <div id='formReg'>
                         <article>
-                            <h3 id="h3formReg">Login</h3>
-                            <input type="text" id='usernameReg'></input>
-                            <input type="text" id='emailReg'></input>
-                            <input type="password" id='passwordReg'></input>
+                            <h3 id="h3formReg">Registrazione</h3>
+                            <input type="text" id='usernameReg'placeholder="inserire un username"></input>
+                            <input type="text" id='emailReg'placeholder="inserire una e-mail"></input>
+                            <input type="password" id='passwordReg'placeholder="inserire una password"></input>
                             <div id="pulsantieraReg">
                                 <a href="./login.php">Hai già un account?</a>
                                 <input type="button" id='buttonReg' onclick='registrati()' value="Registrati"></input>

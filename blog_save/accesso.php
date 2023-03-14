@@ -11,7 +11,7 @@ try{
       $text = "SELECT email, username, password FROM utenti WHERE email = ? OR username = ?";
       
       $query= $pdo->prepare($text);
-      $query->execute([$email]);
+      $query->execute([$email,$email]);
       $risultati = $query->fetchAll();
       $pdo=null;
       if($risultati==null){
