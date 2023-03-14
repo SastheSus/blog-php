@@ -120,11 +120,12 @@ const goTo = ($i) =>{
         const title = document.getElementById('editorTitolo')
         const img = document.getElementById('editorImgArt')
         const content = document.getElementById('editorInputImg')
+        const week = document.getElementById('week')
         var warning = document.getElementById('warningReg')
 
         if(title!=null && img!=null && content!=null){
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "uploader.php?title=" + title.innerHTML + "&img=" + img.innerHTML + "&content=" + content.innerHTML, true);
+            xhr.open("GET", "uploader.php?title=" + title.innerHTML + "&img=" + img.innerHTML + "&content=" + content.innerHTML + "&week=" + week.innerHTML, true);
             xhr.send();
             xhr.onload = () => {
                 if(xhr.response=="none"){

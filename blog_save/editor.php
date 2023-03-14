@@ -62,6 +62,7 @@ session_start();
                         </div>
                         <div id='editorInputs'>
                             <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData()"/>
+                            <input type="datetime-local" name="" id="week" onchange="console.log(document.getElementById('week').value)" value="<?php echo date('Y').'-'.date('m').'-'.date('d').'T'.date("h:i");?>"></input>
                             <input type="button" onclick="invia()"/>
                         </div>
                     </article>

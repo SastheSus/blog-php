@@ -3,16 +3,17 @@ session_start();
 $title = $_REQUEST["title"];
 $img = $_REQUEST["img"];
 $content = $_REQUEST["content"];
+$week = $_REQUEST["week"];
 $hint = "";
 $user = "";
 try{
     try{
       $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
       
-      $text = "INSERT INTO articoli(titolo, ";
+      $text = "INSERT INTO articoli(titolo, descrizione, giorno, logo) VALUES (?, ?, ?, ?)";
       
       $query= $pdo->prepare($text);
-      $query->execute([$email]);
+      $query->execute([$title,$content,$week,$img]);
       $risultati = $query->fetchAll();
       $pdo=null;
       if($risultati==null){
