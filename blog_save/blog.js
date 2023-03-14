@@ -93,7 +93,6 @@ const goTo = ($i) =>{
     const oArt = document.getElementById('container');
     const art = document.getElementById('1');
 
-    if($i)
     if(oArt != null && art != null){
         console.log(((art.offsetWidth*3+(oArt.offsetWidth/100*15))*$i)-(oArt.scrollLeft))
         oArt.scrollTo({
