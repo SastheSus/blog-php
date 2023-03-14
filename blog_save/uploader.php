@@ -3,7 +3,6 @@ session_start();
 $title = $_REQUEST["title"];
 $img = $_REQUEST["img"];
 $content = $_REQUEST["content"];
-$week = $_REQUEST["week"];
 $hint = "";
 $user = "";
 try{
@@ -13,20 +12,8 @@ try{
       $text = "INSERT INTO articoli(titolo, descrizione, giorno, logo) VALUES (?, ?, ?, ?)";
       
       $query= $pdo->prepare($text);
-      $query->execute([$title,$content,$week,$img]);
+      $query->execute([$title,$content,date("Y-m-d h:i:s"),$img]);
       $risultati = $query->fetchAll();
-      $pdo=null;
-      if($risultati==null){
-        $hint="";
-      }
-      else if(password_verify($password, $risultati[0]['password'])){
-        $hint.=$risultati[0]['email'];
-        $user=$risultati[0]['username'];
-        $_SESSION["user"] = $user;
-      }
-      else{
-        $hint="";
-      }
     }
     catch(Exception $e){
       $hint="";
@@ -36,5 +23,6 @@ try{
       $hint="";
       exit();
   }
+  $pdo=null;
   echo $hint === ""  ? "none" : $hint;
 ?>

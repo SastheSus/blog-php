@@ -57,6 +57,10 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         <h3>Qui' puoi trovare notizie e curiosita' riguardo il mondo dei veicoli militari e i loro impieghi sul campo, recenti e passati.</h3>
                     </div>
                     <div id="articles">
+                        <div id="titoli">
+                            <h4>Novita'</h4>
+                            <h4>Il più visto</h4>
+                        </div>
                         <div id="new">
                                 <?php
                                 $text = "SELECT * FROM articoli ORDER BY giorno DESC";
@@ -70,7 +74,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         </div>
                         <div id="main">
                                 <?php
-                                $text = "SELECT * FROM articoli ORDER BY id ASC";
+                                $text = "SELECT * FROM articoli ORDER BY visualizzazioni DESC";
                                 $query= $pdo->prepare($text);
                                 $query->execute();
                                 $row = $query->fetch();
@@ -107,7 +111,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         <div id="console"><button class="move" id="prev" onclick="prevArt()">⮜</button>
                         <?php 
                             if ($row != null && sizeof($row)>3) {
-                                $max=((sizeof($row))%3+(sizeof($row))%3)/3;
+                                $max=((sizeof($row))+(sizeof($row))%3)/3;
                                 for($i=0;$i<$max;$i++){
                                     echo '<button class="round" onclick="goTo('.($i).')">'.($i+1).'</button>';
                                 }

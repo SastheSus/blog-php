@@ -93,12 +93,12 @@ const goTo = ($i) =>{
     const art = document.getElementById('1');
 
     if(oArt != null && art != null){
-        console.log(((art.offsetWidth*3+(oArt.offsetWidth/100*15))*$i)-(oArt.scrollLeft))
+        $unit = (art.offsetWidth*3+(oArt.offsetWidth/100*15))
+        $position = (($unit*$i)+(($unit*$i)-($unit*$old)))
         oArt.scrollTo({
-            left: (((art.offsetWidth*3+(oArt.offsetWidth/100*15))*$i)-(oArt.scrollLeft)),
+            left: ($position),
             behavior : "smooth"
         })
-        console.log(((art.offsetWidth*3+(oArt.offsetWidth/100*15))*$i)-(oArt.scrollLeft))
     }
     $old = $i;
 }
@@ -118,24 +118,20 @@ const goTo = ($i) =>{
     }
     const invia = () =>{
         const title = document.getElementById('editorTitolo')
-        const img = document.getElementById('editorImgArt')
-        const content = document.getElementById('editorInputImg')
-        const week = document.getElementById('week')
+        const img = document.getElementById('editorInputImg')
+        const content = document.getElementById('editorDescArt')
         var warning = document.getElementById('warningReg')
 
         if(title!=null && img!=null && content!=null){
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "uploader.php?title=" + title.innerHTML + "&img=" + img.innerHTML + "&content=" + content.innerHTML + "&week=" + week.innerHTML, true);
+            xhr.open("GET", "uploader.php?title=" + title.value + "&img=" + img.value + "&content=" + content.value, true);
             xhr.send();
             xhr.onload = () => {
                 if(xhr.response=="none"){
-                    email.value=""
-                    password.value=""
-                    warning.style.display="block"
-                    warning.innerHTML="Email o password incorrette"
+                    console.log('unlucky')
                 }
                 else{
-                    console.log('foto piedi')
+                    console.log('funziona')
                 }
             }
             xhr.onerror = function() {
