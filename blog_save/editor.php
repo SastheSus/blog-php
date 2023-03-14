@@ -15,12 +15,40 @@ session_start();
 <body>
     <div id="root">
         <div>
+        <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
                 <li><a href="./editor.php">Editor</a></li>
                 <li></li>
-                <li id="logli"><div id="login" onclick="window.location.replace('./login.php')"><img src="./img/account.png" alt=""><?php echo '<p>'.($_SESSION["user"] === "" ? "Accedi" :$_SESSION["user"])."</p>"?></div></li>
+                <li id="logli"><div id="loginBtn" 
+                <?php
+                    $t="";
+                    if(empty($_SESSION['user'])){
+                        $t="window.location.replace('./login.php')";
+                        echo 'onclick="'.$t.'"';
+                    }
+                ?>
+                ><img src="./img/account.png" alt="">
+                <?php 
+                    if(!empty($_SESSION['user'])){
+                        echo '<p>'.$_SESSION["user"]."</p>";
+                    }
+                    else{
+                        echo '<p>Accedi</p>';
+                    }
+                ?>
+                </div>
+                <?php 
+                    if(!empty($_SESSION['user'])){
+                        $t='close_session()';
+                        echo "<div class='dropdown-content'>
+                        <a onclick='".$t."'>Logout</a>
+                        </div>";
+                    }
+                ?>
+            </li>
             </ul>
+            </nav>
             <div class="App">
                 <div id='editorContainer'>
                     <article>

@@ -16,12 +16,40 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 <body>
     <div id="root">
         <div>
+            <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
                 <li><a href="./editor.php">Editor</a></li>
                 <li></li>
-                <li id="logli"><div id="login" onclick="<?php if(!empty($_SESSION['user'])){echo "close_session()";}else{echo "window.location.replace('./login.php')";}?>"><img src="./img/account.png" alt=""><?php if(!empty($_SESSION['user'])){echo '<p>'.$_SESSION["user"]."</p>";}else{echo '<p>Accedi</p>';}?></div></li>
+                <li id="logli"><div id="loginBtn" 
+                <?php
+                    $t="";
+                    if(empty($_SESSION['user'])){
+                        $t="window.location.replace('./login.php')";
+                        echo 'onclick="'.$t.'"';
+                    }
+                ?>
+                ><img src="./img/account.png" alt="">
+                <?php 
+                    if(!empty($_SESSION['user'])){
+                        echo '<p>'.$_SESSION["user"]."</p>";
+                    }
+                    else{
+                        echo '<p>Accedi</p>';
+                    }
+                ?>
+                </div>
+                <?php 
+                    if(!empty($_SESSION['user'])){
+                        $t='close_session()';
+                        echo "<div class='dropdown-content'>
+                        <a onclick='".$t."'>Logout</a>
+                        </div>";
+                    }
+                ?>
+            </li>
             </ul>
+            </nav>
             <div class="App">
                 <div id="content">
                     <div id="introduction">
@@ -53,28 +81,40 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         </div>
                         <div id="otherArticles">
                             <h2>Altri articoli</h2>
+                            <?php 
+                            try{
+                                $text = "SELECT * FROM articoli";
+                                
+                                $query= $pdo->prepare($text);
+                                $query->execute();
+                                $row = $query->fetchAll();
+                            }
+                                catch (PDOException $e){
+                                echo "Impossibile connettersi al server di database. ".$e;
+                                exit();
+                            }
+                            ?>
                             <div id="container">
                                 <?php
-                                try{
-                                      $text = "SELECT * FROM articoli";
-                                      
-                                      $query= $pdo->prepare($text);
-                                      $query->execute();
-                                      
-                                      while ($row = $query->fetch()) {
-                                        echo "<div class='top' id='1'><h3 id='title'>".$row['titolo']."</h3><div id='immagine'><img id='imgArt' src='./img/".$row['logo']."' alt='immagine'></div><p class='descArtSec'>".$row['descrizione']."</p></div>";
-                                      }
-                                      }
-                                      catch (PDOException $e){
-                                          echo "Impossibile connettersi al server di database. ".$e;
-                                          exit();
-                                      }
-                                //controlla tabella articoli
-                                //stampa ogni articolo prendendo titolo, immagine e descrizione
+                                if ($row != null) {
+                                    for($i=0;$i<sizeof($row);$i++){
+                                        echo "<div class='top' id='1'><h3 id='title'>".$row[$i]['titolo']."</h3><div id='immagine'><img id='imgArt' src='./img/".$row[$i]['logo']."' alt='immagine'></div><p class='descArtSec'>".$row[$i]['descrizione']."</p></div>";
+                                    }
+                                }
                                 ?>
                             </div>
                         </div>
-                        <div id="console"><button class="move" id="prev" onclick="prevArt()">⮜</button><button class="round">1</button><button class="round">2</button><button class="move" id="next" onclick="nextArt()">⮞</button></div>
+                        <div id="console"><button class="move" id="prev" onclick="prevArt()">⮜</button>
+                        <?php 
+                            if ($row != null && sizeof($row)>3) {
+                                $max=((sizeof($row))%3+(sizeof($row))%3)/3;
+                                for($i=0;$i<$max;$i++){
+                                    echo '<button class="round" onclick="goTo('.($i).')">'.($i+1).'</button>';
+                                }
+                                
+                            }
+                        ?>
+                        <button class="move" id="next" onclick="nextArt()">⮞</button></div>
                     </div>
                 </div>
                 <footer>

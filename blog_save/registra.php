@@ -13,19 +13,18 @@ try{
   
   $query= $pdo->prepare($text);
   $query->execute([$email, $username]);
+  $risultati = $query->fetchAll();
   
-  while ($row = $query->fetch()) {
-      $hint.=$row['email'];
-      $user=$row['username'];
-  }
-  if($hint==""){
+  if ($risultati == null) {
     $result="ok";
     $text = "INSERT INTO utenti(email, username, password) VALUES (?,?,?)";
     $query= $pdo->prepare($text);
     $query->execute([$email, $username, $password]);
     $_SESSION["user"] = $username;
   }
-  
+  else{
+    $hint=$risultati[0]['email'];
+  }
   $pdo=null;
   }
   catch (PDOException $e){

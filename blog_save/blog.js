@@ -3,7 +3,7 @@ const accedi = () =>{
     var email = document.getElementById('usernameLogin');
     var password = document.getElementById('passwordLogin')
     var warning = document.getElementById('warningLogin')
-    xhr.open('GET', 'http://localhost:80/blog/blog_save/uploader.php?email='+email.value+'&password='+password.value, true);
+    xhr.open('GET', './uploader.php?email='+email.value+'&password='+password.value, true);
     xhr.send();
     xhr.onload = () => {
         if(xhr.response=="none"){
@@ -13,6 +13,7 @@ const accedi = () =>{
             warning.innerHTML="Email o password incorrette"
         }
         else{
+            alert(xhr.response);
             window.location.replace("./index.php");
         }
     }
@@ -27,7 +28,7 @@ const registrati = () =>{
     var email = document.getElementById('emailReg')
     var password = document.getElementById('passwordReg')
     var warning = document.getElementById('warningReg')
-    xhr.open('GET', 'http://localhost:80/blog/blog_save/registra.php?email='+email.value+'&username='+username.value+'&password='+password.value, true);
+    xhr.open('GET', './registra.php?email='+email.value+'&username='+username.value+'&password='+password.value, true);
     xhr.send();
     xhr.onload = () => {
         if(xhr.response=="none"){
@@ -47,7 +48,7 @@ const registrati = () =>{
   }
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:80/blog/blog_save/chiudi.php', true);
+    xhr.open('GET', './chiudi.php', true);
     xhr.send();
     xhr.onload = () => {
         window.location.replace("./index.php");
@@ -62,7 +63,8 @@ const hidden = () =>{
     warning.style.display="hidden"
     warning.innerHTML=""
 }
-  const prevArt = () =>{
+  
+const prevArt = () =>{
     const oArt = document.getElementById('container');
     const art = document.getElementById('1');
 
@@ -86,8 +88,24 @@ const nextArt = () =>{
         })
     }
 }
+$old=0;
+const goTo = ($i) =>{
+    const oArt = document.getElementById('container');
+    const art = document.getElementById('1');
 
-let img = "";
+    if($i)
+    if(oArt != null && art != null){
+        console.log(((art.offsetWidth*3+(oArt.offsetWidth/100*15))*$i)-(oArt.scrollLeft))
+        oArt.scrollTo({
+            left: (((art.offsetWidth*3+(oArt.offsetWidth/100*15))*$i)-(oArt.scrollLeft)),
+            behavior : "smooth"
+        })
+        console.log(((art.offsetWidth*3+(oArt.offsetWidth/100*15))*$i)-(oArt.scrollLeft))
+    }
+    $old = $i;
+}
+
+
 
     const image = () =>{
         const content = document.getElementById('editorInputImg')

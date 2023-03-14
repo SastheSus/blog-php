@@ -88,18 +88,21 @@ button:focus-visible {
   white-space: normal;
 }
 
+nav{
+  position: sticky;
+  top:0;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: black;
-  position: sticky;
-  top: 0;
-  }
+  background-color: #333;
+}
   li {
-  display: inline-block;
   width: 24%;
+  float: left;
   }
 
   #bodyLogin{
@@ -259,7 +262,8 @@ ul {
     margin-right: 10%;
   }
   #logli{
-    display: inline-flex;
+    width: 10%;
+    float: right;
     align-items: baseline;
   }
 
@@ -268,33 +272,36 @@ ul {
     flex-wrap: wrap;
   }
 
-  #login{
+  #loginBtn{
     background-color: white;
-    margin-left:auto;
-    margin-right: 0;
-    width: 50%;
+    width: 100%;
     color: black;
     display: inline-flex;
+    align-items: center;
     border-radius: 8px;
     border: 1px solid transparent;
-    padding: 0.6em 1.2em;
+    max-height: 4vh;
+    padding: 0.5vw 1vh;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
   }
-  #login img{
-    width: 10%;
+  #loginBtn img{
+    max-height: 4vh;
+    height: auto;
   }
-  #login p{
+  #loginBtn p{
+    text-align: center;
+    font-size: 200%;
     margin:0;
   }
-  #login:hover {
+  #loginBtn:hover {
     border-color: black;
   }
-  #login:focus,
-  #login:focus-visible {
+  #loginBtn:focus,
+  #loginBtn:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
   }
 
@@ -303,10 +310,12 @@ ul {
     text-align: right;
   }
   li a {
+    font-size: 3vh;
+    min-height: 3vh;
+    padding: 1.7vh 1vw;
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
     transition: background-color 0.5s, color 0.5s;
     }
@@ -329,7 +338,9 @@ ul {
 
 
 #title{
+  font-size: 200%;
   width: 100%;
+  margin:1vh 0;
 }
 #editorH3{
   margin: 0;
@@ -376,10 +387,13 @@ ul {
 #immagine{
   width: 50%;
   height: 10em;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 #imgArt{
-  max-height:100%;
   max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
 }
 #editorContainer{
@@ -402,9 +416,12 @@ ul {
 }
 
 #main{
-  min-height: 30vh;
+  min-height: 35vh;
+  max-height: 35vh;
+  text-overflow: ellipsis;
   overflow: hidden;
-  display:inline-flex;
+  display: inline-flex;
+  align-items: center;
   flex-wrap: wrap;
   width: 45%;
   margin-top: 40px;
@@ -412,7 +429,7 @@ ul {
   margin-left: 2.5%;
   background-color: rgb(125,127,126);
   border-radius: 20px;
-  transition:  background-color 0.5s;
+  transition: background-color 0.5s;
 }
 
 #main:hover{
@@ -420,9 +437,12 @@ ul {
 }
 
 #new{
-  min-height: 30vh;
+  min-height: 35vh;
+  max-height: 35vh;
+  text-overflow: ellipsis;
   overflow: hidden;
-  display:inline-flex;
+  display: inline-flex;
+  align-items: center;
   flex-wrap: wrap;
   width: 45%;
   margin-top: 40px;
@@ -430,7 +450,7 @@ ul {
   margin-left: 2.5%;
   background-color: rgb(125,127,126);
   border-radius: 20px;
-  transition:  background-color 0.5s;
+  transition: background-color 0.5s;
 }
 
 #new:hover{
@@ -442,6 +462,7 @@ ul {
   text-overflow: ellipsis;
   overflow: hidden;
   display:inline-flex;
+  align-items: center;
   flex-wrap: wrap;
   width: 28%;
   margin-top: 40px;
@@ -518,4 +539,30 @@ footer{
   background-color: grey;
   border-radius: 50%;
   margin: 0 5px 0 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+
+#logli:hover .dropdown-content {
+  display: block;
 }
