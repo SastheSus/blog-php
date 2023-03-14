@@ -3,7 +3,7 @@ const accedi = () =>{
     var email = document.getElementById('usernameLogin');
     var password = document.getElementById('passwordLogin')
     var warning = document.getElementById('warningLogin')
-    xhr.open('GET', './uploader.php?email='+email.value+'&password='+password.value, true);
+    xhr.open('GET', './accesso.php?email='+email.value+'&password='+password.value, true);
     xhr.send();
     xhr.onload = () => {
         if(xhr.response=="none"){
@@ -133,22 +133,18 @@ const goTo = ($i) =>{
         }
     }
 
-
-    const input = document.getElementById("editorInputImg");
-    const editorImgArt = document.getElementById("editorImgArt");
     
-    input.addEventListener("change", function () {
-        getImgData();
-    });
     
     function getImgData() {
-      const files = input.files;
+        const input = document.getElementById("editorInputImg");
+        const editorImgArt = document.getElementById("editorImgArt");
+      const files = input.files[0];
       if (files) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
-            editorImgArt.style.display = "block";
-            editorImgArt.innerHTML = '<img src="' + this.result + '" />';
+            editorImgArt.src= this.result;
+            console.log(this.result);
         });    
       }
     }

@@ -12,7 +12,7 @@ session_start();
     <script src="blog.js"></script>
 </head>
 
-<body>
+<body >
     <div id="root">
         <div>
         <nav>
@@ -58,10 +58,11 @@ session_start();
                         </div>
                         <textarea id='editorDescArt'></textarea>
                         <div id='editorImmagine'>
+                            <img id='editorImgArt'>
                         </div>
                         <div id='editorInputs'>
-                            <input id="editorInputImg" type="file" accept="image/*"/>
-                            <input type="button"/>
+                            <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData()"/>
+                            <input type="button" onclick="invia()"/>
                         </div>
                     </article>
                 </div>
