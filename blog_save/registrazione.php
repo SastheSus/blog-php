@@ -55,7 +55,7 @@ session_start();
                         <article>
                             <h3 id="h3formReg">Registrazione</h3>
                             <input type="text" id='usernameReg'placeholder="inserire un username"></input>
-                            <input type="text" id='emailReg'placeholder="inserire una e-mail"></input>
+                            <input type="email" id='emailReg'placeholder="inserire una e-mail"></input>
                             <input type="password" id='passwordReg'placeholder="inserire una password"></input>
                             <div id="pulsantieraReg">
                                 <a href="./login.php">Hai già un account?</a>

@@ -22,7 +22,6 @@ try{
     $text = "INSERT INTO utenti(email, username, password) VALUES (?,?,?)";
     $query= $pdo->prepare($text);
     $query->execute([$email, $username, $password]);
-    $_SESSION["user"] = $username;
   }
   else{
     $hint=$risultati[0]['email'];

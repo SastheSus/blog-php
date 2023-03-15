@@ -54,7 +54,7 @@ session_start();
                 <div id='formLogin'>
                         <article>
                             <h3 id="h3formLogin">Login</h3>
-                            <input type="text" id='usernameLogin'placeholder="inserire e-mail"></input>
+                            <input type="text" id='usernameLogin'placeholder="inserire e-mail o username"></input>
                             <input type="password" id='passwordLogin'placeholder="inserire password"></input>
                             <div id="pulsantieraLogin">
                                 <a href="./registrazione.php">Devi ancora registrarti?</a>

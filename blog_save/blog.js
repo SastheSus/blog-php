@@ -27,6 +27,9 @@ const registrati = () =>{
     var email = document.getElementById('emailReg')
     var password = document.getElementById('passwordReg')
     var warning = document.getElementById('warningReg')
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (email.value.match(validRegex)) {
     xhr.open('GET', './registra.php?email='+email.value+'&username='+username.value+'&password='+password.value, true);
     xhr.send();
     xhr.onload = () => {
@@ -38,12 +41,16 @@ const registrati = () =>{
             warning.innerHTML="Impossibile creare questo utente"
         }
         else{
-            window.location.replace("./index.php");
+            window.location.replace("./login.php");
         }
     }
     xhr.onerror = function() {
       alert(`Network Error`);
     };
+}
+else{
+    warning.style.display="block"
+    warning.innerHTML="email non valida"}
   }
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
