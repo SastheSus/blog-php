@@ -104,23 +104,10 @@ const goTo = ($i) =>{
 }
 
 
-
-    const image = () =>{
-        const content = document.getElementById('editorInputImg')
-        const i = document.getElementById('editorImgArt')
-        if(content != null){
-            console.log("/"+content.value+"/")
-            i.src = "'"+content.value+"'";
-        }
-        else{
-            console.log('pino')
-        }
-    }
     const invia = () =>{
         const title = document.getElementById('editorTitolo')
         const img = document.getElementById('editorInputImg')
         const content = document.getElementById('editorDescArt')
-        var warning = document.getElementById('warningReg')
 
         if(title!=null && img!=null && content!=null){
             var xhr = new XMLHttpRequest();
@@ -128,10 +115,11 @@ const goTo = ($i) =>{
             xhr.send();
             xhr.onload = () => {
                 if(xhr.response=="none"){
-                    console.log('unlucky')
                 }
                 else{
-                    console.log('funziona')
+                    title.value=""
+                    img.value=""
+                    content.value=""
                 }
             }
             xhr.onerror = function() {

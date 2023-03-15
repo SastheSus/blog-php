@@ -87,7 +87,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             <h2>Altri articoli</h2>
                             <?php 
                             try{
-                                $text = "SELECT * FROM articoli";
+                                $text = "SELECT * FROM articoli ORDER BY titolo";
                                 
                                 $query= $pdo->prepare($text);
                                 $query->execute();
