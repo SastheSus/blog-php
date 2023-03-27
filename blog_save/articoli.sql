@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mar 27, 2023 alle 10:27
+-- Creato il: Mar 27, 2023 alle 10:29
 -- Versione del server: 10.4.27-MariaDB
 -- Versione PHP: 8.0.25
 
@@ -58,15 +58,16 @@ INSERT INTO `articoli` (`Id`, `titolo`, `descrizione`, `giorno`, `logo`, `emailU
 CREATE TABLE `utenti` (
   `email` varchar(50) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `ruolo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dump dei dati per la tabella `utenti`
 --
 
-INSERT INTO `utenti` (`email`, `username`, `password`) VALUES
-('michele.bardotti04@gmail.com', 'Bardo', '$2y$10$MXbLJYcqDAUmsBAiS0DCLeWC/nQxGJxSqGRaaFg5uIq7QJ8S9dmdG');
+INSERT INTO `utenti` (`email`, `username`, `password`, `ruolo`) VALUES
+('michele.bardotti04@gmail.com', 'Bardo', '$2y$10$MXbLJYcqDAUmsBAiS0DCLeWC/nQxGJxSqGRaaFg5uIq7QJ8S9dmdG', NULL);
 
 --
 -- Indici per le tabelle scaricate
