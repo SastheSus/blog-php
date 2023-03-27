@@ -132,6 +132,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                     <div class="foot" id="links">
                         <h5>Links:</h5><a>https://www.esempio.com</a>
                     </div>
+                    <div>© Copyright 2023, Tutti i diritti riservati</div>
                 </footer>
             </div>
         </div>
