@@ -11,17 +11,17 @@ if($email!="" && $username!="" && !(password_verify("", $password))){
 try{
   $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
   
-  $text = "SELECT email, username FROM utenti WHERE email = ? OR username = ?";
+  $text = "SELECT username, email FROM utenti WHERE email = ? OR username = ?";
   
   $query= $pdo->prepare($text);
-  $query->execute([$email, $username]);
+  $query->execute([$username, $email]);
   $risultati = $query->fetchAll();
   
   if ($risultati == null) {
     $result="ok";
-    $text = "INSERT INTO utenti(email, username, password) VALUES (?,?,?)";
+    $text = "INSERT INTO utenti(username, email, password) VALUES (?,?,?)";
     $query= $pdo->prepare($text);
-    $query->execute([$email, $username, $password]);
+    $query->execute([$username, $email, $password]);
   }
   else{
     $hint=$risultati[0]['email'];

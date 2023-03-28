@@ -8,7 +8,7 @@ try{
     try{
       $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
       
-      $text = "SELECT email, username, password FROM utenti WHERE email = ? OR username = ?";
+      $text = "SELECT username, email, password FROM utenti WHERE username = ? OR email = ?";
       
       $query= $pdo->prepare($text);
       $query->execute([$email,$email]);
