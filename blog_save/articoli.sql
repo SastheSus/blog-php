@@ -3,19 +3,47 @@ CREATE TABLE utenti (
   username varchar(50) PRIMARY KEY NOT NULL,
   email varchar(50) DEFAULT NULL,
   password varchar(255) DEFAULT NULL,
-  ruolo varchar(255) DEFAULT NULL
+  ruolo varchar(255) DEFAULT 'BASE'
+);
+
+CREATE TABLE immagini (
+  id int(11) PRIMARY KEY NOT NULL,
+  nome varchar(255) DEFAULT NULL,
+  logo bool DEFAULT 0
 );
 
 CREATE TABLE articoli (
-  Id int(11) PRIMARY KEY NOT NULL,
+  id int(11) PRIMARY KEY NOT NULL,
   titolo varchar(255) DEFAULT NULL,
-  descrizione mediumtext DEFAULT NULL,
+  descrizione text DEFAULT NULL,
   giorno datetime DEFAULT NULL,
   logo varchar(255) DEFAULT NULL,
   utente varchar(50) DEFAULT NULL,
-  visualizzazioni int(11) DEFAULT NULL,
-  FOREIGN KEY (utente) REFERENCES utenti (username)
+  visualizzazioni int(11) DEFAULT 0,
+  FOREIGN KEY (utente) REFERENCES utenti (username),
+  FOREIGN KEY (logo) REFERENCES immagini (id)
 );
+
+CREATE TABLE paragrafi (
+  id int(11) NOT NULL,
+  articolo int(11) NOT NULL,
+  titolo varchar(255) DEFAULT NULL,
+  contenuto text DEFAULT NULL,
+  FOREIGN KEY (articolo) REFERENCES articoli (id),
+  PRIMARY KEY (id, articolo)
+);
+
+CREATE TABLE immaginiDiParagrafi (
+  idParagrafo int(11) NOT NULL,
+  idImmagine int(11) NOT NULL,
+  FOREIGN KEY (idParagrafo) REFERENCES paragrafi (id),
+  FOREIGN KEY (idImmagine) REFERENCES immagini (id),
+  PRIMARY KEY (idParagrafo, idImmagine)
+);
+
+
+
+
 
 
 
@@ -26,7 +54,7 @@ CREATE TABLE articoli (
 INSERT INTO utenti (username, email, password, ruolo) VALUES
 ("Bardo","michele.bardotti04@gmail.com","$2y$10$MXbLJYcqDAUmsBAiS0DCLeWC/nQxGJxSqGRaaFg5uIq7QJ8S9dmdG", NULL);
 
-INSERT INTO articoli (Id, titolo, descrizione, giorno, logo, utente, visualizzazioni) VALUES
+INSERT INTO articoli (id, titolo, descrizione, giorno, logo, utente, visualizzazioni) VALUES
 (1,"BM-21 Grad","Il BM-21, conosciuto anche come Grad, è un lanciarazzi a 40 tubi che può colpire bersagli fino a 40 km di distanza. Utilizzato in vari conflitti, è stato esportato in tutto il mondo.","2023-02-28 21:20:00","BM-21_Grad.jpg","Bardo", 10),
 (2,"M1 Abrams","L\'M1 Abrams è un carro armato da combattimento di terza generazione, utilizzato principalmente dalle forze armate degli Stati Uniti e di altri paesi.","2023-03-08 10:28:00","abrams.jpeg","Bardo", 2),
 (3,"leopard","Il Leopard è uno dei più avanzati carri armati da combattimento in circolazione, caratterizzato da un cannone ad alta velocità, un motore a turbina a gas e una corazzatura avanzata.","2023-03-01 08:30:00","leopard.jpg","Bardo", 5),
