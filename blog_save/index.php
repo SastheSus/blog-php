@@ -63,31 +63,32 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         </div>
                         <div id="new">
                                 <?php
-                                $text = "SELECT * FROM articoli ORDER BY giorno DESC";
+                                $text = "SELECT titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY giorno DESC";
                                 $query= $pdo->prepare($text);
                                 $query->execute();
                                 $row = $query->fetch();
+
                                 ?>
                                 <h3 id='title'><?php echo $row['titolo']?></h3>
-                                <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['logo']?>" alt="leopard"></div>
+                                <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtSec"><?php echo $row['descrizione']?></p>
                         </div>
                         <div id="main">
                                 <?php
-                                $text = "SELECT * FROM articoli ORDER BY visualizzazioni DESC";
+                                $text = "SELECT titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY visualizzazioni DESC";
                                 $query= $pdo->prepare($text);
                                 $query->execute();
                                 $row = $query->fetch();
                                 ?>
                                 <h3 id='title'><?php echo $row['titolo']?></h3>
-                                <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['logo']?>" alt="leopard"></div>
+                                <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtSec"><?php echo $row['descrizione']?></p>
                         </div>
                         <div id="otherArticles">
                             <h2>Altri articoli</h2>
                             <?php 
                             try{
-                                $text = "SELECT * FROM articoli ORDER BY titolo";
+                                $text = "SELECT titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY titolo";
                                 
                                 $query= $pdo->prepare($text);
                                 $query->execute();
@@ -102,7 +103,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 <?php
                                 if ($row != null) {
                                     for($i=0;$i<sizeof($row);$i++){
-                                        echo "<div class='top' id='1'><h3 id='title'>".$row[$i]['titolo']."</h3><div id='immagine'><img id='imgArt' src='./img/".$row[$i]['logo']."' alt='immagine'></div><p class='descArtSec'>".$row[$i]['descrizione']."</p></div>";
+                                        echo "<div class='top' id='1'><h3 id='title'>".$row[$i]['titolo']."</h3><div id='immagine'><img id='imgArt' src='./img/".$row[$i]['nome']."' alt='immagine'></div><p class='descArtSec'>".$row[$i]['descrizione']."</p></div>";
                                     }
                                 }
                                 ?>
