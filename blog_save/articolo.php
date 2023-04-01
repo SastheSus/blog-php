@@ -53,7 +53,14 @@ session_start();
             <div id='bodyArticolo'>
                 <div id='formArticolo'>
                         <article>
-                            <h3 id="h3formArticolo">Login</h3>
+                            <?php 
+                                $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                                $text = "SELECT * FROM articoli WHERE id = ?";
+                                $query= $pdo->prepare($text);
+                                $query->execute([$_POST['id']]);
+                                $aus = $query->fetchAll();
+                            ?>
+                            <h3 id="h3formArticolo"><?php ?></h3>
                             <?php 
                             
                             

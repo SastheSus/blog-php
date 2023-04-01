@@ -14,7 +14,7 @@ try{
       $query->execute([$img,1]);
 
       $text2 = "SELECT id FROM immagini WHERE nome = ? ORDER BY id DESC";
-      $query= $pdo->prepare($text);
+      $query= $pdo->prepare($text2);
       $query->execute([$img,1]);
       $aus = $query->fetchAll();
       $aus = $aus[0]['id'];

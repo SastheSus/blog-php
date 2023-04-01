@@ -71,7 +71,8 @@ button:focus-visible {
   text-align: center;
 }
 
-#introduction{
+#introduction h3{
+  font-size: 200%;
   color: rgb(81, 89, 91);
 }
 #introduction h1{
@@ -357,17 +358,23 @@ ul {
 
 
 .descArtPrinc{
+  height: 25vh;
+  font-size: 150%;
   width: 50%;
 }
 
 .descArtSec{
-  max-height: 25vh;
+  height: 25vh;
   font-size: 100%;
   width: 50%;
 }
 
-
-#title{
+#titleArtPrinc{
+  font-size: 250%;
+  width: 100%;
+  margin:1vh 0;
+}
+#titleArtSec{
   font-size: 200%;
   width: 100%;
   margin:1vh 0;
@@ -490,12 +497,11 @@ ul {
   background-color: rgb(81, 89, 91);
 }
 .top{
-  min-height: 30vh;
-  max-height: 30vh;
+  height: 30vh;
   text-overflow: ellipsis;
   overflow: hidden;
-  display:inline-flex;
-  align-items: center;
+  display: inline-flex;
+  align-items: flex-start;
   flex-wrap: wrap;
   width: 28%;
   margin-right: 2.5%;
