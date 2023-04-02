@@ -9,6 +9,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
     <meta charset="UTF-8" />
     <link rel="icon" type="gif" href="./img/tank.gif" />
     <title>Blog</title>
+    <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/index.css">
     <script src="blog.js"></script>
 </head>
