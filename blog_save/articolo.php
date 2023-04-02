@@ -60,7 +60,21 @@ $id=$_POST["id"];
                                 $text = "SELECT * FROM articoli WHERE id = ?";
                                 $query= $pdo->prepare($text);
                                 $query->execute([$id]);
-                                $aus = $query->fetchAll();
+                                $articolo = $query->fetchAll();
+                                
+                                $text = "SELECT * FROM paragrafi WHERE articolo = ?";
+                                $query= $pdo->prepare($text);
+                                $query->execute([$id]);
+                                $paragrafi = $query->fetchAll();
+                                
+                                $immagini = "";
+                                $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
+                                $query= $pdo->prepare($text);
+                                foreach ($paragrafi as $value) {
+                                    $query->execute([$value['id']]);
+                                    $immagini += $query->fetchAll();
+                                }
+                                echo $immagini;
                             ?>
                             <h3 id="h3formArticolo"><?php ?></h3>
                             <?php 
