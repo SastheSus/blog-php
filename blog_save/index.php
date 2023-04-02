@@ -57,6 +57,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         <h1>Benvenuti su Tank Mania</h1>
                         <h3>Qui' puoi trovare notizie e curiosita' riguardo il mondo dei veicoli militari e i loro impieghi sul campo, recenti e passati.</h3>
                     </div>
+                    <form action="articolo.php" method="post">
                     <div id="articles">
                         <div id="titoli">
                             <h4>Novita'</h4>
@@ -72,7 +73,8 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 <h3 id='titleArtPrinc'><?php echo $row['titolo']?></h3>
                                 <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtPrinc"><?php echo $row['descrizione']?></p>
-                                <input type="button" name='<?php echo $row['id']?>'>
+                                <input type="hidden" name="id" value='<?php echo $row['id']?>'>
+                                <input type="submit" class="toArticolo" value="vai">
                         </div>
                         <?php
                             $text = "SELECT articoli.id, titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY visualizzazioni DESC";
@@ -84,12 +86,13 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 <h3 id='titleArtPrinc'><?php echo $row['titolo']?></h3>
                                 <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtPrinc"><?php echo $row['descrizione']?></p>
+                                <input type="submit" class="toArticolo" value="vai" name='<?php echo $row['id']?>'>
                         </div>
                         <div id="otherArticles">
                             <h2>Altri articoli</h2>
                             <?php 
                             try{
-                                $text = "SELECT titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY titolo";
+                                $text = "SELECT articoli.id, titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY titolo";
                                 
                                 $query= $pdo->prepare($text);
                                 $query->execute();
@@ -104,13 +107,19 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 <?php
                                 if ($row != null) {
                                     for($i=0;$i<sizeof($row);$i++){
-                                        echo "<div class='top' id='1'><h3 id='titleArtSec'>".$row[$i]['titolo']."</h3><div id='immagine'><img id='imgArt' src='./img/".$row[$i]['nome']."' alt='immagine'></div><p class='descArtSec'>".$row[$i]['descrizione']."</p></div>";
+                                        echo "<div class='top' id='1'>
+                                        <h3 id='titleArtSec'>".$row[$i]['titolo']."</h3>
+                                        <div id='immagine'><img id='imgArt' src='./img/".$row[$i]['nome']."' alt='immagine'></div>
+                                        <p class='descArtSec'>".$row[$i]['descrizione']."</p>
+                                        <input type='submit' class='toArticolo' value='vai' name='".$row[$i]['id']."'></div>";
                                     }
                                 }
                                 ?>
                             </div>
                         </div>
-                        <div id="console"><button class="move" id="prev" onclick="prevArt()">⮜</button>
+                    </div>
+                    </form>
+                    <div id="console"><button class="move" id="prev" onclick="prevArt()">⮜</button>
                         <?php 
                             if ($row != null && sizeof($row)>3) {
                                 $max=((sizeof($row))+(sizeof($row))%3)/3;
@@ -121,7 +130,6 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             }
                         ?>
                         <button class="move" id="next" onclick="nextArt()">⮞</button></div>
-                    </div>
                 </div>
                 <footer>
                     <div class="foot" id="crediti">

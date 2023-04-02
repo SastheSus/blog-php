@@ -1,5 +1,6 @@
 <?php
 session_start();
+$id=$_POST["id"];
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -58,7 +59,7 @@ session_start();
                                 $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 $text = "SELECT * FROM articoli WHERE id = ?";
                                 $query= $pdo->prepare($text);
-                                $query->execute([$_POST['id']]);
+                                $query->execute([$id]);
                                 $aus = $query->fetchAll();
                             ?>
                             <h3 id="h3formArticolo"><?php ?></h3>

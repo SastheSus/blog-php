@@ -17,7 +17,6 @@ background-color: rgb(204, 199, 196);
 display: flex;
 flex-wrap: wrap;
 }
-/*new e main*/
 #titoli{
 width: 100%;
 display: flex;
@@ -27,7 +26,6 @@ font-size: 300%;
 color:#1a1a1a;
 width: 50%;
 }
-/*altri articoli*/
 #otherArticles h2{
 margin-top: 40px;
 color: #1a1a1a;
@@ -42,15 +40,15 @@ white-space: nowrap;
 }
 
 .descArtPrinc{
-height: 25vh;
+height: 20vh;
 font-size: 150%;
 width: 50%;
 }
 
 .descArtSec{
-height: 25vh;
-font-size: 100%;
+height: 17vh;
 width: 50%;
+overflow: hidden;
 }
 
 #titleArtPrinc{
@@ -88,6 +86,7 @@ text-overflow: ellipsis;
 overflow: hidden;
 display: inline-flex;
 align-items: center;
+justify-content: flex-end;
 flex-wrap: wrap;
 width: 45%;
 margin-right: 2.5%;
@@ -107,6 +106,7 @@ max-height: 35vh;
 text-overflow: ellipsis;
 overflow: hidden;
 display: inline-flex;
+justify-content: flex-end;
 align-items: center;
 flex-wrap: wrap;
 width: 45%;
@@ -126,6 +126,7 @@ text-overflow: ellipsis;
 overflow: hidden;
 display: inline-flex;
 align-items: flex-start;
+justify-content: flex-end;
 flex-wrap: wrap;
 width: 28%;
 margin-right: 2.5%;
@@ -174,4 +175,24 @@ outline: 4px auto -webkit-focus-ring-color;
 background-color: grey;
 border-radius: 3vh;
 margin: 0 0.5vh 0 0.5vh;
+}
+
+.toArticolo{
+margin-right: 2vw;
+background-color: white;
+width: 4vw;
+color: black;
+border-radius: 8px;
+border: 1px solid transparent;
+max-height: 4vh;
+padding: 0.5vw 1vh;
+font-size: 1em;
+font-weight: 500;
+font-family: inherit;
+cursor: pointer;
+transition: background-color color 5s;
+}
+.toArticolo:hover {
+color: white;
+background-color: black;
 }
