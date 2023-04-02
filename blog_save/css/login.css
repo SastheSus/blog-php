@@ -1,0 +1,77 @@
+#bodyLogin{
+width: 80%;
+margin-left: auto;
+margin-right: auto;
+}
+#formLogin{
+width: 48%;
+height: 60vh;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 10vh;
+margin-top: 10vh;
+background-color: rgb(204, 199, 196);
+border: solid rgb(125,127,126) 2px;
+border-radius: 20px;
+}
+
+#usernameLogin{
+height: 5vh;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 10vh;
+font-size: 150%;
+padding-left: 10px;
+border-radius: 20px;
+}
+
+#passwordLogin{
+height: 5vh;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 10vh;
+font-size: 150%;
+padding-left: 10px;
+border-radius: 20px;
+}
+#pulsantieraLogin{
+padding-top: 5%;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+#buttonLogin{
+background-color: white;
+margin-left:auto;
+margin-right: 0;
+color: black;
+text-align: center;
+display: inline-flex;
+border-radius: 8px;
+border: 1px solid transparent;
+font-size: 1em;
+font-weight: 500;
+font-family: inherit;
+cursor: pointer;
+transition: border-color 0.25s;
+margin-left: 10%;
+height: 3vh;
+}
+#buttonLogin:hover {
+border-color: black;
+}
+#pulsantieraLogin a{
+color: blue;
+margin-right: 10%;
+}
+#warningLogin{
+color: red;
+}
+#h3formLogin{
+font-size: 300%;
+}

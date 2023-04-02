@@ -1,0 +1,50 @@
+#editorH3{
+margin: 0;
+}
+#editorTitolo{
+width: 50%;
+font-size: 200%;
+}
+#editorDescArt{
+resize: none;
+font-size: 90%;
+float: right;
+width: 40%;
+height: 20vh;
+}
+#editorImmagine{
+color: black;
+background-color: white;
+overflow: hidden;
+width: 50%;
+height: 25vh;
+float: left;
+border: 1px black solid;
+}
+#editorInputs{
+width: 100%;
+display: flex;
+}
+#editorInputImg{
+font-size: 100%;
+}
+#editorImgArt{
+font-size: 200%;
+margin-left: auto;
+margin-right: auto;
+max-width:100%;
+max-height:25vh;
+padding: 1%;
+border-radius: 10%;
+}
+#editorContainer{
+width: 48%;
+height: 60vh;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 10vh;
+margin-top: 10vh;
+background-color: rgb(204, 199, 196);
+border: solid rgb(125,127,126) 2px;
+border-radius: 20px;
+}

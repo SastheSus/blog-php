@@ -9,6 +9,7 @@ session_start();
     <link rel="icon" type="gif" href="./img/tank.gif" />
     <title>Blog</title>
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/registrazione.css">
     <script src="blog.js"></script>
 </head>
 

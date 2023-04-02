@@ -1,0 +1,89 @@
+#bodyReg{
+width: 80%;
+margin-left: auto;
+margin-right: auto;
+}
+#formReg{
+width: 48%;
+height: 60vh;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 10vh;
+margin-top: 10vh;
+background-color: rgb(204, 199, 196);
+border: solid rgb(125,127,126) 2px;
+border-radius: 20px;
+}
+#usernameReg{
+height: 5vh;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 6vh;
+font-size: 150%;
+padding-left: 10px;
+border-radius: 20px;
+}
+
+#emailReg{
+height: 5vh;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 6vh;
+font-size: 150%;
+padding-left: 10px;
+border-radius: 20px;
+}
+
+#passwordReg{
+height: 5vh;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 6vh;
+font-size: 150%;
+padding-left: 10px;
+border-radius: 20px;
+}
+#pulsantieraReg{
+padding-top: 5%;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+#buttonReg{
+background-color: white;
+margin-left:auto;
+margin-right: 0;
+color: black;
+text-align: center;
+display: inline-flex;
+border-radius: 8px;
+border: 1px solid transparent;
+font-size: 1em;
+font-weight: 500;
+font-family: inherit;
+cursor: pointer;
+transition: border-color 0.25s;
+margin-left: 10%;
+height: 3vh;
+}
+#buttonReg:hover {
+border-color: black;
+}
+#pulsantieraReg a{
+color: blue;
+margin-right: 10%;
+}
+#warningReg{
+color: red;
+}
+
+#h3formReg{
+font-size: 200%;
+}

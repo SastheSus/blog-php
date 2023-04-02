@@ -71,14 +71,15 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 <h3 id='titleArtPrinc'><?php echo $row['titolo']?></h3>
                                 <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtPrinc"><?php echo $row['descrizione']?></p>
+                                <input type="button" name='<?php echo $row['id']?>'>
                         </div>
+                        <?php
+                            $text = "SELECT articoli.id, titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY visualizzazioni DESC";
+                            $query= $pdo->prepare($text);
+                            $query->execute();
+                            $row = $query->fetch();
+                        ?>
                         <div id="main">
-                                <?php
-                                $text = "SELECT titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY visualizzazioni DESC";
-                                $query= $pdo->prepare($text);
-                                $query->execute();
-                                $row = $query->fetch();
-                                ?>
                                 <h3 id='titleArtPrinc'><?php echo $row['titolo']?></h3>
                                 <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtPrinc"><?php echo $row['descrizione']?></p>
