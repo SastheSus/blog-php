@@ -41,14 +41,16 @@ white-space: nowrap;
 
 .descArtPrinc{
 height: 20vh;
-font-size: 150%;
+font-size: 130%;
 width: 50%;
+margin: 0;
 }
 
 .descArtSec{
 height: 17vh;
 width: 50%;
 overflow: hidden;
+margin: 0;
 }
 
 #titleArtPrinc{

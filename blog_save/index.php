@@ -57,7 +57,6 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         <h1>Benvenuti su Tank Mania</h1>
                         <h3>Qui' puoi trovare notizie e curiosita' riguardo il mondo dei veicoli militari e i loro impieghi sul campo, recenti e passati.</h3>
                     </div>
-                    <form action="articolo.php" method="post">
                     <div id="articles">
                         <div id="titoli">
                             <h4>Novita'</h4>
@@ -73,8 +72,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 <h3 id='titleArtPrinc'><?php echo $row['titolo']?></h3>
                                 <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtPrinc"><?php echo $row['descrizione']?></p>
-                                <input type="hidden" name="id" value='<?php echo $row['id']?>'>
-                                <input type="submit" class="toArticolo" value="vai">
+                                <a type="button" href="./articolo.php?id=<?php echo $row['id']?>" class="toArticolo">vai</a>
                         </div>
                         <?php
                             $text = "SELECT articoli.id, titolo, nome, descrizione FROM articoli, immagini WHERE articoli.logo = immagini.id ORDER BY visualizzazioni DESC";
@@ -86,7 +84,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                 <h3 id='titleArtPrinc'><?php echo $row['titolo']?></h3>
                                 <div id="immagine"><img id="imgArt" src="./img/<?php echo $row['nome']?>" alt="leopard"></div>
                                 <p class="descArtPrinc"><?php echo $row['descrizione']?></p>
-                                <input type="submit" class="toArticolo" value="vai" name='<?php echo $row['id']?>'>
+                                <a href="./articolo.php?id=<?php echo $row['id']?>" class="toArticolo">vai</a>
                         </div>
                         <div id="otherArticles">
                             <h2>Altri articoli</h2>
@@ -111,14 +109,14 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                         <h3 id='titleArtSec'>".$row[$i]['titolo']."</h3>
                                         <div id='immagine'><img id='imgArt' src='./img/".$row[$i]['nome']."' alt='immagine'></div>
                                         <p class='descArtSec'>".$row[$i]['descrizione']."</p>
-                                        <input type='submit' class='toArticolo' value='vai' name='".$row[$i]['id']."'></div>";
+                                        <a type='button' href='./articolo.php?id=".$row[$i]['id']."' class='toArticolo'>vai</a>
+                                        </div>";
                                     }
                                 }
                                 ?>
                             </div>
                         </div>
                     </div>
-                    </form>
                     <div id="console"><button class="move" id="prev" onclick="prevArt()">⮜</button>
                         <?php 
                             if ($row != null && sizeof($row)>3) {
