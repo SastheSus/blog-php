@@ -67,19 +67,35 @@ $id=$_POST["id"];
                                 $query->execute([$id]);
                                 $paragrafi = $query->fetchAll();
                                 
-                                $immagini = "";
+                                $aus="";
                                 $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
                                 $query= $pdo->prepare($text);
                                 foreach ($paragrafi as $value) {
                                     $query->execute([$value['id']]);
-                                    $immagini += $query->fetchAll();
+                                    $immagini=$query->fetchAll();
+                                    foreach ($immagini as $val) {
+                                        $aus.=$val[0]."-";
+                                    }
                                 }
-                                echo $immagini;
+
+
+                                echo "|".$aus."|";
                             ?>
                             <h3 id="h3formArticolo"><?php ?></h3>
                             <?php 
                             
-                            
+                            foreach ($paragrafi as $value) {
+                                echo '<div class="paragrafo">';
+                                if($immagini!=null){
+                                    echo '<div class="immagini">';
+                                    foreach ($immagini as $val) {
+                                    echo '<div class="immagine"><img class="imgArt" src="./img/'.$val['nome'].'"></div>';
+                                    }
+                                    echo '</div>';
+                                }
+                                echo '<p id='.$value['id'].' class="paragrafoContent">'.$value['contenuto'].'</p>';
+                                echo '</div>';
+                            }
 
                             ?>
                         </article>

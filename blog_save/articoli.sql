@@ -45,7 +45,8 @@ CREATE TABLE immaginiDiParagrafi (
 --
 
 INSERT INTO utenti (username, email, password, ruolo) VALUES
-("Bardo","michele.bardotti04@gmail.com","$2y$10$MXbLJYcqDAUmsBAiS0DCLeWC/nQxGJxSqGRaaFg5uIq7QJ8S9dmdG", NULL);
+("Bardo","michele.bardotti04@gmail.com","$2y$10$MXbLJYcqDAUmsBAiS0DCLeWC/nQxGJxSqGRaaFg5uIq7QJ8S9dmdG", "ADMIN");
+
 INSERT INTO immagini (nome, logo) VALUES
 ("BM-21_Grad.jpg",1),
 ("abrams.jpeg",1),
@@ -62,3 +63,11 @@ INSERT INTO articoli (titolo, descrizione, giorno, logo, utente, visualizzazioni
 ("T-14","Il T-14 Armata è un carro armato da combattimento di quinta generazione sviluppato in Russia. È uno dei sistemi d\'arma più avanzati al mondo","2023-03-02 09:40:00",5,"Bardo", 15),
 ("T-72","Il T-72 è un carro armato da combattimento russo sviluppato negli anni \'70. Caratterizzato da un cannone ad alta velocità da 125 mm e una corazzatura avanzata, è stato utilizzato ed esportato in diversi paesi.","2023-03-14 10:03:53",6,"Bardo", 30);
 
+INSERT INTO paragrafi (articolo, titolo, contenuto) VALUES
+(6,'test','questo è un test'),
+(6,'test2','questo è un test');
+
+INSERT INTO immaginiDiParagrafi (idParagrafo, idImmagine) VALUES
+(1,1),
+(1,2),
+(2,3);
