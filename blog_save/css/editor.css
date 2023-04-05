@@ -1,6 +1,10 @@
 #editorH3{
 margin: 0;
 }
+
+#ediTitContainer{
+    width: 100%;
+    }
 #editorTitolo{
 width: 50%;
 font-size: 200%;
@@ -13,12 +17,12 @@ width: 40%;
 height: 20vh;
 }
 #editorImmagine{
-color: black;
 background-color: white;
-overflow: hidden;
 width: 50%;
-height: 25vh;
-float: left;
+height: 10em;
+justify-content: center;
+display: flex;
+align-items: center;
 border: 1px black solid;
 }
 #editorInputs{
@@ -29,22 +33,23 @@ display: flex;
 font-size: 100%;
 }
 #editorImgArt{
-font-size: 200%;
-margin-left: auto;
-margin-right: auto;
-max-width:100%;
-max-height:25vh;
-padding: 1%;
-border-radius: 10%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
 }
 #editorContainer{
-width: 48%;
-height: 60vh;
-margin-left: auto;
-margin-right: auto;
-margin-bottom: 10vh;
-margin-top: 10vh;
-background-color: rgb(204, 199, 196);
-border: solid rgb(125,127,126) 2px;
-border-radius: 20px;
+    min-height: 35vh;
+    max-height: 35vh;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 45%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    background-color: rgb(125,127,126);
+    border-radius: 20px;
+    transition: background-color 0.5s;
 }
