@@ -20,7 +20,23 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
             <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
-                <li><a href="./editor.php">Editor</a></li>
+                <li>
+                    <?php
+                    if(!empty($_SESSION['user'])){
+                        $text = "SELECT ruolo FROM utenti WHERE username = ?";
+                        $query= $pdo->prepare($text);
+                        $query->execute([$_SESSION['user']]);
+                        $row = $query->fetch();
+                        if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
+                            echo '<a href="./editor.php">Editor</a>';
+                        }else{
+                            $title = "'Heads Up!'";
+                            $content = "'This is a custom alert with heading.'";
+                            echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
+                        }
+                    }
+                    ?>
+                </li>
                 <li></li>
                 <li id="logli"><div id="loginBtn" 
                 <?php
