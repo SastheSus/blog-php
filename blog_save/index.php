@@ -30,8 +30,8 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
                             echo '<a href="./editor.php">Editor</a>';
                         }else{
-                            $title = "'Heads Up!'";
-                            $content = "'This is a custom alert with heading.'";
+                            $title = "'ALT!'";
+                            $content = "'Questa sezione è accessibile solo alle persone autorizzate. Vuoi richiedere un ruolo da autore o admin?'";
                             echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
                         }
                     }

@@ -1,6 +1,7 @@
 <?php
 session_start();
 $id=$_GET["id"];
+$pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -20,7 +21,24 @@ $id=$_GET["id"];
         <nav>
             <ul>
                 <li><a href="./index.php">Home</a></li>
-                <li><a href="./editor.php">Editor</a></li>
+                <li>
+                    <?php
+                    if(!empty($_SESSION['user'])){
+                        $text = "SELECT ruolo FROM utenti WHERE username = ?";
+                        $query= $pdo->prepare($text);
+                        $query->execute([$_SESSION['user']]);
+                        $row = $query->fetch();
+                        $pdo = null;
+                        if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
+                            echo '<a href="./editor.php">Editor</a>';
+                        }else{
+                            $title = "'Heads Up!'";
+                            $content = "'This is a custom alert with heading.'";
+                            echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
+                        }
+                    }
+                    ?>
+                </li>
                 <li></li>
                 <li id="logli"><div id="loginBtn" 
                 <?php
@@ -60,28 +78,26 @@ $id=$_GET["id"];
                                 $text = "SELECT * FROM articoli WHERE id = ?";
                                 $query= $pdo->prepare($text);
                                 $query->execute([$id]);
-                                $articolo = $query->fetchAll();
+                                $articolo = $query->fetch();
                                 
                                 $text = "SELECT * FROM paragrafi WHERE articolo = ?";
                                 $query= $pdo->prepare($text);
                                 $query->execute([$id]);
                                 $paragrafi = $query->fetchAll();
                                 
-                                $aus="";
+                                $immagini=array();
+                                $aus=array();
                                 $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
                                 $query= $pdo->prepare($text);
                                 foreach ($paragrafi as $value) {
                                     $query->execute([$value['id']]);
-                                    $immagini=$query->fetchAll();
-                                    foreach ($immagini as $val) {
-                                        $aus.=$val[0]."-";
+                                    $aus = $query->fetchAll();
+                                    foreach ($aus as $val) {
+                                        array_push($immagini,$val);
                                     }
                                 }
-
-
-                                echo "|".$aus."|";
                             ?>
-                            <h3 id="h3formArticolo"><?php ?></h3>
+                            <h3 id="h3formArticolo"><?php echo $articolo['titolo'];?></h3>
                             <?php 
                             
                             foreach ($paragrafi as $value) {
@@ -89,7 +105,9 @@ $id=$_GET["id"];
                                 if($immagini!=null){
                                     echo '<div class="immagini">';
                                     foreach ($immagini as $val) {
-                                    echo '<div class="immagine"><img class="imgArt" src="./img/'.$val['nome'].'"></div>';
+                                        if($value['id']==$val['idParagrafo']){
+                                            echo '<div class="immagine"><img class="imgArt" src="./img/'.$val['nome'].'"></div>';
+                                        }
                                     }
                                     echo '</div>';
                                 }
