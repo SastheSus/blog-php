@@ -20,12 +20,19 @@ font-size: 300%;
 width: 100%;
 display: inline-flex;
 flex-wrap: wrap;
-background-color: rgb(231, 89, 6);
 border-bottom: solid rgb(125,127,126) 2px;
 }
 .paragrafoContent{
-border-left:1px solid black;
-width: 59%;
+    border-left:1px solid black;
+    width: 66%;
+    padding-left: 3%;
+}
+.paragrafoTitle{
+    font-size: 200%;
+}
+.paragrafoText{
+    text-align: start;
+    font-size: 150%;
 }
 
 .immagini{

@@ -111,7 +111,10 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                                     }
                                     echo '</div>';
                                 }
-                                echo '<p id='.$value['id'].' class="paragrafoContent">'.$value['contenuto'].'</p>';
+                                echo '  <div id='.$value['id'].' class="paragrafoContent">
+                                            <h2 class="paragrafoTitle">'.$value['titolo'].'</h2>
+                                            <p class="paragrafoText">'.$value['contenuto'].'</p>
+                                        </div>';
                                 echo '</div>';
                             }
 
