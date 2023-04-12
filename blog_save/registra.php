@@ -21,7 +21,7 @@ try{
     $result="ok";
     $text = "INSERT INTO utenti(username, email, password) VALUES (?,?,?)";
     $query= $pdo->prepare($text);
-    $query->execute([$username, $email, $password]);
+    $query->execute([strip_tags($username), $email, $password]);
   }
   else{
     $hint=$risultati[0]['email'];

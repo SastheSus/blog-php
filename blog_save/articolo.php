@@ -6,116 +6,118 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 <!DOCTYPE html>
 <html lang="it">
 
-<head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="gif" href="./img/tank.gif" />
-    <title>Blog</title>
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/articolo.css">
-    <script src="blog.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="gif" href="./img/tank.gif" />
+        <title>Blog</title>
+        <link rel="stylesheet" href="./css/common.css">
+        <link rel="stylesheet" href="./css/articolo.css">
+        <script src="blog.js"></script>
+    </head>
 
-<body>
-    <div id="root">
-        <div>
-        <nav>
-            <ul>
-                <li><a href="./index.php">Home</a></li>
-                <li>
-                    <?php
-                    if(!empty($_SESSION['user'])){
+    <body>
+        <div id="root">
+            <nav>
+                <ul>
+                    <li><a href="./index.php">Home</a></li>
+                    <li>
+                        <?php
+                        if(!empty($_SESSION['user'])){
                         $text = "SELECT ruolo FROM utenti WHERE username = ?";
                         $query= $pdo->prepare($text);
                         $query->execute([$_SESSION['user']]);
                         $row = $query->fetch();
                         $pdo = null;
                         if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
-                            echo '<a href="./editor.php">Editor</a>';
+                        echo '<a href="./editor.php">Editor</a>';
                         }else{
-                            $title = "'Heads Up!'";
-                            $content = "'This is a custom alert with heading.'";
-                            echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
+                        $title = "'Heads Up!'";
+                        $content = "'This is a custom alert with heading.'";
+                        echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
                         }
-                    }
-                    ?>
-                </li>
-                <li></li>
-                <li id="logli"><div id="loginBtn" 
-                <?php
-                    $t="";
-                    if(empty($_SESSION['user'])){
+                        }
+                        ?>
+                    </li>
+                    <li></li>
+                    <li id="logli">
+                        <div id="loginBtn" 
+                        <?php
+                        $t="";
+                        if(empty($_SESSION['user'])){
                         $t="window.location.replace('./login.php')";
                         echo 'onclick="'.$t.'"';
-                    }
-                ?>
-                ><img src="./img/account.png" alt="">
-                <?php 
-                    if(!empty($_SESSION['user'])){
-                        echo '<p>'.$_SESSION["user"]."</p>";
-                    }
-                    else{
-                        echo '<p>Accedi</p>';
-                    }
-                ?>
-                </div>
-                <?php 
-                    if(!empty($_SESSION['user'])){
+                        }
+                        ?>
+                        >
+                            <img src="./img/account.png" alt="">
+                            <?php 
+                            if(!empty($_SESSION['user'])){
+                            echo '<p>'.$_SESSION["user"]."</p>";
+                            }
+                            else{
+                            echo '<p>Accedi</p>';
+                            }
+                            ?>
+                        </div>
+                        <?php 
+                        if(!empty($_SESSION['user'])){
                         $t='close_session()';
-                        echo "<div class='dropdown-content'>
-                        <a onclick='".$t."'>Logout</a>
+                        echo 
+                        "<div class='dropdown-content'>
+                            <a onclick='".$t."'>Logout</a>
                         </div>";
-                    }
-                ?>
-            </li>
-            </ul>
+                        }
+                        ?>
+                    </li>
+                </ul>
             </nav>
             <div class="App">
-            <div id='bodyArticolo'>
-                <div id='formArticolo'>
+                <div id='bodyArticolo'>
+                    <div id='formArticolo'>
                         <article>
                             <?php 
-                                $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
-                                $text = "SELECT * FROM articoli WHERE id = ?";
-                                $query= $pdo->prepare($text);
-                                $query->execute([$id]);
-                                $articolo = $query->fetch();
-                                
-                                $text = "SELECT * FROM paragrafi WHERE articolo = ?";
-                                $query= $pdo->prepare($text);
-                                $query->execute([$id]);
-                                $paragrafi = $query->fetchAll();
-                                
-                                $immagini=array();
-                                $aus=array();
-                                $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
-                                $query= $pdo->prepare($text);
-                                foreach ($paragrafi as $value) {
-                                    $query->execute([$value['id']]);
-                                    $aus = $query->fetchAll();
-                                    foreach ($aus as $val) {
-                                        array_push($immagini,$val);
-                                    }
-                                }
+                            $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                            $text = "SELECT * FROM articoli WHERE id = ?";
+                            $query= $pdo->prepare($text);
+                            $query->execute([$id]);
+                            $articolo = $query->fetch();
+
+                            $text = "SELECT * FROM paragrafi WHERE articolo = ?";
+                            $query= $pdo->prepare($text);
+                            $query->execute([$id]);
+                            $paragrafi = $query->fetchAll();
+
+                            $immagini=array();
+                            $aus=array();
+                            $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
+                            $query= $pdo->prepare($text);
+                            foreach ($paragrafi as $value) {
+                            $query->execute([$value['id']]);
+                            $aus = $query->fetchAll();
+                            foreach ($aus as $val) {
+                            array_push($immagini,$val);
+                            }
+                            }
                             ?>
                             <h3 id="h3formArticolo"><?php echo $articolo['titolo'];?></h3>
                             <?php 
-                            
+
                             foreach ($paragrafi as $value) {
-                                echo '<div class="paragrafo">';
-                                if($immagini!=null){
-                                    echo '<div class="immagini">';
-                                    foreach ($immagini as $val) {
-                                        if($value['id']==$val['idParagrafo']){
-                                            echo '<div class="immagine"><img class="imgArt" src="./img/'.$val['nome'].'"></div>';
-                                        }
-                                    }
-                                    echo '</div>';
-                                }
-                                echo '  <div id='.$value['id'].' class="paragrafoContent">
-                                            <h2 class="paragrafoTitle">'.$value['titolo'].'</h2>
-                                            <p class="paragrafoText">'.$value['contenuto'].'</p>
-                                        </div>';
-                                echo '</div>';
+                            echo '<div class="paragrafo">';
+                            if($immagini!=null){
+                            echo '<div class="immagini">';
+                            foreach ($immagini as $val) {
+                            if($value['id']==$val['idParagrafo']){
+                            echo '<div class="immagine"><img class="imgPar" src="./img/'.$val['nome'].'"></div>';
+                            }
+                            }
+                            echo '</div>';
+                            }
+                            echo '  <div id='.$value['id'].' class="paragrafoContent">
+                            <h2 class="paragrafoTitle">'.$value['titolo'].'</h2>
+                            <p class="paragrafoText">'.$value['contenuto'].'</p>
+                            </div>';
+                            echo '</div>';
                             }
 
                             ?>
@@ -137,8 +139,5 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                 </footer>
             </div>
         </div>
-    </div>
-
-</body>
-
+    </body>
 </html>
