@@ -73,6 +73,11 @@ session_start();
                                 ?>
                                 <h3 id="h3formArticolo"><?php ?></h3>
                                 <?php
+                                    echo '<div class="paragrafo">
+                                            <button id="s1" class="insertImg" onclick="insertImg(\'s1\')"></button>
+                                            <textarea type="text" class="paragrafoContent"></textarea>
+                                            <button id="d1" class="insertImg" onclick="insertImg(\'d1\')"/></button>
+                                          </div>';
                                 ?>
                             </article>
                         </div> 

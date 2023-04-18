@@ -190,3 +190,7 @@ function CustomAlert(){
   }
   
   let customAlert = new CustomAlert();
+
+  function insertImg(id){
+    
+  }

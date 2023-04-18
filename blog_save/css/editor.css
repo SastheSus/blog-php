@@ -84,6 +84,11 @@ flex-wrap: wrap;
 border-bottom: solid rgb(125,127,126) 2px;
 }
 .paragrafoContent{
+    font-size: 150%;
+    font-family: font;
+    resize: none;
+    text-align: start;
+    min-height: 30vh;
     border-left:1px solid black;
     width: 66%;
     padding-left: 3%;
