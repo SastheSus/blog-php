@@ -141,9 +141,9 @@ const invia = () =>{
 
 
 
-function getImgData() {
-    const input = document.getElementById("editorInputImg");
-    const editorImgArt = document.getElementById("editorImgArt");
+function getImgData(idImg, idInput) {
+    const input = document.getElementById(""+idInput+"");
+    const editorImgArt = document.getElementById(""+idImg+"");
     const files = input.files[0];
     if (files) {
         const fileReader = new FileReader();
@@ -192,5 +192,14 @@ function CustomAlert(){
   let customAlert = new CustomAlert();
 
   function insertImg(id){
-    
+
+    var elem = document.getElementById(''+id+'');
+    var elem2 = '';
+
+    if(id%2==1){
+        elem2 = document.getElementById(''+(id+1)+'');
+        console.log(elem2);
+        elem2.remove();
+        elem = '<img class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/>'
+    }
   }

@@ -61,7 +61,7 @@ session_start();
                                 <img id='editorImgArt'>
                             </div>
                             <div id='editorInputs'>
-                                <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData()"/>
+                                <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData('editorImgArt')"/>
                                 <input type="button" value="carica" onclick="invia()"/>
                             </div>
                         </article>
@@ -74,9 +74,13 @@ session_start();
                                 <h3 id="h3formArticolo"><?php ?></h3>
                                 <?php
                                     echo '<div class="paragrafo">
-                                            <button id="s1" class="insertImg" onclick="insertImg(\'s1\')"></button>
+                                            <div id="1" class="insertImgDiv">
+                                                <button class="insertImgBtn" onclick="insertImg(1)"></button>
+                                            </div>
                                             <textarea type="text" class="paragrafoContent"></textarea>
-                                            <button id="d1" class="insertImg" onclick="insertImg(\'d1\')"/></button>
+                                            <div id="2" class="insertImgDiv">
+                                                <button class="insertImg" onclick="insertImg(2)"/></button>
+                                            </div>
                                           </div>';
                                 ?>
                             </article>
