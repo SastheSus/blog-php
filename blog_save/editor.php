@@ -73,11 +73,11 @@ session_start();
                                 ?>
                                 <h3 id="h3formArticolo"><?php ?></h3>
                                 <?php
-                                    echo '<div class="paragrafo">
+                                    echo '<div id="paragrafo1" class="paragrafo">
                                             <div id="1" class="insertImgDiv">
                                                 <button class="insertImgBtn" onclick="insertImg(1)"></button>
                                             </div>
-                                            <textarea type="text" class="paragrafoContent"></textarea>
+                                            <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
                                             <div id="2" class="insertImgDiv">
                                                 <button class="insertImg" onclick="insertImg(2)"/></button>
                                             </div>

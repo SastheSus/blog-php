@@ -194,12 +194,30 @@ function CustomAlert(){
   function insertImg(id){
 
     var elem = document.getElementById(''+id+'');
+    var text = document.getElementById('textarea'+id);
     var elem2 = '';
 
     if(id%2==1){
         elem2 = document.getElementById(''+(id+1)+'');
         console.log(elem2);
         elem2.remove();
-        elem = '<img class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/>'
+        elem.className = 'immagini';
+        elem.innerHTML = '<img id="immagine" class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/>'
     }
+    else{
+        elem2 = document.getElementById(''+(id-1)+'');
+        console.log(elem2);
+        elem2.remove();
+        elem.className = 'immagini';
+        elem.innerHTML = '<img id="immagine" class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/>'
+        elem.innerHTML += '<button id="d'+id+'" onclick="changePos(\'d'+id+'\')"></button>'
+    
+    }
+  }
+  function changePos(id) {
+    numId = id.replace('characterToReplace', '');
+    var elem = document.getElementById(''+numId+'');
+    var text = document.getElementById('textarea'+numId);
+    var container = document.getElementById('paragrafo'+numId);
+    elem.parentNode.insertBefore(text,elem);
   }
