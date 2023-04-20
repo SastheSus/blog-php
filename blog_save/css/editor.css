@@ -100,11 +100,16 @@ border-bottom: solid rgb(125,127,126) 2px;
     font-size: 150%;
 }
 
+.onputImgContainer{
+    width: 100%;
+}
+
 .immagini{
 width: 30%;
 }
 .immagine{
-    width:100%;
+    max-width:100%;
+    max-height: 20vh;
 }
 .imgPar{
 margin-left: auto;

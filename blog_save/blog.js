@@ -194,7 +194,7 @@ let customAlert = new CustomAlert();
 function insertImg(id){
     var elem = document.getElementById(''+id+'');
     var text = document.getElementById('textarea'+id);
-    elem.innerHTML = '<img id="immagine" class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/><button onclick="changePos(1)"></button>'
+    elem.innerHTML = '<img id="immagine" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/></div><button onclick="changePos(1)"></button>'
 }
 function changePos(id) {
     var parag = document.getElementById('paragrafo'+id);
