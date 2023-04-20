@@ -28,6 +28,7 @@ CREATE TABLE paragrafi (
   articolo int(11) NOT NULL,
   titolo varchar(255) DEFAULT NULL,
   contenuto text DEFAULT NULL,
+  stile int DEFAULT 0,
   FOREIGN KEY (articolo) REFERENCES articoli (id),
   PRIMARY KEY (id, articolo)
 );

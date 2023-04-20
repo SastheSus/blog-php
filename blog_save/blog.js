@@ -187,37 +187,22 @@ function CustomAlert(){
       document.getElementById('dialogbox').style.display = "none";
       document.getElementById('dialogoverlay').style.display = "none";
     }
-  }
-  
-  let customAlert = new CustomAlert();
+}
 
-  function insertImg(id){
+let customAlert = new CustomAlert();
 
+function insertImg(id){
     var elem = document.getElementById(''+id+'');
     var text = document.getElementById('textarea'+id);
-    var elem2 = '';
-
-    if(id%2==1){
-        elem2 = document.getElementById(''+(id+1)+'');
-        console.log(elem2);
-        elem2.remove();
-        elem.className = 'immagini';
-        elem.innerHTML = '<img id="immagine" class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/>'
+    elem.innerHTML = '<img id="immagine" class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/><button onclick="changePos(1)"></button>'
+}
+function changePos(id) {
+    var parag = document.getElementById('paragrafo'+id);
+    console.log(parag.style.flexDirection)
+    if(parag.style.flexDirection=="row" || parag.style.flexDirection==""){
+        parag.style.flexDirection = "row-reverse";
     }
     else{
-        elem2 = document.getElementById(''+(id-1)+'');
-        console.log(elem2);
-        elem2.remove();
-        elem.className = 'immagini';
-        elem.innerHTML = '<img id="immagine" class="immagine"><input id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/>'
-        elem.innerHTML += '<button id="d'+id+'" onclick="changePos(\'d'+id+'\')"></button>'
-    
+        parag.style.flexDirection = "row";
     }
-  }
-  function changePos(id) {
-    numId = id.replace('characterToReplace', '');
-    var elem = document.getElementById(''+numId+'');
-    var text = document.getElementById('textarea'+numId);
-    var container = document.getElementById('paragrafo'+numId);
-    elem.parentNode.insertBefore(text,elem);
-  }
+}
