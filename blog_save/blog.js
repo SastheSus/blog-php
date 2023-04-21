@@ -1,3 +1,5 @@
+var immaginiParagrafo = [];
+
 const accedi = () =>{
     var xhr = new XMLHttpRequest();
     var email = document.getElementById('usernameLogin');
@@ -122,7 +124,7 @@ const invia = () =>{
 
     if(title!=null && img!=null && content!=null){
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "uploader.php?title=" + title.value + "&img=" + img.value + "&content=" + content.value, true);
+        xhr.open("GET", "uploadDesc.php?title=" + title.value + "&img=" + img.value.replace('C:\\fakepath\\','') + "&content=" + content.value, true);
         xhr.send();
         xhr.onload = () => {
             if(xhr.response=="none"){
@@ -137,8 +139,20 @@ const invia = () =>{
             alert(`Network Error`);
         }
     }
-}
+    var i = 1;
+    const parag = document.getElementById('paragrafo1')
+    while(parag!=null){
+        const titPar = document.getElementById('subTitle'+i)
+        const imgPar = document.getElementById('insertImgBtn'+i)
+        const contentPar = document.getElementById('textarea'+i)
 
+        xhr.open("GET", "uploadParag.php?title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgPar.value, true);
+        xhr.send();
+        xhr.onload = () => {
+
+        }
+    }
+}
 
 
 function getImgData(idImg, idInput) {
@@ -151,8 +165,11 @@ function getImgData(idImg, idInput) {
         fileReader.addEventListener("load", function () {
             editorImgArt.src= this.result;
             console.log(this.result);
+            immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
+            alert(immaginiParagrafo)
         });    
     }
+
 }
 
 function richiedi() {

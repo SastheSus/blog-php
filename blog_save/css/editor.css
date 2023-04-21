@@ -4,7 +4,7 @@ margin: 0;
 
 #ediTitContainer{
     width: 100%;
-    }
+}
 #editorTitolo{
 width: 50%;
 font-size: 200%;
@@ -85,7 +85,6 @@ border-bottom: solid rgb(125,127,126) 2px;
 }
 .paragrafoContent{
     font-size: 150%;
-    font-family: font;
     resize: none;
     text-align: start;
     min-height: 30vh;
@@ -119,4 +118,13 @@ border-radius: 10px;
 }
 .insertImgDiv{
     width: 15%;
+}
+.subTitle{
+    width: 80%;
+    font-size:250%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.subTitleContainer{
+    width: 100%;
 }
