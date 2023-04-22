@@ -121,10 +121,12 @@ const invia = () =>{
     const title = document.getElementById('editorTitolo')
     const img = document.getElementById('editorInputImg')
     const content = document.getElementById('editorDescArt')
+    var style = 0;
+    var artId = ''
 
-    if(title!=null && img!=null && content!=null){
+    //if(title!=null && img!=null && content!=null){
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "uploadDesc.php?title=" + title.value + "&img=" + img.value.replace('C:\\fakepath\\','') + "&content=" + content.value, true);
+        xhr.open("GET", "uploadDesc.php?title=Testone" + /*title.value*/ "&img=" + /*img.value.replace('C:\\fakepath\\','')*/"gabri_briga.png&content=testiamolo"/* + content.value*/, true);
         xhr.send();
         xhr.onload = () => {
             if(xhr.response=="none"){
@@ -133,12 +135,13 @@ const invia = () =>{
                 title.value=""
                 img.value=""
                 content.value=""
+                artId = xhr.response
             }
         }
         xhr.onerror = function() {
             alert(`Network Error`);
         }
-    }
+    //}
     var i = 1;
     const parag = document.getElementById('paragrafo1')
     while(parag!=null){
@@ -146,7 +149,11 @@ const invia = () =>{
         const imgPar = document.getElementById('insertImgBtn'+i)
         const contentPar = document.getElementById('textarea'+i)
 
-        xhr.open("GET", "uploadParag.php?title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgPar.value, true);
+        if(parag.style.flexDirection=='row-reverse'){
+            style=1;
+        }
+
+        xhr.open("GET", "uploadParag.php?article="+artId+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgPar.value, true);
         xhr.send();
         xhr.onload = () => {
 

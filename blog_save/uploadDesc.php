@@ -13,16 +13,20 @@ try{
       $query= $pdo->prepare($text);
       $query->execute([$img,1]);
 
-      $text2 = "SELECT id FROM immagini WHERE nome = ? ORDER BY id DESC";
-      $query= $pdo->prepare($text2);
+      $text = "SELECT id FROM immagini WHERE nome = ? ORDER BY id DESC";
+      $query= $pdo->prepare($text);
       $query->execute([$img,1]);
       $aus = $query->fetchAll();
       $aus = $aus[0]['id'];
       
-      $text3 = "INSERT INTO articoli(titolo, descrizione, giorno, logo) VALUES (?, ?, ?, ?)";
-      $query= $pdo->prepare($text3);
+      $text = "INSERT INTO articoli(titolo, descrizione, giorno, logo) VALUES (?, ?, ?, ?)";
+      $query= $pdo->prepare($text);
       $query->execute([$title,$content,date("Y-m-d h:i:s"),$aus]);
-      $hint="ok";
+
+      $text = "SELECT id FROM articoli WHERE titolo = ? ";
+      $query= $pdo->prepare($text);
+      $query->execute([$title]);
+      $hint = $query->fetchAll();
     }
     catch(Exception $e){
       $hint="";
