@@ -67,7 +67,7 @@ session_start();
                     </div>
                     <div id='bodyArticolo'>
                         <div id='formArticolo'>
-                            <article>
+                            <article id="paragZone">
                                 <?php
                                 ?>
                                 <h3 id="h3formArticolo"><?php ?></h3>
@@ -83,7 +83,7 @@ session_start();
                                           </div>';
                                 ?>
                             </article>
-                            <input type="button" value="carica" onclick="invia()"/>
+                        <input type="button" value="carica" onclick="invia()"/>
                         </div> 
                     </div>
                 </div>

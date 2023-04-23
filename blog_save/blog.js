@@ -1,4 +1,5 @@
 var immaginiParagrafo = [];
+var imgInputs = 0;
 
 const accedi = () =>{
     var xhr = new XMLHttpRequest();
@@ -116,14 +117,7 @@ const goTo = ($i) =>{
     $old = $i;
 }
 
-const readValues = () =>{
-    const title = document.getElementById('editorTitolo').value
-    const content = document.getElementById('editorDescArt').value
-    const titPar = document.getElementById('subTitle1').value
-    const contentPar = document.getElementById('textarea1').value
 
-    alert(title+"|"+content+"|"+titPar+"|"+contentPar+"|")
-}
 
 const invia = () =>{
     const title = document.getElementById('editorTitolo')
@@ -159,14 +153,14 @@ const invia = () =>{
 const invia2 = (artId) =>{
     var style = 0;
     var i = 1;
-    const parag = document.getElementById('paragrafo1')
+    const parag = document.getElementById('paragrafo'+i)
     imgStr = ''
-    for (let i = 0; i<immaginiParagrafo.length; i++) {
-        imgStr+=immaginiParagrafo[i][1]+"|";
+    for (let e = 0; e<immaginiParagrafo.length; e++) {
+        imgStr+=immaginiParagrafo[e][1]+"|";
     }
     imgStr = imgStr.slice(0,-1);
     alert(imgStr)
-    //while(parag!=null){
+    while(parag!=null){
         idAus = 'subTitle'+i
         const titPar = document.getElementById('subTitle'+i)
         alert(titPar.value)
@@ -182,7 +176,9 @@ const invia2 = (artId) =>{
         xhr.onload = () => {
             document.getElementById('formArticolo').innerHTML+=xhr.responseText
         }
-    //}
+        i++;
+        parag = document.getElementById('paragrafo'+i)
+    }
 }
 
 
@@ -190,14 +186,28 @@ function getImgData(idImg, idInput) {
     const input = document.getElementById(""+idInput+"");
     const editorImgArt = document.getElementById(""+idImg+"");
     const files = input.files[0];
+    const pos = -1;
     if (files) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
             editorImgArt.src= this.result;
             console.log(this.result);
-            immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
-            alert(immaginiParagrafo)
+            for(let i=0; i<immaginiParagrafo.length;i++){
+                alert(1)
+                if(immaginiParagrafo[i].includes(idInput)){
+                    alert(2+immaginiParagrafo[i])
+                    pos=1
+                    immaginiParagrafo[i][1] = input.value.replace('C:\\fakepath\\','')
+                    alert(immaginiParagrafo)
+                    pos=-1
+                    break
+                }
+            }
+            if(pos==-1){
+                immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
+                alert(immaginiParagrafo)
+            }
         });    
     }
 
@@ -240,9 +250,10 @@ function CustomAlert(){
 let customAlert = new CustomAlert();
 
 function insertImg(id){
+    imgInputs++;
     var elem = document.getElementById(''+id+'');
     var text = document.getElementById('textarea'+id);
-    elem.innerHTML = '<img id="immagine" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+'" type="file" accept="image/*" onchange="getImgData(\'immagine\',\'inputImg'+id+'\')"/></div><button onclick="changePos(1)"></button>'
+    elem.innerHTML += '<img id="immagine'+id+''+imgInputs+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+id+'\',\'inputImg'+id+''+id+'\')"/></div><button onclick="changePos('+id+')"></button>'
 }
 function changePos(id) {
     var parag = document.getElementById('paragrafo'+id);
