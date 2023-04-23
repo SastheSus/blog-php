@@ -9,18 +9,19 @@ $hint = "";
 $user = "";
 try{
     try{
-      $arrImg = explode($img, "|");
+      $arrImg = explode("|",$img);
       $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 
       $text = "INSERT INTO paragrafi(articolo, titolo, contenuto, stile) VALUES (?, ?, ?, ?)";
       $query= $pdo->prepare($text);
       $query->execute([$article, $title, $content, $style]);
       
-      $text = "SELECT id FROM paragrafi WHERE nome = ? AND logo = 0";
+      $text = "SELECT id FROM paragrafi WHERE titolo = ? AND articolo = ?";
       $query= $pdo->prepare($text);
-      $query->execute([$article, $title, $content]);
+      $query->execute([$title, $article]);
+      $idPar = $query->fetch();
 
-      foreach ($img as $value) {
+      foreach ($arrImg as $value) {
         $text = "INSERT INTO immagini(nome) VALUES (?)";
         $query= $pdo->prepare($text);
         $query->execute([$value]);
@@ -28,33 +29,23 @@ try{
         $text = "SELECT id FROM immagini WHERE nome = ? AND logo = 0";
         $query= $pdo->prepare($text);
         $query->execute([$value]);
-        $result = $query->fetchAll();
+        $idImg = $query->fetch();
 
         $text = "INSERT INTO immaginiDiParagrafi(idParagrafo, idImmagine) VALUES (?, ?)";
         $query= $pdo->prepare($text);
-        $query->execute([$value]);
+        $query->execute([$idPar[0],$idImg[0]]);
       }
-      
-
-      $text2 = "SELECT id FROM immagini WHERE nome = ? ORDER BY id DESC";
-      $query= $pdo->prepare($text2);
-      $query->execute([$img]);
-      $aus = $query->fetchAll();
-      $aus = $aus[0]['id'];
-      
-      $text3 = "INSERT INTO paragrafi(titolo, descrizione, giorno, logo) VALUES (?, ?, ?, ?)";
-      $query= $pdo->prepare($text3);
-      $query->execute([$title,$content,date("Y-m-d h:i:s"),$aus]);
-      $hint="ok";
     }
     catch(Exception $e){
+      echo "<p style='width: 100%; text-align: center; background-color: red;'>".$e."</p>";
       $hint="";
     }
   }
   catch (PDOException $e){
+      echo "<p style='width: 100%; text-align: center; background-color: red;'>".$e."</p>";
       $hint="";
       exit();
   }
   $pdo=null;
-  echo $hint === ""  ? "none" : $hint;
+  echo $hint === ""  ? $article : $hint;
 ?>
