@@ -116,6 +116,14 @@ const goTo = ($i) =>{
     $old = $i;
 }
 
+const readValues = () =>{
+    const title = document.getElementById('editorTitolo').value
+    const content = document.getElementById('editorDescArt').value
+    const titPar = document.getElementById('subTitle1').value
+    const contentPar = document.getElementById('textarea1').value
+
+    alert(title+"|"+content+"|"+titPar+"|"+contentPar+"|")
+}
 
 const invia = () =>{
     const title = document.getElementById('editorTitolo')
@@ -123,9 +131,9 @@ const invia = () =>{
     const content = document.getElementById('editorDescArt')
     var artId = ''
 
-    //if(title!=null && img!=null && content!=null){
+    if(title!=null && content!=null){
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "uploadDesc.php?title=Testone" + /*title.value*/ "&img=" + /*img.value.replace('C:\\fakepath\\','')*/"gabri_briga.png&content=testiamolo"/* + content.value*/, true);
+        xhr.open("GET", "uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
         xhr.send();
         xhr.onload = () => {
             alert(xhr.responseText)
@@ -139,14 +147,14 @@ const invia = () =>{
                 img.value=""
                 content.value=""
                 artId = xhr.response
-                document.getElementById('formArticolo').innerHTML+=xhr.responseText
+                alert(xhr.responseText)
                 invia2(artId)
             }
         }
         xhr.onerror = function() {
             alert(`Network Error`);
         }
-    //}
+    }
 }
 const invia2 = (artId) =>{
     var style = 0;
@@ -159,10 +167,11 @@ const invia2 = (artId) =>{
     imgStr = imgStr.slice(0,-1);
     alert(imgStr)
     //while(parag!=null){
+        idAus = 'subTitle'+i
         const titPar = document.getElementById('subTitle'+i)
-        alert(titPar.innerHTML)
+        alert(titPar.value)
         const contentPar = document.getElementById('textarea'+i)
-        alert(contentPar.innerHTML)
+        alert(contentPar.value)
 
         if(parag.style.flexDirection=='row-reverse'){
             style=1;
