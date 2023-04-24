@@ -186,7 +186,7 @@ function getImgData(idImg, idInput) {
     const input = document.getElementById(""+idInput+"");
     const editorImgArt = document.getElementById(""+idImg+"");
     const files = input.files[0];
-    const pos = -1;
+    var pos = -1;
     if (files) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
@@ -196,11 +196,10 @@ function getImgData(idImg, idInput) {
             for(let i=0; i<immaginiParagrafo.length;i++){
                 alert(1)
                 if(immaginiParagrafo[i].includes(idInput)){
-                    alert(2+immaginiParagrafo[i])
-                    pos=1
+                    alert(2+immaginiParagrafo[i]);
+                    pos = 1;
                     immaginiParagrafo[i][1] = input.value.replace('C:\\fakepath\\','')
                     alert(immaginiParagrafo)
-                    pos=-1
                     break
                 }
             }
@@ -210,7 +209,7 @@ function getImgData(idImg, idInput) {
             }
         });    
     }
-
+    pos=-1
 }
 
 function richiedi() {
@@ -253,7 +252,7 @@ function insertImg(id){
     imgInputs++;
     var elem = document.getElementById(''+id+'');
     var text = document.getElementById('textarea'+id);
-    elem.innerHTML += '<img id="immagine'+id+''+imgInputs+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+id+'\',\'inputImg'+id+''+id+'\')"/></div><button onclick="changePos('+id+')"></button>'
+    elem.innerHTML += '<img id="immagine'+id+''+imgInputs+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs+'\',\'inputImg'+id+''+imgInputs+'\')"/></div><button type="button" onclick="changePos('+id+')"></button>'
 }
 function changePos(id) {
     var parag = document.getElementById('paragrafo'+id);

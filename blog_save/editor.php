@@ -71,6 +71,7 @@ session_start();
                                 <?php
                                 ?>
                                 <h3 id="h3formArticolo"><?php ?></h3>
+                                <form action="editor.php?input=1" method="post" enctype="multipart/form-data">
                                 <?php
                                     echo '<div id="paragrafo1" class="paragrafo">
                                             <div id="subTitleContainer1" class="subTitleContainer">
@@ -83,11 +84,38 @@ session_start();
                                           </div>';
                                 ?>
                             </article>
-                        <input type="button" value="carica" onclick="invia()"/>
+                        <input type="submit" value="carica" onclick="invia()"/>
+                        </form>
                         </div> 
                     </div>
                 </div>
             </div>
         </div>
+        <?php 
+        if($_REQUEST!=null){
+            $target_dir = "./";
+            $target_file = $target_dir . basename($_FILES["inputImg11"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        
+        
+            if($imageFileType != "txt") {
+            echo "Sorry, only TXT files are allowed.";
+            $uploadOk = 0;
+            }
+        
+            if ($uploadOk == 0) {
+            echo "Sorry, your file was not uploaded.";
+            }
+            else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+                header("index.php");
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+            }
+        }
+        ?>
     </body>
 </html>

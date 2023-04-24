@@ -18,9 +18,9 @@ try{
       $aus = $query->fetchAll();
       $aus = $aus[0]['id'];
       
-      $text = "INSERT INTO articoli(titolo, descrizione, giorno, logo) VALUES (?, ?, ?, ?)";
+      $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente, logo) VALUES (?, ?, ?, ?, ?)";
       $query= $pdo->prepare($text);
-      $query->execute([$title,$content,date("Y-m-d h:i:s"),$aus]);
+      $query->execute([$title,$content,date("Y-m-d h:i:s"),$_SESSION['user'],$aus]);
 
       $text = "SELECT id FROM articoli WHERE titolo = ? ";
       $query= $pdo->prepare($text);
