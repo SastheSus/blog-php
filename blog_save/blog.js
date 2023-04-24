@@ -252,7 +252,7 @@ function insertImg(id){
     imgInputs++;
     var elem = document.getElementById(''+id+'');
     var text = document.getElementById('textarea'+id);
-    elem.innerHTML += '<img id="immagine'+id+''+imgInputs+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs+'\',\'inputImg'+id+''+imgInputs+'\')"/></div><button type="button" onclick="changePos('+id+')"></button>'
+    elem.innerHTML += '<img id="immagine'+id+''+imgInputs+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs+'" name="inputImg'+id+''+imgInputs+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs+'\',\'inputImg'+id+''+imgInputs+'\')"/></div><button type="button" onclick="changePos('+id+')"></button>'
 }
 function changePos(id) {
     var parag = document.getElementById('paragrafo'+id);
