@@ -1,5 +1,6 @@
 var immaginiParagrafo = [];
 var imgInputs = 0;
+var parags = 1;
 
 const accedi = () =>{
     var xhr = new XMLHttpRequest();
@@ -247,6 +248,13 @@ function CustomAlert(){
 }
 
 let customAlert = new CustomAlert();
+
+function insertParag(){
+    parags++;
+    var area = document.getElementById('paragZone');
+
+    area.innerHTML += '<h3 id="h3formArticolo'+parags+'"><?php ?></h3><form action="editor.php?input=1&mode=1" method="post" enctype="multipart/form-data"><div id="paragrafo1" class="paragrafo"><div id="subTitleContainer1" class="subTitleContainer"><input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input></div><div id="1" class="immagini"><button class="insertImgBtn" onclick="insertImg(1)"></button></div><textarea id="textarea1" type="text" class="paragrafoContent"></textarea></div>';
+}
 
 function insertImg(id){
     imgInputs++;
