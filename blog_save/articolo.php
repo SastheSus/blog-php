@@ -92,32 +92,37 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
                             $query= $pdo->prepare($text);
                             foreach ($paragrafi as $value) {
-                            $query->execute([$value['id']]);
-                            $aus = $query->fetchAll();
-                            foreach ($aus as $val) {
-                            array_push($immagini,$val);
-                            }
+                                $query->execute([$value['id']]);
+                                $aus = $query->fetchAll();
+                                foreach ($aus as $val) {
+                                    array_push($immagini,$val);
+                                }
                             }
                             ?>
                             <h3 id="h3formArticolo"><?php echo $articolo['titolo'];?></h3>
                             <?php 
 
                             foreach ($paragrafi as $value) {
-                            echo '<div class="paragrafo">';
-                            if($immagini!=null){
-                            echo '<div class="immagini">';
-                            foreach ($immagini as $val) {
-                            if($value['id']==$val['idParagrafo']){
-                            echo '<div class="immagine"><img class="imgPar" src="./img/'.$val['nome'].'"></div>';
-                            }
-                            }
-                            echo '</div>';
-                            }
-                            echo '  <div id='.$value['id'].' class="paragrafoContent">
-                            <h2 class="paragrafoTitle">'.$value['titolo'].'</h2>
-                            <p class="paragrafoText">'.$value['contenuto'].'</p>
-                            </div>';
-                            echo '</div>';
+                                if($value['stile']==1){
+                                    echo '<div class="notParagrafo">';
+                                }
+                                else{
+                                    echo '<div class="paragrafo">';
+                                }
+                                if($immagini!=null){
+                                    echo '<div class="immagini">';
+                                    foreach ($immagini as $val) {
+                                        if($value['id']==$val['idParagrafo']){
+                                            echo '<div class="immagine"><img class="imgPar" src="./img/'.$val['nome'].'"></div>';
+                                        }
+                                    }
+                                    echo '</div>';
+                                }
+                                echo '  <div id='.$value['id'].' class="paragrafoContent">
+                                <h2 class="paragrafoTitle">'.$value['titolo'].'</h2>
+                                <p class="paragrafoText">'.$value['contenuto'].'</p>
+                                </div>';
+                                echo '</div>';
                             }
 
                             ?>

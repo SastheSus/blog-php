@@ -29,14 +29,25 @@ session_start();
                         if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
                             echo '<a href="./editor.php">Editor</a>';
                         }else{
-                            $title = "'Heads Up!'";
-                            $content = "'This is a custom alert with heading.'";
+                            $title = "'ALT!'";
+                            $content = "'Questa sezione è accessibile solo alle persone autorizzate. Vuoi richiedere un ruolo da autore o admin?'";
                             echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
                         }
                     }
                     ?>
                 </li>
-                <li></li>
+                <li><?php
+                    if(!empty($_SESSION['user'])){
+                        $text = "SELECT ruolo FROM utenti WHERE username = ?";
+                        $query= $pdo->prepare($text);
+                        $query->execute([$_SESSION['user']]);
+                        $row = $query->fetch();
+                        if($row['ruolo']=='ADMIN'){
+                            echo '<a href="./manager.php">users manager</a>';
+                        }
+                    }
+                    ?>
+                </li>
                 <li id="logli"><div id="loginBtn" 
                 <?php
                     $t="";
@@ -65,7 +76,7 @@ session_start();
                 ?>
             </li>
             </ul>
-            </nav>
+        </nav>
             <div class="App">
             <div id='bodyLogin'>
                 <div id='formLogin'>

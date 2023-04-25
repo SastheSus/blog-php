@@ -148,7 +148,7 @@ const invia = () =>{
                     invia2(artId)
                 }
             } catch (error) {
-                //alert("5 "+error)
+                alert("5 "+error)
             }
             
         }
@@ -158,6 +158,7 @@ const invia = () =>{
     }
 }
 const invia2 = (artId) =>{
+    if(document.getElementById('subTitle1')!=""){
     var style = 0;
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
@@ -204,6 +205,7 @@ const invia2 = (artId) =>{
         parag = document.getElementById('paragrafo'+i)
         alert(parag.id)
     }
+}
 }
 
 
@@ -290,6 +292,7 @@ function insertParag(){
     clone.querySelector(".paragrafoContent").value = "";
     clone.querySelector(".inputImg").remove()
     clone.querySelector(".changePos").remove()
+    clone.querySelector(".immagine").remove()
     area.appendChild(clone)
 }
 
