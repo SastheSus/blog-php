@@ -69,11 +69,7 @@ $elenco = '';
                         <div id='bodyArticolo'>
                             <div id='formArticolo'>
                                 <article id="paragZone">
-                                    <?php
-                                    ?>
-                                    <h3 id="h3formArticolo"><?php ?></h3>
-                                    <?php
-                                        echo '<div id="paragrafo1" class="paragrafo">
+                                    <div id="paragrafo1" class="paragrafo">
                                                 <div id="subTitleContainer1" class="subTitleContainer">
                                                     <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
@@ -81,8 +77,7 @@ $elenco = '';
                                                     <button type="button" class="insertImgBtn" onclick="insertImg(1)"></button>
                                                 </div>
                                                 <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
-                                            </div>';
-                                    ?>
+                                            </div>
                                 </article>
                             <button type="button" onclick="insertParag()"></button>
                             <input type="submit" value="carica" onclick="invia()"/>

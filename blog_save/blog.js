@@ -148,7 +148,7 @@ const invia = () =>{
                     invia2(artId)
                 }
             } catch (error) {
-                alert("5 "+error)
+                //alert("5 "+error)
             }
             
         }
@@ -160,19 +160,34 @@ const invia = () =>{
 const invia2 = (artId) =>{
     var style = 0;
     var i = 1;
-    const parag = document.getElementById('paragrafo'+i)
+    var parag = document.getElementById('paragrafo'+i)
     imgStr = ''
-    for (let e = 0; e<immaginiParagrafo.length; e++) {
-        imgStr+=immaginiParagrafo[e][1]+"|";
-    }
-    imgStr = imgStr.slice(0,-1);
-    alert("6 "+imgStr)
+    
+    //alert("6 "+imgStr)
     while(parag!=null){
+        alert(parag.id)
         idAus = 'subTitle'+i
         const titPar = document.getElementById('subTitle'+i)
-        alert("7 "+titPar.value)
         const contentPar = document.getElementById('textarea'+i)
-        alert("8 "+contentPar.value)
+        alert("pino")
+        try {
+            for (let q = 0; q<immaginiParagrafo.length; q++) {
+                if(immaginiParagrafo[q][0].startsWith(i)){
+                    imgStr+=immaginiParagrafo[q][1]+"|";
+                }
+                else{
+                    alert(immaginiParagrafo[q][0]+' '+i)
+                }
+            }
+        } catch (error) {
+            alert(error+" "+i)
+        }
+            
+        
+        
+        
+        alert("paolo")
+        imgStr = imgStr.slice(0,-1);
 
         if(parag.style.flexDirection=='row-reverse'){
             style=1;
@@ -183,8 +198,11 @@ const invia2 = (artId) =>{
         xhr.onload = () => {
             document.getElementById('formArticolo').innerHTML+=xhr.responseText
         }
+        
         i++;
+        imgStr = ''
         parag = document.getElementById('paragrafo'+i)
+        alert(parag.id)
     }
 }
 
@@ -198,6 +216,7 @@ function getImgData(idImg, idInput) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
         fileReader.addEventListener("load", function () {
+            idInput = idInput.replace('inputImg','')
             editorImgArt.src= this.result;
             console.log(this.result);
             for(let i=0; i<immaginiParagrafo.length;i++){
@@ -256,10 +275,22 @@ function CustomAlert(){
 let customAlert = new CustomAlert();
 
 function insertParag(){
-    parags++;
     var area = document.getElementById('paragZone');
 
-    area.innerHTML = area.innerHTML+'<h3 id="h3formArticolo'+parags+'"><?php ?></h3><div id="paragrafo'+parags+'" class="paragrafo"><div id="subTitleContainer'+parags+'" class="subTitleContainer"><input id="subTitle'+parags+'" class="subTitle" type="text" placeholder="inserire un titolo"></input></div><div id="'+parags+'" class="immagini"><button type="button" class="insertImgBtn" onclick="insertImg('+parags+')"></button></div><textarea id="textarea'+parags+'" type="text" class="paragrafoContent"></textarea></div>';
+    var tag = document.getElementById('paragrafo'+parags);
+    const clone = tag.cloneNode(true);
+    parags++;
+    clone.id = 'paragrafo'+parags;
+    clone.querySelector(".subTitleContainer").id = 'subTitleContainer'+parags;
+    clone.querySelector(".subTitle").id = "subTitle"+parags;
+    clone.querySelector(".subTitle").value = "";
+    clone.querySelector(".immagini").id = parags;
+    clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
+    clone.querySelector(".paragrafoContent").id = "textarea"+parags;
+    clone.querySelector(".paragrafoContent").value = "";
+    clone.querySelector(".inputImg").remove()
+    clone.querySelector(".changePos").remove()
+    area.appendChild(clone)
 }
 
 function insertImg(id){
@@ -273,7 +304,7 @@ function insertImg(id){
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
-        elem.innerHTML += '<div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div><button type="button" onclick="changePos('+id+')"></button></div>'
+        elem.innerHTML += '<div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div><button class="changePos" type="button" onclick="changePos('+id+')"></button></div>'
     }
     else{
         var tag = document.getElementById(''+id+'').lastChild;
