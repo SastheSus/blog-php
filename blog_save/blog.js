@@ -1,5 +1,5 @@
 var immaginiParagrafo = [];
-var imgInputs = 0;
+var imgInputs = [];
 var parags = 1;
 
 const accedi = () =>{
@@ -126,25 +126,31 @@ const invia = () =>{
     const content = document.getElementById('editorDescArt')
     var artId = ''
 
-    if(title!=null && content!=null){
+    if(title.value!="" && content.value!=""){
+        alert("|"+title.value+"|"+content.value+"|")
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
         xhr.send();
         xhr.onload = () => {
-            alert(xhr.responseText)
-            if(xhr.response=="none"){
-                alert(xhr.responseText)
-                document.getElementById('formArticolo').innerHTML+=xhr.responseText
+            try {
+                alert("1 "+xhr.responseText)
+                if(xhr.response=="none"){
+                    alert("2 "+xhr.responseText)
+                    document.getElementById('formArticolo').innerHTML+=xhr.responseText
+                }
+                else{
+                    alert("3 "+xhr.responseText)
+                    title.value=""
+                    img.value=""
+                    content.value=""
+                    artId = xhr.response
+                    alert("4 "+xhr.responseText)
+                    invia2(artId)
+                }
+            } catch (error) {
+                alert("5 "+error)
             }
-            else{
-                alert(xhr.responseText)
-                title.value=""
-                img.value=""
-                content.value=""
-                artId = xhr.response
-                alert(xhr.responseText)
-                invia2(artId)
-            }
+            
         }
         xhr.onerror = function() {
             alert(`Network Error`);
@@ -160,13 +166,13 @@ const invia2 = (artId) =>{
         imgStr+=immaginiParagrafo[e][1]+"|";
     }
     imgStr = imgStr.slice(0,-1);
-    alert(imgStr)
+    alert("6 "+imgStr)
     while(parag!=null){
         idAus = 'subTitle'+i
         const titPar = document.getElementById('subTitle'+i)
-        alert(titPar.value)
+        alert("7 "+titPar.value)
         const contentPar = document.getElementById('textarea'+i)
-        alert(contentPar.value)
+        alert("8 "+contentPar.value)
 
         if(parag.style.flexDirection=='row-reverse'){
             style=1;
@@ -253,14 +259,40 @@ function insertParag(){
     parags++;
     var area = document.getElementById('paragZone');
 
-    area.innerHTML += '<h3 id="h3formArticolo'+parags+'"><?php ?></h3><form action="editor.php?input=1&mode=1" method="post" enctype="multipart/form-data"><div id="paragrafo1" class="paragrafo"><div id="subTitleContainer1" class="subTitleContainer"><input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input></div><div id="1" class="immagini"><button class="insertImgBtn" onclick="insertImg(1)"></button></div><textarea id="textarea1" type="text" class="paragrafoContent"></textarea></div>';
+    area.innerHTML = area.innerHTML+'<h3 id="h3formArticolo'+parags+'"><?php ?></h3><div id="paragrafo'+parags+'" class="paragrafo"><div id="subTitleContainer'+parags+'" class="subTitleContainer"><input id="subTitle'+parags+'" class="subTitle" type="text" placeholder="inserire un titolo"></input></div><div id="'+parags+'" class="immagini"><button type="button" class="insertImgBtn" onclick="insertImg('+parags+')"></button></div><textarea id="textarea'+parags+'" type="text" class="paragrafoContent"></textarea></div>';
 }
 
 function insertImg(id){
-    imgInputs++;
+    if(imgInputs[id]!=1){
+        imgInputs[id]=1
+        alert("1 "+imgInputs[id])
+    }
+    else{
+        imgInputs[id]++;
+        alert("2 "+imgInputs[id])
+    }
     var elem = document.getElementById(''+id+'');
-    var text = document.getElementById('textarea'+id);
-    elem.innerHTML += '<img id="immagine'+id+''+imgInputs+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs+'" name="inputImg'+id+''+imgInputs+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs+'\',\'inputImg'+id+''+imgInputs+'\')"/></div><button type="button" onclick="changePos('+id+')"></button>'
+    if(imgInputs[id]==1){
+        elem.innerHTML += '<div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div><button type="button" onclick="changePos('+id+')"></button></div>'
+    }
+    else{
+        var tag = document.getElementById(''+id+'').lastChild;
+        const clone = tag.cloneNode(true);
+        clone.id = 'imgAndBtnContainer'+id;
+        clone.querySelector(".immagine").id = 'immagine'+id+''+imgInputs[id];
+        clone.querySelector(".immagine").src = "";
+        clone.querySelector(".inputImg").id = 'inputImg'+id+''+imgInputs[id];
+        clone.querySelector(".inputImg").name = 'inputImg'+id+''+imgInputs[id];
+        clone.querySelector(".inputImg").setAttribute('onchange','getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')');
+        clone.querySelector(".inputImg").value = null;
+        elem.appendChild(clone)
+    }
+    //var text = document.getElementById('textarea'+id);
+    //elem.innerHTML += '<img id="immagine'+id+''+imgInputs+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs+'" name="inputImg'+id+''+imgInputs+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs+'\',\'inputImg'+id+''+imgInputs+'\')"/></div><button type="button" onclick="changePos('+id+')"></button>'
+
+    //const clone = tag.cloneNode(true);
+
+    //document.getElementById(elem).appendChild(clone);
 }
 function changePos(id) {
     var parag = document.getElementById('paragrafo'+id);

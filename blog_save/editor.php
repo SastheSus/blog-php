@@ -12,7 +12,6 @@ $elenco = '';
         <link rel="stylesheet" href="./css/editor.css">
         <script src="blog.js"></script>
     </head>
-
     <body >
         <div id="root">
             <div>
@@ -73,14 +72,13 @@ $elenco = '';
                                     <?php
                                     ?>
                                     <h3 id="h3formArticolo"><?php ?></h3>
-                                    <form action="editor.php?input=1&mode=1" method="post" enctype="multipart/form-data">
                                     <?php
                                         echo '<div id="paragrafo1" class="paragrafo">
                                                 <div id="subTitleContainer1" class="subTitleContainer">
                                                     <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
                                                 <div id="1" class="immagini">
-                                                    <button class="insertImgBtn" onclick="insertImg(1)"></button>
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg(1)"></button>
                                                 </div>
                                                 <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
                                             </div>';
