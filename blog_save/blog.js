@@ -290,10 +290,13 @@ function insertParag(){
     clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
     clone.querySelector(".paragrafoContent").id = "textarea"+parags;
     clone.querySelector(".paragrafoContent").value = "";
-    clone.querySelector(".inputImg").remove()
-    clone.querySelector(".changePos").remove()
+    if(clone.querySelector(".inputImg")!=null)
+        clone.querySelector(".inputImg").remove()
+    if(clone.querySelector(".changePos")!=null)
+        clone.querySelector(".changePos").remove()
+    if(clone.querySelector(".immagine")!=null)
     clone.querySelector(".immagine").remove()
-    area.appendChild(clone)
+        area.appendChild(clone)
 }
 
 function insertImg(id){
