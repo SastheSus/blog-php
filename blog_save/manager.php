@@ -134,7 +134,9 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                     }
                     ?>
                 </div>
-                <footer>
+                
+            </div>
+        </div><footer>
                     <div class="foot" id="crediti">
                         <h5>Author:</h5>
                         <h5>Michele Bardotti</h5>
@@ -147,8 +149,6 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                     </div>
                     <div>© Copyright 2023, Tutti i diritti riservati</div>
                 </footer>
-            </div>
-        </div>
     </div>
 
 </body>
