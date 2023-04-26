@@ -2,6 +2,10 @@
 session_start();
 $id=$_GET["id"];
 $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+$text = "UPDATE articoli SET visualizzazioni = visualizzazioni+1 WHERE id = ?";
+$query= $pdo->prepare($text);
+$query->execute([$id]);
+
 ?>
 <!DOCTYPE html>
 <html lang="it">
