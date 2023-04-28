@@ -75,7 +75,7 @@ $elenco = '';
                                     <img id='editorImgArt'>
                                 </div>
                                 <div id='editorInputs'>
-                                    <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData('editorImgArt')"/>
+                                    <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData('editorImgArt','editorInputImg')"/>
                                 </div>
                             </article>
                         </div>
