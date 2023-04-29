@@ -158,7 +158,9 @@ const invia = () =>{
     }
 }
 const invia2 = (artId) =>{
-    if(document.getElementById('subTitle1')!=""){
+    var test = document.getElementById('subTitle1')
+    if(test.value!=""){
+    alert("|"+(test.value!="")+"|"+(test.value!=null)+"|")
     var style = 0;
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
@@ -285,11 +287,11 @@ function insertParag(){
     clone.id = 'paragrafo'+parags;
     clone.querySelector(".subTitleContainer").id = 'subTitleContainer'+parags;
     clone.querySelector(".subTitle").id = "subTitle"+parags;
-    clone.querySelector(".subTitle").value = "";
+    clone.querySelector(".subTitle").value = null;
     clone.querySelector(".immagini").id = parags;
     clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
     clone.querySelector(".paragrafoContent").id = "textarea"+parags;
-    clone.querySelector(".paragrafoContent").value = "";
+    clone.querySelector(".paragrafoContent").value = null;
     if(clone.querySelector(".inputImg")!=null)
         clone.querySelector(".inputImg").remove()
     if(clone.querySelector(".changePos")!=null)
