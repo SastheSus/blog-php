@@ -158,9 +158,6 @@ const invia = () =>{
     }
 }
 const invia2 = (artId) =>{
-    var test = document.getElementById('subTitle1')
-    if(test.value!=""){
-    alert("|"+(test.value!="")+"|"+(test.value!=null)+"|")
     var style = 0;
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
@@ -168,46 +165,41 @@ const invia2 = (artId) =>{
     
     //alert("6 "+imgStr)
     while(parag!=null){
-        alert(parag.id)
-        idAus = 'subTitle'+i
-        const titPar = document.getElementById('subTitle'+i)
-        const contentPar = document.getElementById('textarea'+i)
-        alert("pino")
-        try {
-            for (let q = 0; q<immaginiParagrafo.length; q++) {
-                if(immaginiParagrafo[q][0].startsWith(i)){
-                    imgStr+=immaginiParagrafo[q][1]+"|";
+        var test = document.getElementById('subTitle'+i).value
+        if(test!=""){
+            alert(parag.id)
+            idAus = 'subTitle'+i
+            const titPar = document.getElementById('subTitle'+i)
+            const contentPar = document.getElementById('textarea'+i)
+            try {
+                for (let q = 0; q<immaginiParagrafo.length; q++) {
+                    if(immaginiParagrafo[q][0].startsWith(i)){
+                        imgStr+=immaginiParagrafo[q][1]+"|";
+                    }
+                    else{
+                        alert(immaginiParagrafo[q][0]+' '+i)
+                    }
                 }
-                else{
-                    alert(immaginiParagrafo[q][0]+' '+i)
-                }
+            } catch (error) {
+                alert(error+" "+i)
             }
-        } catch (error) {
-            alert(error+" "+i)
-        }
-            
-        
-        
-        
-        alert("paolo")
-        imgStr = imgStr.slice(0,-1);
+            imgStr = imgStr.slice(0,-1);
 
-        if(parag.style.flexDirection=='row-reverse'){
-            style=1;
+            if(parag.style.flexDirection=='row-reverse'){
+                style=1;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "uploadParag.php?article="+artId+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr, true);
+            xhr.send();
+            xhr.onload = () => {
+                document.getElementById('formArticolo').innerHTML+=xhr.responseText
+            }
         }
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "uploadParag.php?article="+artId+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr, true);
-        xhr.send();
-        xhr.onload = () => {
-            document.getElementById('formArticolo').innerHTML+=xhr.responseText
-        }
-        
         i++;
         imgStr = ''
         parag = document.getElementById('paragrafo'+i)
         alert(parag.id)
     }
-}
 }
 
 

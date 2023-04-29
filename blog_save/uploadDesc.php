@@ -8,19 +8,26 @@ $user = "";
 try{
     try{
       $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
-      $text = "INSERT INTO immagini(nome, logo) VALUES (?, ?)";
-      $query= $pdo->prepare($text);
-      $query->execute([$img,1]);
+      if($img!=""){
+        $text = "INSERT INTO immagini(nome, logo) VALUES (?, ?)";
+        $query= $pdo->prepare($text);
+        $query->execute([$img,1]);
 
-      $text = "SELECT id FROM immagini WHERE nome = ? ORDER BY id DESC";
-      $query= $pdo->prepare($text);
-      $query->execute([$img]);
-      $aus = $query->fetchAll();
-      $aus = $aus[0]['id'];
-      
-      $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente, logo) VALUES (?, ?, ?, ?, ?)";
-      $query= $pdo->prepare($text);
-      $query->execute([$title,$content,date("Y-m-d h:i:s"),$_SESSION['user'],$aus]);
+        $text = "SELECT id FROM immagini WHERE nome = ? ORDER BY id DESC";
+        $query= $pdo->prepare($text);
+        $query->execute([$img]);
+        $aus = $query->fetchAll();
+        $aus = $aus[0]['id'];
+        
+        $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente, logo) VALUES (?, ?, ?, ?, ?)";
+        $query= $pdo->prepare($text);
+        $query->execute([$title,$content,date("Y-m-d h:i:s"),$_SESSION['user'],$aus]);
+      }
+      else{
+        $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente) VALUES (?, ?, ?, ?)";
+        $query= $pdo->prepare($text);
+        $query->execute([$title,$content,date("Y-m-d h:i:s"),$_SESSION['user']]);
+      }
 
       $text = "SELECT id FROM articoli WHERE titolo = ? ";
       $query= $pdo->prepare($text);

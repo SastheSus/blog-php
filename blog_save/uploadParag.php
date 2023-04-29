@@ -22,6 +22,7 @@ try{
       $idPar = $query->fetch();
 
       foreach ($arrImg as $value) {
+        if($value!=""){
         $text = "INSERT INTO immagini(nome) VALUES (?)";
         $query= $pdo->prepare($text);
         $query->execute([$value]);
@@ -34,6 +35,7 @@ try{
         $text = "INSERT INTO immaginiDiParagrafi(idParagrafo, idImmagine) VALUES (?, ?)";
         $query= $pdo->prepare($text);
         $query->execute([$idPar[0],$idImg[0]]);
+      }
       }
     }
     catch(Exception $e){

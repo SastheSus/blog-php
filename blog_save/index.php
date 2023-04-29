@@ -37,7 +37,8 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                     }
                     ?>
                 </li>
-                <li><?php
+                <li>
+                    <?php
                     if(!empty($_SESSION['user'])){
                         $text = "SELECT ruolo FROM utenti WHERE username = ?";
                         $query= $pdo->prepare($text);

@@ -16,7 +16,7 @@ CREATE TABLE articoli (
   titolo varchar(255) DEFAULT NULL,
   descrizione text DEFAULT NULL,
   giorno datetime DEFAULT NULL,
-  logo int(11) DEFAULT NULL,
+  logo int(11) DEFAULT -1,
   utente varchar(50) DEFAULT NULL,
   visualizzazioni int(11) DEFAULT 0,
   FOREIGN KEY (utente) REFERENCES utenti (username),
@@ -47,6 +47,9 @@ CREATE TABLE immaginiDiParagrafi (
 
 INSERT INTO utenti (username, email, password, ruolo) VALUES
 ("Bardo","michele.bardotti04@gmail.com","$2y$10$MXbLJYcqDAUmsBAiS0DCLeWC/nQxGJxSqGRaaFg5uIq7QJ8S9dmdG", "ADMIN");
+
+INSERT INTO immagini (id, nome, logo) VALUES
+(-1,"no_image.gif",1);
 
 INSERT INTO immagini (nome, logo) VALUES
 ("BM-21_Grad.jpg",1),
