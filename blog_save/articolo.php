@@ -16,7 +16,7 @@ $query->execute([$id]);
         <title>Blog</title>
         <link rel="stylesheet" href="./css/common.css">
         <link rel="stylesheet" href="./css/articolo.css">
-        <script src="blog.js"></script>
+        <script src="./js/blog.js"></script>
     </head>
 
     <body>

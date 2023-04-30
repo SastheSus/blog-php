@@ -11,7 +11,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
     <title>Blog</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/manager.css">
-    <script src="blog.js"></script>
+    <script src="./js/blog.js"></script>
 </head>
 
 <body>

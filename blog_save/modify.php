@@ -1,6 +1,7 @@
 <?php
 session_start();
 $elenco = '';
+$id = $_GET["id"];
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -10,7 +11,7 @@ $elenco = '';
         <title>Blog</title>
         <link rel="stylesheet" href="./css/common.css">
         <link rel="stylesheet" href="./css/editor.css">
-        <script src="blog.js"></script>
+        <script src="./js/blog.js"></script>
     </head>
     <body >
         <div id="root">
@@ -62,52 +63,44 @@ $elenco = '';
                 </li>
                 </ul>
                 </nav>
+                <?php 
+                    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                    $text = "SELECT articoli.*, immagini.nome FROM articoli, immagini WHERE articoli.id = ? AND articoli.logo = immagini.id";
+                    $query= $pdo->prepare($text);
+                    $query->execute([$id]);
+                    $articolo = $query->fetch();
+
+                    $text = "SELECT * FROM paragrafi WHERE articolo = ?";
+                    $query= $pdo->prepare($text);
+                    $query->execute([$id]);
+                    $paragrafi = $query->fetchAll();
+
+                    $immagini=array();
+                    $aus=array();
+                    $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
+                    $query= $pdo->prepare($text);
+                    foreach ($paragrafi as $value) {
+                        $query->execute([$value['id']]);
+                        $aus = $query->fetchAll();
+                        foreach ($aus as $val) {
+                            array_push($immagini,$val);
+                        }
+                    }
+                ?>
                 <div class="App">
-                    <form action="editor.php?input=1&id=1" method="get" enctype="multipart/form-data">
+                    <form action="editor.php?input=1&mode=1" method="post" enctype="multipart/form-data">
                         <div id='editorContainer'>
                             <article>
-
-                                <?php
-                                $yes = 0;
-                                if(!empty($_GET['id'])){
-                                    $id = $_GET['id'];
-                                    $yes = 1;
-                                    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
-                                    $text = "SELECT * FROM articoli WHERE id = ?";
-                                    $query= $pdo->prepare($text);
-                                    $query->execute([$id]);
-                                    $articolo = $query->fetch();
-
-                                    $text = "SELECT * FROM paragrafi WHERE articolo = ?";
-                                    $query= $pdo->prepare($text);
-                                    $query->execute([$id]);
-                                    $paragrafi = $query->fetchAll();
-
-                                    $immagini=array();
-                                    $aus=array();
-                                    $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
-                                    $query= $pdo->prepare($text);
-                                    foreach ($paragrafi as $value) {
-                                        $query->execute([$value['id']]);
-                                        $aus = $query->fetchAll();
-                                        foreach ($aus as $val) {
-                                            array_push($immagini,$val);
-                                        }
-                                    }
-                                }
-                                
-                                ?>
-
                                 <div id="ediTitContainer">
                                     <h3 id="editorH3">Titolo:</h3>
-                                    <input id="editorTitolo" type="text" placeholder="inserire un titolo"<?php if($yes){echo 'value="'.$articolo["titolo"].'"';}?>></input>
+                                    <input id="editorTitolo" type="text" placeholder="inserire un titolo" <?php echo 'value="'.$articolo['titolo'].'"'?>></input>
                                 </div>
-                                <textarea id='editorDescArt'placeholder="inserire una descrizione"><?php if($yes){echo $articolo["descrizione"];}?></textarea>
+                                <textarea id='editorDescArt'placeholder="inserire una descrizione"><?php echo $articolo['descrizione']?></textarea>
                                 <div id='editorImmagine'>
-                                    <img id='editorImgArt'>
+                                    <img id='editorImgArt' <?php echo 'src="./img/'.$articolo['nome'].'"'?>>
                                 </div>
                                 <div id='editorInputs'>
-                                    <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData('editorImgArt')"/>
+                                    <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData('editorImgArt','editorInputImg')"/>
                                 </div>
                             </article>
                         </div>
@@ -116,37 +109,16 @@ $elenco = '';
                                 <article id="paragZone">
                                     <div id="paragrafo1" class="paragrafo">
                                                 <div id="subTitleContainer1" class="subTitleContainer">
-                                                    <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"<?php if($yes){if($paragrafi!=null){echo 'value="'.$paragrafi[0]["titolo"].'"';}}?>></input>
+                                                    <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
                                                 <div id="1" class="immagini">
                                                     <button type="button" class="insertImgBtn" onclick="insertImg(1)"></button>
-                                                    <?php 
-                                                    if($yes){
-                                                        if($paragrafi!=null){
-                                                            $img = 0;
-
-                                                            foreach ($immagini as $val) {
-                                                                if($paragrafi[0]['id']==$val['idParagrafo']){
-                                                                    $img++;
-                                                                    echo '<div id="imgAndBtnContainer1" class="imgAndBtnContainer">
-                                                                    <img id="immagine1'.$img.'" class="immagine" src="./img/'.$val['nome'].'">
-                                                                    <div class="onputImgContainer">
-                                                                    <input class="inputImg" id="inputImg1'.$img.'" name="inputImg1'.$img.'" type="file" accept="image/*" onchange="getImgData(\'immagine1'.$img.'\',\'inputImg1'.$img.'\')"/>
-                                                                    </div>
-                                                                    <button class="changePos" type="button" onclick="changePos(1)">
-                                                                    </button>
-                                                                    </div>';
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                    ?>
                                                 </div>
-                                                <textarea id="textarea1" type="text" class="paragrafoContent"<?php if($yes){if($paragrafi!=null){echo 'value="'.$paragrafi[0]["contenuto"].'"';}}?>></textarea>
+                                                <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
                                             </div>
                                 </article>
                             <button type="button" onclick="insertParag()"></button>
-                            <input type="submit" value="carica" <?php if($yes){echo 'onclick="modifica()"';}else{echo 'onclick="invia()"';}?>/>
+                            <input type="submit" value="carica" onclick="invia()"/>
                             </div> 
                         </div>
                     </form>
