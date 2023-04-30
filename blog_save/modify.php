@@ -2,6 +2,7 @@
 session_start();
 $elenco = '';
 $id = $_GET["id"];
+$num = 1;
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -74,6 +75,7 @@ $id = $_GET["id"];
                     $query= $pdo->prepare($text);
                     $query->execute([$id]);
                     $paragrafi = $query->fetchAll();
+                    $num += sizeof($paragrafi);
 
                     $immagini=array();
                     $aus=array();
@@ -107,7 +109,7 @@ $id = $_GET["id"];
                         <div id='bodyArticolo'>
                             <div id='formArticolo'>
                                 <article id="paragZone">
-                                    <div id="paragrafo1" class="paragrafo">
+                                    <div id="paragrafo<?php echo $num?>" class="paragrafo">
                                                 <div id="subTitleContainer1" class="subTitleContainer">
                                                     <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
