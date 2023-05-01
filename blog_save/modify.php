@@ -75,7 +75,7 @@ $num = 1;
                     $query= $pdo->prepare($text);
                     $query->execute([$id]);
                     $paragrafi = $query->fetchAll();
-                    $num += sizeof($paragrafi);
+                    //$num += sizeof($paragrafi);
 
                     $immagini=array();
                     $aus=array();
@@ -90,7 +90,7 @@ $num = 1;
                     }
                 ?>
                 <div class="App">
-                    <form action="editor.php?input=1&mode=1" method="post" enctype="multipart/form-data">
+                    <form action="articolo.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
                         <div id='editorContainer'>
                             <article>
                                 <div id="ediTitContainer">
@@ -110,9 +110,7 @@ $num = 1;
                             <div id='formArticolo'>
                                 <article id="paragZone">
                                     <?php 
-                                        $i = 0;
                                         foreach ($paragrafi as $value) {
-                                            $i++;
                                             echo '
                                             <div id="paragrafo'.$num.'" class="paragrafo">
                                                 <div id="subTitleContainer'.$num.'" class="subTitleContainer">
@@ -121,10 +119,18 @@ $num = 1;
                                                 <div id="'.$num.'" class="immagini">
                                                     <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')"></button>'
                                             ;
-                                            
+                                            $i = 0;
                                             foreach ($immagini as $val) {
-                                                if($val['idParagrafo']==$num){
-
+                                                if($val['idParagrafo']==$value['id']){
+                                                    $i++;
+                                                    echo '  <div id="imgAndBtnContainer'.$num.'" class="imgAndBtnContainer">
+                                                                <img id="immagine'.$num.''.$i.'" class="immagine" src="./img/'.$val['nome'].'">
+                                                                <div class="onputImgContainer">
+                                                                    <input class="inputImg" id="inputImg'.$num.''.$i.'" name="inputImg'.$num.''.$i.'" type="file" accept="image/*" onchange="getImgData(\'immagine'.$num.''.$i.'\',\'inputImg'.$num.''.$i.'\')"/>
+                                                                </div>
+                                                                <button class="changePos" type="button" onclick="changePos('.$num.')"></button>
+                                                            </div>'
+                                                    ;
                                                 }
                                             }
 
@@ -133,6 +139,7 @@ $num = 1;
                                                 <textarea id="textarea'.$num.'" type="text" class="paragrafoContent">'.$value['contenuto'].'</textarea>
                                             </div>
                                             ';
+                                            $num++;
                                         }
                                     ?>
                                     <div id="paragrafo<?php echo $num?>" class="paragrafo">
@@ -146,7 +153,7 @@ $num = 1;
                                             </div>
                                 </article>
                             <button type="button" onclick="insertParag()"></button>
-                            <input type="submit" value="carica" onclick="invia()"/>
+                            <input type="submit" value="carica" onclick="invia(<?php echo $id;?>)"/>
                             </div> 
                         </div>
                     </form>
@@ -183,5 +190,8 @@ $num = 1;
             
         }
         ?>
+        <script>
+            setVar(<?php echo $num;?>)
+        </script>
     </body>
 </html>

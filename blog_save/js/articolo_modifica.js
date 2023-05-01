@@ -1,6 +1,7 @@
 var immaginiParagrafo = [];
 var imgInputs = [];
 var parags = 1;
+var paragsPhp = 0;
 
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
@@ -14,6 +15,12 @@ const close_session = () =>{
     };
 }
 
+function setVar(val) {
+    paragsPhp = val-1;
+    parags +=val;
+    alert(parags);
+}
+
 const hidden = () =>{
     var warning = document.getElementById('warningLogin')
 
@@ -21,7 +28,7 @@ const hidden = () =>{
     warning.innerHTML=""
 }
 
-const invia = () =>{
+const invia = (id) =>{
     const title = document.getElementById('editorTitolo')
     const img = document.getElementById('editorInputImg')
     const content = document.getElementById('editorDescArt')
@@ -30,7 +37,7 @@ const invia = () =>{
     if(title.value!="" && content.value!=""){
         alert("|"+title.value+"|"+content.value+"|")
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
+        xhr.open("GET", "./php_aus/updateDesc.php?id="+id+"&title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
         xhr.send();
         xhr.onload = () => {
             try {
@@ -46,7 +53,7 @@ const invia = () =>{
                     content.value=""
                     artId = xhr.response
                     alert("4 "+xhr.responseText)
-                    invia2(artId)
+                    //invia2(artId)
                 }
             } catch (error) {
                 alert("5 "+error)
