@@ -90,7 +90,7 @@ const invia2 = (artId) =>{
                 style=1;
             }
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr, true);
+            xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr, true);
             xhr.send();
             xhr.onload = () => {
                 document.getElementById('formArticolo').innerHTML+=xhr.responseText

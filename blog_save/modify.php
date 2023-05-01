@@ -79,10 +79,10 @@ $num = 1;
 
                     $immagini=array();
                     $aus=array();
-                    $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
+                    $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ? AND idArticolo = ?";
                     $query= $pdo->prepare($text);
                     foreach ($paragrafi as $value) {
-                        $query->execute([$value['id']]);
+                        $query->execute([$value['id'], $value['articolo']]);
                         $aus = $query->fetchAll();
                         foreach ($aus as $val) {
                             array_push($immagini,$val);
@@ -116,12 +116,21 @@ $num = 1;
                                             echo '
                                             <div id="paragrafo'.$num.'" class="paragrafo">
                                                 <div id="subTitleContainer'.$num.'" class="subTitleContainer">
-                                                    <input id="subTitle'.$num.'" class="subTitle" type="text" placeholder="inserire un titolo"></input>
+                                                    <input id="subTitle'.$num.'" class="subTitle" type="text" placeholder="inserire un titolo" value='.$value['titolo'].'></input>
                                                 </div>
                                                 <div id="'.$num.'" class="immagini">
-                                                    <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')"></button>
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')"></button>'
+                                            ;
+                                            
+                                            foreach ($immagini as $val) {
+                                                if($val['idParagrafo']==$num){
+
+                                                }
+                                            }
+
+                                            echo'
                                                 </div>
-                                                <textarea id="textarea'.$num.'" type="text" class="paragrafoContent"></textarea>
+                                                <textarea id="textarea'.$num.'" type="text" class="paragrafoContent">'.$value['contenuto'].'</textarea>
                                             </div>
                                             ';
                                         }

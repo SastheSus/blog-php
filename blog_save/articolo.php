@@ -93,10 +93,10 @@ $query->execute([$id]);
 
                             $immagini=array();
                             $aus=array();
-                            $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ?";
+                            $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ? AND idArticolo = ?";
                             $query= $pdo->prepare($text);
                             foreach ($paragrafi as $value) {
-                                $query->execute([$value['id']]);
+                                $query->execute([$value['id'],$value['articolo']]);
                                 $aus = $query->fetchAll();
                                 foreach ($aus as $val) {
                                     array_push($immagini,$val);
