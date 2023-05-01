@@ -102,21 +102,38 @@ $num = 1;
                                     <img id='editorImgArt' <?php echo 'src="./img/'.$articolo['nome'].'"'?>>
                                 </div>
                                 <div id='editorInputs'>
-                                    <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData('editorImgArt','editorInputImg')"/>
+                                    <input id="editorInputImg" type="file" accept="image/*" name="inputImg0" onchange="getImgData('editorImgArt','editorInputImg')"/>
                                 </div>
                             </article>
                         </div>
                         <div id='bodyArticolo'>
                             <div id='formArticolo'>
                                 <article id="paragZone">
+                                    <?php 
+                                        $i = 0;
+                                        foreach ($paragrafi as $value) {
+                                            $i++;
+                                            echo '
+                                            <div id="paragrafo'.$num.'" class="paragrafo">
+                                                <div id="subTitleContainer'.$num.'" class="subTitleContainer">
+                                                    <input id="subTitle'.$num.'" class="subTitle" type="text" placeholder="inserire un titolo"></input>
+                                                </div>
+                                                <div id="'.$num.'" class="immagini">
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')"></button>
+                                                </div>
+                                                <textarea id="textarea'.$num.'" type="text" class="paragrafoContent"></textarea>
+                                            </div>
+                                            ';
+                                        }
+                                    ?>
                                     <div id="paragrafo<?php echo $num?>" class="paragrafo">
-                                                <div id="subTitleContainer1" class="subTitleContainer">
-                                                    <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
+                                                <div id="subTitleContainer<?php echo $num?>" class="subTitleContainer">
+                                                    <input id="subTitle<?php echo $num?>" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
-                                                <div id="1" class="immagini">
-                                                    <button type="button" class="insertImgBtn" onclick="insertImg(1)"></button>
+                                                <div id="<?php echo $num?>" class="immagini">
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg(<?php echo $num?>)"></button>
                                                 </div>
-                                                <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
+                                                <textarea id="textarea<?php echo $num?>" type="text" class="paragrafoContent"></textarea>
                                             </div>
                                 </article>
                             <button type="button" onclick="insertParag()"></button>
