@@ -10,7 +10,7 @@ $elenco = '';
         <title>Blog</title>
         <link rel="stylesheet" href="./css/common.css">
         <link rel="stylesheet" href="./css/editor.css">
-        <script src="./js/blog.js"></script>
+        <script src="./js/articolo_crea.js"></script>
     </head>
     <body >
         <div id="root">
@@ -75,7 +75,7 @@ $elenco = '';
                                     <img id='editorImgArt'>
                                 </div>
                                 <div id='editorInputs'>
-                                    <input id="editorInputImg" type="file" accept="image/*" onchange="getImgData('editorImgArt','editorInputImg')"/>
+                                    <input id="editorInputImg" type="file" accept="image/*" name="inputImg0" onchange="getImgData('editorImgArt','editorInputImg')"/>
                                 </div>
                             </article>
                         </div>

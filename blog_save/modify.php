@@ -12,7 +12,7 @@ $num = 1;
         <title>Blog</title>
         <link rel="stylesheet" href="./css/common.css">
         <link rel="stylesheet" href="./css/editor.css">
-        <script src="./js/blog.js"></script>
+        <script src="./js/articolo_modifica.js"></script>
     </head>
     <body >
         <div id="root">

@@ -10,7 +10,7 @@ session_start();
     <title>Blog</title>
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/registrazione.css">
-    <script src="./js/blog.js"></script>
+    <script src="./js/login.js"></script>
 </head>
 
 <body>

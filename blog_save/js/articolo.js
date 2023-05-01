@@ -9,48 +9,6 @@ const close_session = () =>{
         alert(`Network Error`);
     };
 }
-
-const prevArt = () =>{
-    const oArt = document.getElementById('container');
-    const art = document.getElementById('1');
-
-    if(oArt != null && art != null){
-        oArt.scrollBy({
-            left: art.offsetWidth*(-3)-(oArt.offsetWidth/100*15),
-            behavior : "smooth"
-        })
-    }
-}
-
-
-const nextArt = () =>{
-    const oArt = document.getElementById('container');
-    const art = document.getElementById('1');
-
-    if(oArt != null && art != null){
-        oArt.scrollBy({
-            left: art.offsetWidth*3+(oArt.offsetWidth/100*15),
-            behavior : "smooth"
-        })
-    }
-}
-
-$old=0;
-const goTo = ($i) =>{
-    const oArt = document.getElementById('container');
-    const art = document.getElementById('1');
-
-    if(oArt != null && art != null){
-        $unit = (art.offsetWidth*3+(oArt.offsetWidth/100*15))
-        $position = (($unit*$i)+(($unit*$i)-($unit*$old)))
-        oArt.scrollTo({
-            left: ($position),
-            behavior : "smooth"
-        })
-    }
-    $old = $i;
-}
-
 function richiedi() {
     alert(
         "Non sei abilitato ad accedere a questa pagina.\nè necessario essere Autori o Admin per poter creare nuovi articoli. Manda una richiesta all'Admin per promuoverti."
