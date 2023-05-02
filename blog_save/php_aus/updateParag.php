@@ -35,10 +35,6 @@ try{
       $query->execute();
       $idImg = $query->fetch();
 
-      $text = "INSERT INTO aus(img,input) VALUES (?,?)";
-      $query= $pdo->prepare($text);
-      $query->execute([$idImg[0],$arrIn[$i]]);
-
       try{
         $text = "INSERT INTO immaginiDiParagrafi(idParagrafo, idArticolo, idInput, idImmagine) VALUES (?, ?, ?, ?)";
         $query= $pdo->prepare($text);

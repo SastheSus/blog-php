@@ -122,6 +122,7 @@ const invia2 = (artId) =>{
             
         }
         i++;
+        style=0
         imgStr = ''
         imgIn = ''
         parag = document.getElementById('paragrafo'+i)
