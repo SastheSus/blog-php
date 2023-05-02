@@ -38,11 +38,10 @@ CREATE TABLE immaginiDiParagrafi (
   idArticolo int(11) NOT NULL,
   idInput int(11) NOT NULL,
   idImmagine int(11) NOT NULL,
-  PRIMARY KEY (idParagrafo, idArticolo, idImmagine),
+  PRIMARY KEY (idParagrafo, idArticolo, idInput),
   FOREIGN KEY (idParagrafo, idArticolo) REFERENCES paragrafi (id, articolo),
   FOREIGN KEY (idImmagine) REFERENCES immagini (id)
 );
-
 --
 -- Dump dei dati per la tabella articoli
 --
@@ -77,3 +76,4 @@ INSERT INTO immaginiDiParagrafi (idParagrafo, idArticolo, idInput, idImmagine) V
 (1,6,11,1),
 (1,6,12,2),
 (2,6,21,3);
+

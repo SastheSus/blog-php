@@ -53,7 +53,7 @@ const invia = (id) =>{
                     content.value=""
                     artId = xhr.response
                     alert("4 "+xhr.responseText)
-                    //invia2(artId)
+                    invia2(id)
                 }
             } catch (error) {
                 alert("5 "+error)
@@ -66,21 +66,26 @@ const invia = (id) =>{
     }
 }
 const invia2 = (artId) =>{
+   alert(1)
     var style = 0;
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
     imgStr = ''
     imgIn = ''
+    alert(2)
     
     //alert("6 "+imgStr)
     while(parag!=null){
+        alert(3)
         var test = document.getElementById('subTitle'+i).value
         if(test!=""){
-            alert(parag.id)
+            alert(4)
+            //alert(parag.id)
             idAus = 'subTitle'+i
             const titPar = document.getElementById('subTitle'+i)
             const contentPar = document.getElementById('textarea'+i)
             try {
+                alert(5)
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
                     if(immaginiParagrafo[q][0].startsWith(i)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
@@ -90,26 +95,39 @@ const invia2 = (artId) =>{
                         alert(immaginiParagrafo[q][0]+' '+i)
                     }
                 }
+                alert(6)
             } catch (error) {
                 alert(error+" "+i)
             }
+            alert(7)
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
 
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
+            alert(8)
+            alert("article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn);
+            
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "./php_aus/updateParag.php?article="+artId+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
+            xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value/* + "&img=" + imgStr + "&input=" + imgIn*/, true);
             xhr.send();
             xhr.onload = () => {
+                alert(9)
+                alert(xhr.responseText)
                 document.getElementById('formArticolo').innerHTML+=xhr.responseText
             }
+            xhr.onerror = () => {
+                alert(xhr.responseText)
+            }
         }
+        alert(10)
         i++;
         imgStr = ''
+        imgIn = ''
         parag = document.getElementById('paragrafo'+i)
-        alert(parag.id)
+        alert(11)
+        //alert(parag.id)
     }
 }
 
