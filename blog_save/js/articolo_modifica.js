@@ -257,3 +257,12 @@ function changePos(id) {
         parag.style.flexDirection = "row";
     }
 }
+
+function eliminaParag(id){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "./php_aus/eliminaParag.php?id="+id, true);
+    xhr.send();
+    xhr.onload = () => {
+        window.location.replace("./modify.php?id="+id);
+    }
+}

@@ -112,12 +112,15 @@ $num = 1;
                                     <?php 
                                         foreach ($paragrafi as $value) {
                                             echo '
-                                            <div id="paragrafo'.$num.'" class="paragrafo">
+                                            <div id="paragrafo'.$num.'" class="paragrafo" ';
+                                            if($value['stile']==1)echo 'style="flex-direction: row-reverse;"';
+                                            echo '>
                                                 <div id="subTitleContainer'.$num.'" class="subTitleContainer">
                                                     <input id="subTitle'.$num.'" class="subTitle" type="text" placeholder="inserire un titolo" value='.$value['titolo'].'></input>
                                                 </div>
                                                 <div id="'.$num.'" class="immagini">
-                                                    <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')"></button>'
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')">+</button>
+                                                    <button type="button" class="insertImgBtn" onclick="eliminaParag('.$val['idParagrafo'].')">El</button>'
                                             ;
                                             $i = 0;
                                             foreach ($immagini as $val) {
@@ -128,10 +131,13 @@ $num = 1;
                                                                 <div class="onputImgContainer">
                                                                     <input class="inputImg" id="inputImg'.$num.''.$i.'" name="inputImg'.$num.''.$i.'" type="file" accept="image/*" onchange="getImgData(\'immagine'.$num.''.$i.'\',\'inputImg'.$num.''.$i.'\')"/>
                                                                 </div>
-                                                                <button class="changePos" type="button" onclick="changePos('.$num.')"></button>
-                                                            </div>'
+                                                                '
                                                     ;
                                                 }
+                                            }
+                                            if($i>0){
+                                                echo '<button class="changePos" type="button" onclick="changePos('.$num.')">posizione</button>
+                                                </div>';
                                             }
 
                                             echo'

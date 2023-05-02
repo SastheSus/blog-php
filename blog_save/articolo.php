@@ -79,6 +79,7 @@ $query->execute([$id]);
                 <div id='bodyArticolo'>
                     <div id='formArticolo'>
                         <article>
+                        <a type="button" href="./modify.php?id=<?php echo $id;?>" class="toArticolo">modifica</a>
                             <?php 
                             $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             $text = "SELECT * FROM articoli WHERE id = ?";
