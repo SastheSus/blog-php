@@ -70,6 +70,7 @@ const invia2 = (artId) =>{
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
     imgStr = ''
+    imgIn = ''
     
     //alert("6 "+imgStr)
     while(parag!=null){
@@ -83,6 +84,7 @@ const invia2 = (artId) =>{
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
                     if(immaginiParagrafo[q][0].startsWith(i)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
+                        imgIn+=immaginiParagrafo[q][0]+"|";
                     }
                     else{
                         alert(immaginiParagrafo[q][0]+' '+i)
@@ -92,12 +94,13 @@ const invia2 = (artId) =>{
                 alert(error+" "+i)
             }
             imgStr = imgStr.slice(0,-1);
+            imgIn = imgIn.slice(0,-1);
 
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr, true);
+            xhr.open("GET", "./php_aus/updateParag.php?article="+artId+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
             xhr.send();
             xhr.onload = () => {
                 document.getElementById('formArticolo').innerHTML+=xhr.responseText

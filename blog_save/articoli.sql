@@ -29,18 +29,18 @@ CREATE TABLE paragrafi (
   titolo varchar(255) DEFAULT NULL,
   contenuto text DEFAULT NULL,
   stile int DEFAULT 0,
-  FOREIGN KEY (articolo) REFERENCES articoli (id),
-  PRIMARY KEY (id, articolo)
+  PRIMARY KEY (id, articolo),
+  FOREIGN KEY (articolo) REFERENCES articoli (id)
 );
 
 CREATE TABLE immaginiDiParagrafi (
   idParagrafo int(11) NOT NULL,
   idArticolo int(11) NOT NULL,
+  idInput int(11) NOT NULL,
   idImmagine int(11) NOT NULL,
-  FOREIGN KEY (idParagrafo) REFERENCES paragrafi (id),
-  FOREIGN KEY (idArticolo) REFERENCES articoli (id),
-  FOREIGN KEY (idImmagine) REFERENCES immagini (id),
-  PRIMARY KEY (idParagrafo, idArticolo, idImmagine)
+  PRIMARY KEY (idParagrafo, idArticolo, idImmagine),
+  FOREIGN KEY (idParagrafo, idArticolo) REFERENCES paragrafi (id, articolo),
+  FOREIGN KEY (idImmagine) REFERENCES immagini (id)
 );
 
 --
@@ -73,7 +73,7 @@ INSERT INTO paragrafi (articolo, titolo, contenuto) VALUES
 (6,'test','questo è un test'),
 (6,'test2','questo è un test');
 
-INSERT INTO immaginiDiParagrafi (idParagrafo, idArticolo, idImmagine) VALUES
-(1,6,1),
-(1,6,2),
-(2,6,3);
+INSERT INTO immaginiDiParagrafi (idParagrafo, idArticolo, idInput, idImmagine) VALUES
+(1,6,11,1),
+(1,6,12,2),
+(2,6,21,3);

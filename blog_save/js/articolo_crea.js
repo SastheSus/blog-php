@@ -59,47 +59,75 @@ const invia = () =>{
     }
 }
 const invia2 = (artId) =>{
+    var y = 0
+    alert(y)
+    y++
     var style = 0;
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
     imgStr = ''
+    imgIn = ''
+    alert(y)
+    y++
     
     //alert("6 "+imgStr)
     while(parag!=null){
+        alert(y)
+        y++
         var test = document.getElementById('subTitle'+i).value
         if(test!=""){
-            alert(parag.id)
+            alert(y)
+            y++
+            //alert(parag.id)
             idAus = 'subTitle'+i
             const titPar = document.getElementById('subTitle'+i)
             const contentPar = document.getElementById('textarea'+i)
             try {
+                alert(y)
+                y++
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
                     if(immaginiParagrafo[q][0].startsWith(i)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
+                        imgIn+=immaginiParagrafo[q][0]+"|";
                     }
                     else{
                         alert(immaginiParagrafo[q][0]+' '+i)
                     }
                 }
+                alert(y)
+                y++
             } catch (error) {
                 alert(error+" "+i)
             }
+            alert(y)
+            y++
             imgStr = imgStr.slice(0,-1);
+            imgIn = imgIn.slice(0,-1);
+            alert(y)
+            y++
 
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
+            alert(y)
+            y++
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr, true);
+            xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
             xhr.send();
             xhr.onload = () => {
+                alert(xhr.responseText)
                 document.getElementById('formArticolo').innerHTML+=xhr.responseText
             }
+            alert(y)
+            y++
         }
         i++;
         imgStr = ''
+        imgIn = ''
         parag = document.getElementById('paragrafo'+i)
-        alert(parag.id)
+        alert(y)
+        y++
+        //alert(parag.id)
     }
 }
 
@@ -185,13 +213,19 @@ function insertParag(){
     clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
     clone.querySelector(".paragrafoContent").id = "textarea"+parags;
     clone.querySelector(".paragrafoContent").value = null;
-    if(clone.querySelector(".inputImg")!=null)
+    while(clone.querySelector(".imgAndBtnContainer")!=null){
+        clone.querySelector(".imgAndBtnContainer").remove()
+    }/*
+    while(clone.querySelector(".inputImg")!=null){
         clone.querySelector(".inputImg").remove()
-    if(clone.querySelector(".changePos")!=null)
+    }
+    while(clone.querySelector(".changePos")!=null){
         clone.querySelector(".changePos").remove()
-    if(clone.querySelector(".immagine")!=null)
-    clone.querySelector(".immagine").remove()
-        area.appendChild(clone)
+    }
+    while(clone.querySelector(".immagine")!=null){
+        clone.querySelector(".immagine").remove()
+    }*/
+    area.appendChild(clone)
 }
 
 function insertImg(id){

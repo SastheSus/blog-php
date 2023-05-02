@@ -5,12 +5,14 @@ $paragrafo = $_REQUEST["paragrafo"];
 $style = $_REQUEST["style"];
 $title = $_REQUEST["title"];
 $img = $_REQUEST["img"];
+$input = $_REQUEST["input"];
 $content = $_REQUEST["content"];
 $hint = "";
 $user = "";
 try{
     try{
       $arrImg = explode("|",$img);
+      $arrIn = explode("|",$input);
       $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 
       $text = "INSERT INTO paragrafi(id, articolo, titolo, contenuto, stile) VALUES (?, ?, ?, ?, ?)";
@@ -22,6 +24,7 @@ try{
       $query->execute([$title, $article]);
       $idPar = $query->fetch();
       */
+      $i = 0;
       foreach ($arrImg as $value) {
         if($value!=""){
         $text = "INSERT INTO immagini(nome) VALUES (?)";
@@ -33,9 +36,10 @@ try{
         $query->execute([$value]);
         $idImg = $query->fetch();
 
-        $text = "INSERT INTO immaginiDiParagrafi(idParagrafo, idArticolo, idImmagine) VALUES (?, ?, ?)";
+        $text = "INSERT INTO immaginiDiParagrafi(idParagrafo, idArticolo, idInput, idImmagine) VALUES (?, ?, ?, ?)";
         $query= $pdo->prepare($text);
-        $query->execute([$paragrafo,$article,$idImg[0]]);
+        $query->execute([$paragrafo,$article,$arrIn[$i],$idImg[0]]);
+        $i++;
       }
       }
     }
