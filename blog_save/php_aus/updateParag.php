@@ -1,4 +1,5 @@
 <?php
+echo "leoncini merda";
 session_start();
 $article = $_REQUEST["article"];
 $paragrafo = $_REQUEST["paragrafo"];
@@ -31,8 +32,12 @@ try{
 
       $text = "SELECT id FROM immagini WHERE logo = 0 ORDER BY id DESC";
       $query= $pdo->prepare($text);
-      $query->execute([$value]);
+      $query->execute();
       $idImg = $query->fetch();
+
+      $text = "INSERT INTO aus(img,input) VALUES (?,?)";
+      $query= $pdo->prepare($text);
+      $query->execute([$idImg[0],$arrIn[$i]]);
 
       try{
         $text = "INSERT INTO immaginiDiParagrafi(idParagrafo, idArticolo, idInput, idImmagine) VALUES (?, ?, ?, ?)";

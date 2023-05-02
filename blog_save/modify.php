@@ -90,7 +90,7 @@ $num = 1;
                     }
                 ?>
                 <div class="App">
-                    <form action="articolo.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
+                    <form action="modify.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
                         <div id='editorContainer'>
                             <article>
                                 <div id="ediTitContainer">
