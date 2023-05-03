@@ -77,3 +77,6 @@ INSERT INTO immaginiDiParagrafi (idParagrafo, idArticolo, idInput, idImmagine) V
 (1,6,12,2),
 (2,6,21,3);
 
+INSERT INTO `paragrafi` (`id`, `articolo`, `titolo`, `contenuto`, `stile`) VALUES
+(1, 6, 'introduzione', 'Il T-72 è un carro armato da combattimento russo sviluppato negli anni \'70 come successore del T-62. Il suo cannone ad alta velocità da 125 mm e la corazzatura avanzata lo hanno reso un sistema d\'arma altamente letale e affidabile, utilizzato in molti conflitti nel mondo.', 0),
+(2, 6, 'caratteristiche', 'Il T-72 è stato progettato per essere un carro armato versatile, in grado di svolgere un\'ampia gamma di compiti. Grazie alla sua mobilità e capacità di attraversare terreni difficili, è in grado di spostarsi rapidamente sul campo di battaglia. La sua corazzatura è in grado di resistere ai proiettili delle armi leggere e ai frammenti di granate, offrendo una protezione efficace ai membri dell\'equipaggio.', 1);
