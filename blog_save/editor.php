@@ -63,7 +63,7 @@ $elenco = '';
                 </ul>
                 </nav>
                 <div class="App">
-                    <form action="index.php" method="post" enctype="multipart/form-data">
+                    <form action="editor.php?ok=1" method="post" enctype="multipart/form-data">
                         <div id='editorContainer'>
                             <article>
                                 <div id="ediTitContainer">
