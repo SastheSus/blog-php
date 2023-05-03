@@ -96,7 +96,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         for($i=0;$i<sizeof($row);$i++){
                             echo "<div class='top' id='1'>
                             <h3 id='titleArtSec'>".$row[$i]['username']."</h3>
-                            <button id='".$row[$i]['username']."' onclick='passChange()'></button>
+                            <div class='passBtn'><button id='".$row[$i]['username']."' onclick='passChange()'></button></div>
                             <select id='choose' name='rolelist".$i."' form='roleform'>";
                             switch ($row[$i]['ruolo']) {
                                 case 'BASE':

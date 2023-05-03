@@ -68,15 +68,12 @@ INSERT INTO articoli (titolo, descrizione, giorno, logo, utente, visualizzazioni
 ("T-14","Il T-14 Armata è un carro armato da combattimento di quinta generazione sviluppato in Russia. È uno dei sistemi d\'arma più avanzati al mondo","2023-03-02 09:40:00",5,"Bardo", 15),
 ("T-72","Il T-72 è un carro armato da combattimento russo sviluppato negli anni \'70. Caratterizzato da un cannone ad alta velocità da 125 mm e una corazzatura avanzata, è stato utilizzato ed esportato in diversi paesi.","2023-03-14 10:03:53",6,"Bardo", 30);
 
-INSERT INTO paragrafi (articolo, titolo, contenuto) VALUES
-(6,'test','questo è un test'),
-(6,'test2','questo è un test');
+INSERT INTO paragrafi (articolo, titolo, contenuto, stile) VALUES
+( 6, 'introduzione', 'Il T-72 è un carro armato da combattimento russo sviluppato negli anni \'70 come successore del T-62. Il suo cannone ad alta velocità da 125 mm e la corazzatura avanzata lo hanno reso un sistema d\'arma altamente letale e affidabile, utilizzato in molti conflitti nel mondo.', 0),
+( 6, 'caratteristiche', 'Il T-72 è stato progettato per essere un carro armato versatile, in grado di svolgere un\'ampia gamma di compiti. Grazie alla sua mobilità e capacità di attraversare terreni difficili, è in grado di spostarsi rapidamente sul campo di battaglia. La sua corazzatura è in grado di resistere ai proiettili delle armi leggere e ai frammenti di granate, offrendo una protezione efficace ai membri dell\'equipaggio.', 1);
+
 
 INSERT INTO immaginiDiParagrafi (idParagrafo, idArticolo, idInput, idImmagine) VALUES
 (1,6,11,1),
 (1,6,12,2),
 (2,6,21,3);
-
-INSERT INTO `paragrafi` (`id`, `articolo`, `titolo`, `contenuto`, `stile`) VALUES
-(1, 6, 'introduzione', 'Il T-72 è un carro armato da combattimento russo sviluppato negli anni \'70 come successore del T-62. Il suo cannone ad alta velocità da 125 mm e la corazzatura avanzata lo hanno reso un sistema d\'arma altamente letale e affidabile, utilizzato in molti conflitti nel mondo.', 0),
-(2, 6, 'caratteristiche', 'Il T-72 è stato progettato per essere un carro armato versatile, in grado di svolgere un\'ampia gamma di compiti. Grazie alla sua mobilità e capacità di attraversare terreni difficili, è in grado di spostarsi rapidamente sul campo di battaglia. La sua corazzatura è in grado di resistere ai proiettili delle armi leggere e ai frammenti di granate, offrendo una protezione efficace ai membri dell\'equipaggio.', 1);

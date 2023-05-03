@@ -203,14 +203,13 @@ function insertParag(){
 
     var tag = document.getElementById('paragrafo'+(parags-1));
     const clone = tag.cloneNode(true);
-    parags++;
-    clone.id = 'paragrafo'+parags-1;
-    clone.querySelector(".subTitleContainer").id = 'subTitleContainer'+parags-1;
-    clone.querySelector(".subTitle").id = "subTitle"+parags-1;
+    clone.id = 'paragrafo'+parags;
+    clone.querySelector(".subTitleContainer").id = 'subTitleContainer'+parags;
+    clone.querySelector(".subTitle").id = "subTitle"+parags;
     clone.querySelector(".subTitle").value = null;
-    clone.querySelector(".immagini").id = parags-1;
-    clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+(parags-1)+')');
-    clone.querySelector(".paragrafoContent").id = "textarea"+(parags-1);
+    clone.querySelector(".immagini").id = parags;
+    clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+(parags)+')');
+    clone.querySelector(".paragrafoContent").id = "textarea"+(parags);
     clone.querySelector(".paragrafoContent").value = null;
     if(clone.querySelector(".inputImg")!=null)
         clone.querySelector(".inputImg").remove()
@@ -219,6 +218,7 @@ function insertParag(){
     if(clone.querySelector(".immagine")!=null)
     clone.querySelector(".immagine").remove()
         area.appendChild(clone)
+        parags++;
 }
 
 function insertImg(id){

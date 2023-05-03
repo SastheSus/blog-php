@@ -127,7 +127,7 @@ $elenco = '';
                     }
                 }
             }
-            
+            header("location:index.php");
         }
         ?>
     </body>
