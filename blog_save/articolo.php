@@ -79,13 +79,24 @@ $query->execute([$id]);
                 <div id='bodyArticolo'>
                     <div id='formArticolo'>
                         <article>
-                        <a type="button" href="./modify.php?id=<?php echo $id;?>" class="toArticolo">modifica</a>
-                            <?php 
+                        
+                            <?php
                             $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+
                             $text = "SELECT * FROM articoli WHERE id = ?";
                             $query= $pdo->prepare($text);
                             $query->execute([$id]);
                             $articolo = $query->fetch();
+
+                            if(!empty($_SESSION['user'])){
+                                $text = "SELECT ruolo FROM utenti WHERE username = ?";
+                                $query= $pdo->prepare($text);
+                                $query->execute([$_SESSION['user']]);
+                                $row = $query->fetch();
+                                if(($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR') && $_SESSION['user']==$articolo['utente']){
+                                    echo '<a type="button" href="./modify.php?id='.$id.'" class="toArticolo">modifica</a>';
+                                }
+                            }
 
                             $text = "SELECT * FROM paragrafi WHERE articolo = ?";
                             $query= $pdo->prepare($text);

@@ -65,6 +65,7 @@ outline: 4px auto -webkit-focus-ring-color;
 }
 
 nav{
+z-index: 999;
 position: sticky;
 top:0;
 }

@@ -201,16 +201,16 @@ let customAlert = new CustomAlert();
 function insertParag(){
     var area = document.getElementById('paragZone');
 
-    var tag = document.getElementById('paragrafo'+parags);
+    var tag = document.getElementById('paragrafo'+(parags-1));
     const clone = tag.cloneNode(true);
     parags++;
-    clone.id = 'paragrafo'+parags;
-    clone.querySelector(".subTitleContainer").id = 'subTitleContainer'+parags;
-    clone.querySelector(".subTitle").id = "subTitle"+parags;
+    clone.id = 'paragrafo'+parags-1;
+    clone.querySelector(".subTitleContainer").id = 'subTitleContainer'+parags-1;
+    clone.querySelector(".subTitle").id = "subTitle"+parags-1;
     clone.querySelector(".subTitle").value = null;
-    clone.querySelector(".immagini").id = parags;
-    clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
-    clone.querySelector(".paragrafoContent").id = "textarea"+parags;
+    clone.querySelector(".immagini").id = parags-1;
+    clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+(parags-1)+')');
+    clone.querySelector(".paragrafoContent").id = "textarea"+(parags-1);
     clone.querySelector(".paragrafoContent").value = null;
     if(clone.querySelector(".inputImg")!=null)
         clone.querySelector(".inputImg").remove()
@@ -258,11 +258,11 @@ function changePos(id) {
     }
 }
 
-function eliminaParag(id){
+function eliminaParag(idArt, idPar){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./php_aus/eliminaParag.php?id="+id, true);
+    xhr.open("GET", "./php_aus/eliminaParag.php?idArt="+idArt+"&idPar="+idPar, true);
     xhr.send();
     xhr.onload = () => {
-        window.location.replace("./modify.php?id="+id);
+        window.location.replace("./modify.php?id="+idArt);
     }
 }

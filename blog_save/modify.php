@@ -120,7 +120,7 @@ $num = 1;
                                                 </div>
                                                 <div id="'.$num.'" class="immagini">
                                                     <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')">+</button>
-                                                    <button type="button" class="insertImgBtn" onclick="eliminaParag('.$val['idParagrafo'].')">El</button>'
+                                                    <button type="button" class="insertImgBtn" onclick="eliminaParag('.$id.','.$value['id'].')">El</button>'
                                             ;
                                             $i = 0;
                                             foreach ($immagini as $val) {
@@ -131,13 +131,13 @@ $num = 1;
                                                                 <div class="onputImgContainer">
                                                                     <input class="inputImg" id="inputImg'.$num.''.$i.'" name="inputImg'.$num.''.$i.'" type="file" accept="image/*" onchange="getImgData(\'immagine'.$num.''.$i.'\',\'inputImg'.$num.''.$i.'\')"/>
                                                                 </div>
+                                                                </div>
                                                                 '
                                                     ;
                                                 }
                                             }
                                             if($i>0){
-                                                echo '<button class="changePos" type="button" onclick="changePos('.$num.')">posizione</button>
-                                                </div>';
+                                                echo '<button class="changePos" type="button" onclick="changePos('.$num.')">posizione</button>';
                                             }
 
                                             echo'
