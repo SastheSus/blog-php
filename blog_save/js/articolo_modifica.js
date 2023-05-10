@@ -263,6 +263,6 @@ function eliminaParag(idArt, idPar){
     xhr.open("GET", "./php_aus/eliminaParag.php?idArt="+idArt+"&idPar="+idPar, true);
     xhr.send();
     xhr.onload = () => {
-        window.location.replace("./modify.php?id="+idArt);
+        location.reload();
     }
 }
