@@ -64,6 +64,7 @@ const invia = (id) =>{
             alert(`Network Error`);
         }
     }
+    return "ok"
 }
 const invia2 = (artId) =>{
     var style = 0;
@@ -104,18 +105,17 @@ const invia2 = (artId) =>{
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
-            try {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "./php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
-            xhr.send();
-            xhr.onload = () => {
-                alert(9)
-                alert(xhr.responseText)
-                document.getElementById('formArticolo').innerHTML+=xhr.responseText
-            }
-            xhr.onerror = function() {
-                alert(xhr.responseText)
-            }
+                
+            try {var xhr = new XMLHttpRequest();
+                xhr.open("GET", "./php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.send();
+                xhr.onload = () => {
+                    alert(9)
+                    alert(xhr.responseText)
+                }
+                xhr.onerror = function() {
+                    alert(xhr.responseText)
+                }          
             } catch (error) {
                 alert(error)
             }

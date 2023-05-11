@@ -90,7 +90,7 @@ $num = 1;
                     }
                 ?>
                 <div class="App">
-                    <form action="modify.php?id=<?php echo $id ?>" method="post" enctype="multipart/form-data">
+                    <form action="modify.php?id=<?php echo $id ?>&m=1" method="post" enctype="multipart/form-data">
                         <div id='editorContainer'>
                             <article>
                                 <div id="ediTitContainer">
@@ -197,6 +197,11 @@ $num = 1;
         }
         ?>
         <script>
+        <?php
+            if($_GET['m']==1){
+                echo "location.";
+            }
+            ?>
             setVar(<?php echo $num;?>)
         </script>
     </body>
