@@ -69,10 +69,10 @@ try{
     $query= $pdo->prepare($text);
     $query->execute();
   }
-  catch (PDOException $e){
-      $hint="";
+  catch (Exception $e){
+      $hint=$e;
       exit();
   }
   $pdo=null;
-  echo $hint === ""  ? "none" : $hint[0];
+  echo $hint;
 ?>

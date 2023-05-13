@@ -5,7 +5,7 @@ $id = $_GET["id"];
 $num = 1;
 ?>
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" >
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="gif" href="./img/tank.gif" />
@@ -14,7 +14,7 @@ $num = 1;
         <link rel="stylesheet" href="./css/editor.css">
         <script src="./js/articolo_modifica.js"></script>
     </head>
-    <body >
+    <body onload="alert('load')">
         <div id="root">
             <div>
             <nav>
@@ -87,7 +87,9 @@ $num = 1;
                         foreach ($aus as $val) {
                             array_push($immagini,$val);
                         }
-                    }
+                    };   
+    
+                    echo '<script>alert("done")</script>';
                 ?>
                 <div class="App">
                     <form action="modify.php?id=<?php echo $id ?>&m=1" method="post" enctype="multipart/form-data">
@@ -197,12 +199,13 @@ $num = 1;
         }
         ?>
         <script>
-        <?php
-            if($_GET['m']==1){
+        <?php 
+            /*if($_GET['m']==1){
                 echo "location.";
-            }
+            }*/
             ?>
             setVar(<?php echo $num;?>)
+            alert('end')
         </script>
     </body>
 </html>

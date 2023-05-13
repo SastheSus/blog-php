@@ -67,6 +67,7 @@ const invia = (id) =>{
     return "ok"
 }
 const invia2 = (artId) =>{
+    try{
     var style = 0;
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
@@ -128,6 +129,7 @@ const invia2 = (artId) =>{
         parag = document.getElementById('paragrafo'+i)
         //alert(parag.id)
     }
+}catch(e){alert (e)}
 }
 
 
@@ -263,6 +265,7 @@ function eliminaParag(idArt, idPar){
     xhr.open("GET", "./php_aus/eliminaParag.php?idArt="+idArt+"&idPar="+idPar, true);
     xhr.send();
     xhr.onload = () => {
+        alert(xhr.responseText)
         location.reload();
     }
 }
