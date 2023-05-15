@@ -102,9 +102,10 @@ $elenco = '';
         </div>
         <?php 
         if($_REQUEST!=null){
-            var_dump($_FILES);
+            //var_dump($_FILES);
             $array = $_FILES;
             foreach ($array as $value) {
+                if($value["name"]!=""){
                 $inputName = $value["name"];
                 $target_dir = "./img/";
                 $target_file = $target_dir . basename($inputName);
@@ -127,7 +128,8 @@ $elenco = '';
                     }
                 }
             }
-            header("location:index.php");
+            //header("location:index.php");
+        }
         }
         ?>
     </body>

@@ -102,9 +102,10 @@ const invia2 = (artId) =>{
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
             alert(imgStr+'€'+imgIn+'€')
-
+            alert('pre-style '+style)
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
+                alert('style '+style)
             }
                 
             try {var xhr = new XMLHttpRequest();
@@ -123,7 +124,7 @@ const invia2 = (artId) =>{
             
         }
         i++;
-        style=0
+        //style=0
         imgStr = ''
         imgIn = ''
         parag = document.getElementById('paragrafo'+i)

@@ -170,9 +170,10 @@ $num = 1;
         </div>
         <?php 
         if($_REQUEST!=null){
-            var_dump($_FILES);
+            //var_dump($_FILES);
             $array = $_FILES;
             foreach ($array as $value) {
+                if($value["name"]!=""){
                 $inputName = $value["name"];
                 $target_dir = "./img/";
                 $target_file = $target_dir . basename($inputName);
@@ -195,7 +196,7 @@ $num = 1;
                     }
                 }
             }
-            
+        }
         }
         ?>
         <script>

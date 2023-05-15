@@ -59,76 +59,67 @@ const invia = () =>{
     }
 }
 const invia2 = (artId) =>{
-    var y = 0
-    alert(y)
-    y++
+    try{
     var style = 0;
     var i = 1;
     var parag = document.getElementById('paragrafo'+i)
     imgStr = ''
     imgIn = ''
-    alert(y)
-    y++
     
     //alert("6 "+imgStr)
     while(parag!=null){
-        alert(y)
-        y++
         var test = document.getElementById('subTitle'+i).value
         if(test!=""){
-            alert(y)
-            y++
             //alert(parag.id)
             idAus = 'subTitle'+i
             const titPar = document.getElementById('subTitle'+i)
             const contentPar = document.getElementById('textarea'+i)
             try {
-                alert(y)
-                y++
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
                     if(immaginiParagrafo[q][0].startsWith(i)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
                         imgIn+=immaginiParagrafo[q][0]+"|";
+                        alert(imgStr+'€'+imgIn+'€')
                     }
                     else{
                         alert(immaginiParagrafo[q][0]+' '+i)
+                        alert(imgStr+'£'+imgIn+'£')
                     }
                 }
-                alert(y)
-                y++
             } catch (error) {
-                alert(error+" "+i)
+                alert('invia2 error '+error+" "+i)
             }
-            alert(y)
-            y++
+            
+            alert(imgStr+'€'+imgIn+'€')
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
-            alert(y)
-            y++
 
+            alert('style '+style)
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
-            alert(y)
-            y++
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
-            xhr.send();
-            xhr.onload = () => {
-                alert(xhr.responseText)
-                document.getElementById('formArticolo').innerHTML+=xhr.responseText
+            try {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.send();
+                xhr.onload = () => {
+                    alert(9)
+                    alert(xhr.responseText)
+                }
+                xhr.onerror = function() {
+                    alert(xhr.responseText)
+                }          
+            } catch (error) {
+                alert(error)
             }
-            alert(y)
-            y++
         }
         i++;
         imgStr = ''
         imgIn = ''
         parag = document.getElementById('paragrafo'+i)
-        alert(y)
-        y++
         //alert(parag.id)
     }
+}catch(e){alert (e)}
 }
 
 
