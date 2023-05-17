@@ -105,7 +105,9 @@ const invia2 = (artId) =>{
             alert('pre-style '+style)
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
-                alert('style '+style)
+            }
+            else{
+                style = 0;
             }
                 
             try {var xhr = new XMLHttpRequest();

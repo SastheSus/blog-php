@@ -98,6 +98,9 @@ const invia2 = (artId) =>{
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
+            else{
+                style = 0;
+            }
             try {
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);

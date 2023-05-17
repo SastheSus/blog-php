@@ -197,16 +197,17 @@ $num = 1;
                 }
             }
         }
+        //echo "<script>  </script>";
         }
         ?>
         <script>
+        setVar(<?php echo $num;?>)
+        alert('end')
         <?php 
-            /*if($_GET['m']==1){
-                echo "location.";
-            }*/
-            ?>
-            setVar(<?php echo $num;?>)
-            alert('end')
+        if(!empty($_GET['m'])){
+            echo "location.replace('articolo.php?id=$id')";
+        }
+        ?>
         </script>
     </body>
 </html>
