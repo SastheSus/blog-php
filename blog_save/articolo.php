@@ -143,6 +143,9 @@ $query->execute([$id]);
 
                             ?>
                         </article>
+                        <div id="formCommenti">
+
+                        </div>
                     </div> 
                 </div>
                 <footer>

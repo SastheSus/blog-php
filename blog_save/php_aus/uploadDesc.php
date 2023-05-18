@@ -21,12 +21,12 @@ try{
         
         $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente, logo) VALUES (?, ?, ?, ?, ?)";
         $query= $pdo->prepare($text);
-        $query->execute([$title,$content,date("Y-m-d h:i:s"),$_SESSION['user'],$aus]);
+        $query->execute([$title,$content,date("Y-m-d H:i:s"),$_SESSION['user'],$aus]);
       }
       else{
         $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente) VALUES (?, ?, ?, ?)";
         $query= $pdo->prepare($text);
-        $query->execute([$title,$content,date("Y-m-d h:i:s"),$_SESSION['user']]);
+        $query->execute([$title,$content,date("Y-m-d H:i:s"),$_SESSION['user']]);
       }
 
       $text = "SELECT id FROM articoli WHERE titolo = ? ";

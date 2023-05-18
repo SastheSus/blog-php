@@ -42,6 +42,19 @@ CREATE TABLE immaginiDiParagrafi (
   FOREIGN KEY (idParagrafo, idArticolo) REFERENCES paragrafi (id, articolo),
   FOREIGN KEY (idImmagine) REFERENCES immagini (id)
 );
+
+CREATE TABLE commenti (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  idArticolo int(11) NOT NULL,
+  contenuto text DEFAULT NULL,
+  giorno datetime DEFAULT NULL,
+  utente varchar(50) DEFAULT NULL,
+  idCommento int(11) DEFAULT NULL,
+  PRIMARY KEY (id, idArticolo),
+  FOREIGN KEY (idArticolo) REFERENCES articoli (id),
+  FOREIGN KEY (utente) REFERENCES utenti (username),
+  FOREIGN KEY (idCommento) REFERENCES commenti (id)
+)
 --
 -- Dump dei dati per la tabella articoli
 --

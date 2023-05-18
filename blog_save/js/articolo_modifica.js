@@ -29,6 +29,7 @@ const hidden = () =>{
 }
 
 const invia = (id) =>{
+    var xhr = new XMLHttpRequest();
     const title = document.getElementById('editorTitolo')
     const img = document.getElementById('editorInputImg')
     const content = document.getElementById('editorDescArt')
@@ -36,7 +37,6 @@ const invia = (id) =>{
 
     if(title.value!="" && content.value!=""){
         alert("|"+title.value+"|"+content.value+"|")
-        var xhr = new XMLHttpRequest();
         xhr.open("GET", "./php_aus/updateDesc.php?id="+id+"&title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
         xhr.send();
         xhr.onload = () => {
