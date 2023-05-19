@@ -43,3 +43,16 @@ function CustomAlert(){
 }
 
 let customAlert = new CustomAlert();
+
+function sendComment(event){
+    var formData = new FormData(event.target),
+        content = formData.get('content'),
+        parag = formData.get('parag')
+    
+    fetch("./php_aus/uploadComment.php?cont="+content+"&parag="+parag)
+    .then(data => {
+        alert("ok")
+        location.reload()
+    }
+    )
+}

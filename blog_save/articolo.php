@@ -144,8 +144,12 @@ $query->execute([$id]);
                             ?>
                         </article>
                         <div id="formCommenti">
-                            <form action="articolo.php?id=<?php echo $id;?>" method="post" enctype="multipart/form-data">
-                                <input id="inputCommento" type="text"></input>
+                            <form onsubmit="sendComment" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="parag" value="<?php echo $id?>"></input>
+                                <input id="inputCommento" type="text" name='content'></input>
+                                <?php 
+                                    
+                                ?>
                                 <input type="submit">
                             </form>
                         </div>

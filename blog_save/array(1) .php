@@ -38,3 +38,15 @@ array(3) {
 string(19) "HMS_Dreadnought.jpg" 
 string(23) "Owen_the_conqueror.jpeg" 
 string(9) "giphy.gif"
+
+
+
+CREATE     
+[DEFINER = { user | CURRENT_USER }]     
+TRIGGER trigger_name     
+trigger_time trigger_event     
+ON tbl_name FOR EACH ROW     
+trigger_body:
+trigger_time: {AFTER } 
+trigger_event: { INSERT }
+

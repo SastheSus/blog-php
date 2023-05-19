@@ -31,7 +31,6 @@ const invia = () =>{
         alert("|"+title.value+"|"+content.value+"|")
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
-        xhr.send();
         xhr.onload = () => {
             try {
                 alert("1 "+xhr.responseText)
@@ -56,6 +55,7 @@ const invia = () =>{
         xhr.onerror = function() {
             alert(`Network Error`);
         }
+        xhr.send();
     }
 }
 const invia2 = (artId) =>{
