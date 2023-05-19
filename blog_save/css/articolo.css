@@ -23,7 +23,18 @@ border-radius: 20px;
     background-color: rgb(79, 115, 64);
     border: solid rgb(125,127,126) 2px;
     border-radius: 20px;
-    }
+}
+#inputCommento{
+    font-size: 150%;
+    background-color: transparent;
+    width: 95%;
+    height: 4vh;
+    border: 0;
+    border-bottom: 4px solid white;
+}
+input:focus{
+    outline: none;
+}
 #h3formArticolo{
 font-size: 300%;
 }

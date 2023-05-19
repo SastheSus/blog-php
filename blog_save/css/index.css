@@ -47,9 +47,13 @@ margin: 0;
 }
 
 .descArtSec{
-height: 17vh;
+max-height: 17vh;
 width: 50%;
 overflow: hidden;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 6; /* start showing ellipsis when 3rd line is reached */
+white-space: pre-wrap;
 margin: 0;
 }
 
