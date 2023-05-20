@@ -44,7 +44,7 @@ CREATE TABLE immaginiDiParagrafi (
 );
 
 CREATE TABLE commenti (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  id int(11) NOT NULL,
   idArticolo int(11) NOT NULL,
   contenuto text DEFAULT NULL,
   giorno datetime DEFAULT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE commenti (
   FOREIGN KEY (idArticolo) REFERENCES articoli (id),
   FOREIGN KEY (utente) REFERENCES utenti (username),
   FOREIGN KEY (idCommento) REFERENCES commenti (id)
-)
+);
 --
 -- Dump dei dati per la tabella articoli
 --

@@ -29,33 +29,38 @@ const invia = () =>{
 
     if(title.value!="" && content.value!=""){
         alert("|"+title.value+"|"+content.value+"|")
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
-        xhr.onload = () => {
-            try {
-                alert("1 "+xhr.responseText)
-                if(xhr.response=="none"){
-                    alert("2 "+xhr.responseText)
-                    document.getElementById('formArticolo').innerHTML+=xhr.responseText
+        try{
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
+            xhr.onload = () => {
+                try {
+                    alert("1 "+xhr.responseText)
+                    if(xhr.response=="none"){
+                        alert("2 "+xhr.responseText)
+                        document.getElementById('formArticolo').innerHTML+=xhr.responseText
+                    }
+                    else{
+                        alert("3 "+xhr.responseText)
+                        title.value=""
+                        img.value=""
+                        content.value=""
+                        artId = xhr.response
+                        alert("4 "+xhr.responseText)
+                        invia2(artId)
+                    }
+                } catch (error) {
+                    alert("5 "+error)
                 }
-                else{
-                    alert("3 "+xhr.responseText)
-                    title.value=""
-                    img.value=""
-                    content.value=""
-                    artId = xhr.response
-                    alert("4 "+xhr.responseText)
-                    invia2(artId)
-                }
-            } catch (error) {
-                alert("5 "+error)
+                
             }
-            
+            xhr.onerror = function() {
+                alert(`Network Error`);
+            }
+            xhr.send();
+        }catch(error){
+
         }
-        xhr.onerror = function() {
-            alert(`Network Error`);
-        }
-        xhr.send();
+        
     }
 }
 const invia2 = (artId) =>{
