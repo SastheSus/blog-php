@@ -147,11 +147,20 @@ $query->execute([$id]);
                             <form onsubmit="sendComment" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="parag" value="<?php echo $id?>"></input>
                                 <input id="inputCommento" type="text" name='content'></input>
-                                <?php 
-                                    
-                                ?>
-                                <input type="submit">
+                                
+                                <input id="send" type="submit">
                             </form>
+                            <div class="containerCommento">
+                                <h3 class="userCommento">peppino</h3>
+                                <p class="contentCommento">che brutto</p>
+                            </div>
+                            <div class="containerRisposta">
+                                <h3 class="userCommento">peppino</h3>
+                                <p class="contentCommento">che brutto</p>
+                            </div>
+                            <?php 
+                                echo '';
+                            ?>
                         </div>
                     </div> 
                 </div>
