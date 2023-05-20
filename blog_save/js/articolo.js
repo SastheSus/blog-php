@@ -1,3 +1,9 @@
+var idRisposta = 0;
+
+function risposta(id){
+    idRisposta = id
+}
+
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
     xhr.open('GET', './php_aus/chiudi.php', true);
@@ -47,9 +53,9 @@ let customAlert = new CustomAlert();
 function sendComment(event){
     var formData = new FormData(event.target),
         content = formData.get('content'),
-        parag = formData.get('parag')
+        article = formData.get('article')
     
-    fetch("./php_aus/uploadComment.php?cont="+content+"&parag="+parag)
+    fetch("./php_aus/uploadComment.php?cont="+content+"&article="+article+"&risposta="+idRisposta)
     .then(data => {
         alert("ok")
         location.reload()

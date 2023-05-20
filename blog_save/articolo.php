@@ -145,7 +145,7 @@ $query->execute([$id]);
                         </article>
                         <div id="formCommenti">
                             <form onsubmit="sendComment" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="parag" value="<?php echo $id?>"></input>
+                                <input type="hidden" name="article" value="<?php echo $id?>"></input>
                                 <input id="inputCommento" type="text" name='content'></input>
                                 
                                 <input id="send" type="submit">
@@ -153,6 +153,8 @@ $query->execute([$id]);
                             <div class="containerCommento">
                                 <h3 class="userCommento">peppino</h3>
                                 <p class="contentCommento">che brutto</p>
+                                <button class="buttonRispCommento" onclick="risposta('..')">rispondi</button>
+                                <button class="buttonRispCommento" onclick="showRisposta('..')">mostra risposte</button>
                             </div>
                             <div class="containerRisposta">
                                 <h3 class="userCommento">peppino</h3>

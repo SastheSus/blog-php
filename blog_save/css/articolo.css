@@ -38,6 +38,7 @@ border-radius: 20px;
     width:5%;
 }
 .containerCommento{
+    margin-top: 2vh;
     text-align: left;
 }
 .containerRisposta{
@@ -48,10 +49,17 @@ border-radius: 20px;
     border-left: 1px solid black;
 }
 .userCommento{
+    margin-top:0.5vh;
     margin-bottom: 0;
 }
 .contentCommento{
     margin-top: 0;
+    margin-bottom: 0;
+}
+.buttonRispCommento{
+    background-color: transparent;
+    padding: 0;
+    color: white;
 }
 input:focus{
     outline: none;
