@@ -144,25 +144,41 @@ $query->execute([$id]);
                             ?>
                         </article>
                         <div id="formCommenti">
-                            <form onsubmit="sendComment" method="post" enctype="multipart/form-data">
+                            <form action="" onsubmit="return sendComment(this)" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="article" value="<?php echo $id?>"></input>
                                 <input id="inputCommento" type="text" name='content'></input>
                                 
                                 <input id="send" type="submit">
                             </form>
-                            <div class="containerCommento">
-                                <h3 class="userCommento">peppino</h3>
-                                <p class="contentCommento">che brutto</p>
-                                <button class="buttonRispCommento" onclick="risposta('..')">rispondi</button>
-                                <button class="buttonRispCommento" onclick="showRisposta('..')">mostra risposte</button>
-                            </div>
-                            <div class="containerRisposta">
-                                <h3 class="userCommento">peppino</h3>
-                                <p class="contentCommento">che brutto</p>
-                            </div>
-                            <?php 
-                                echo '';
-                            ?>
+                            <div id="commentZone">
+                            <?php
+                                $text = "SELECT * FROM commenti WHERE idArticolo = ? AND idRisposta IS NULL ORDER BY id";
+                                $query= $pdo->prepare($text);
+                                $query->execute([$id]);
+                                $comments = $query->fetchAll();
+
+                                
+
+                                foreach ($comments as $value) {
+                                    echo '
+                                    <div class="containerCommento" id="c'.$value['id'].'">
+                                        <h3 class="userCommento">'.$value['utente'].'</h3><p class="dateCommento">'.$value['giorno'].'</p>
+                                        <p class="contentCommento">'.$value['contenuto'].'</p>
+                                        <button class="buttonRispCommento" onclick="risposta('.$value['id'].')">rispondi</button>
+                                    </div>';
+                                    $text = "SELECT * FROM commenti WHERE idArticoloRis = ? AND idRisposta = ? ORDER BY id";
+                                    $query= $pdo->prepare($text);
+                                    $query->execute([$id,$value['id']]);
+                                    $answers = $query->fetchAll();
+                                    foreach ($answers as $val) {
+                                        echo '
+                                        <div class="containerRisposta" id="c'.$val['id'].'">
+                                            <h3 class="userCommento">'.$val['utente'].'</h3><p class="dateCommento">'.$val['giorno'].'</p>
+                                            <p class="contentCommento">'.$val['contenuto'].'</p>
+                                        </div>';
+                                    }
+                                }
+                            ?></div>
                         </div>
                     </div> 
                 </div>

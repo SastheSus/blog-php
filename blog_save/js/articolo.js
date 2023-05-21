@@ -1,7 +1,14 @@
 var idRisposta = 0;
 
 function risposta(id){
-    idRisposta = id
+    if(idRisposta == id){
+        idRisposta = 0;
+        document.getElementById('c'+id).style="color:black"
+    }
+    else{
+        idRisposta = id
+        document.getElementById('c'+id).style="color:yellow"
+    }
 }
 
 const close_session = () =>{
@@ -50,15 +57,17 @@ function CustomAlert(){
 
 let customAlert = new CustomAlert();
 
-function sendComment(event){
-    var formData = new FormData(event.target),
+function sendComment(form){
+    var formData = new FormData(form),
         content = formData.get('content'),
         article = formData.get('article')
-    
-    fetch("./php_aus/uploadComment.php?cont="+content+"&article="+article+"&risposta="+idRisposta)
+
+    fetch("./php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
     .then(data => {
         alert("ok")
         location.reload()
     }
-    )
+    ).catch(data => {
+        alert(data)
+    })
 }

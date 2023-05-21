@@ -49,11 +49,12 @@ CREATE TABLE commenti (
   contenuto text DEFAULT NULL,
   giorno datetime DEFAULT NULL,
   utente varchar(50) DEFAULT NULL,
-  idCommento int(11) DEFAULT NULL,
+  idRisposta int(11) DEFAULT NULL,
+  idArticoloRis int(11) DEFAULT NULL,
   PRIMARY KEY (id, idArticolo),
   FOREIGN KEY (idArticolo) REFERENCES articoli (id),
   FOREIGN KEY (utente) REFERENCES utenti (username),
-  FOREIGN KEY (idCommento) REFERENCES commenti (id)
+  FOREIGN KEY (idRisposta,idArticoloRis) REFERENCES commenti (id,idArticolo)
 );
 --
 -- Dump dei dati per la tabella articoli
