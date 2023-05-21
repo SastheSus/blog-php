@@ -1,7 +1,7 @@
 <?php
 session_start();
 $id=$_GET["id"];
-$pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+$pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
 $text = "UPDATE articoli SET visualizzazioni = visualizzazioni+1 WHERE id = ?";
 $query= $pdo->prepare($text);
 $query->execute([$id]);
@@ -81,7 +81,7 @@ $query->execute([$id]);
                         <article>
                         
                             <?php
-                            $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                            $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
 
                             $text = "SELECT * FROM articoli WHERE id = ?";
                             $query= $pdo->prepare($text);

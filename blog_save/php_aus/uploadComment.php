@@ -11,7 +11,7 @@ if($risposta == 0){
 $hint = "";
 $id = 1;
 try{
-    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+    $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
 
     $text = "SELECT MAX(id) AS id FROM commenti WHERE idArticolo = ?";
     $query= $pdo->prepare($text);

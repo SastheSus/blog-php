@@ -7,7 +7,7 @@ $hint = "";
 $user = "";
 try{
     try{
-      $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+      $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
       if($img!=""){
         $text = "INSERT INTO immagini(nome, logo) VALUES (?, ?)";
         $query= $pdo->prepare($text);

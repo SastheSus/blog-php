@@ -9,7 +9,7 @@ $result = "";
 if($email!="" && $username!="" && !(password_verify("", $password))){
   
 try{
-  $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+  $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
   
   $text = "SELECT username, email FROM utenti WHERE email = ? OR username = ?";
   

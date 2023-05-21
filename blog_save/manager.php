@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+$pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -126,7 +126,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                     }
 
                     if(!empty($_POST['btn'])){
-                        $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                        $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
                         for($i=0;$i<sizeof($row);$i++){
                             $text = "UPDATE utenti SET ruolo = ? WHERE username = ?";
                             $query= $pdo->prepare($text);

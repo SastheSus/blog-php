@@ -32,9 +32,10 @@ const invia = () =>{
         .then((response) => {
             alert("eureka: "+response.text())
         })
-        .catch((response) => {
-            alert(response)
-            alert(response.text())
+        .catch((error) => {
+            alert("pene")
+            alert("1 "+error)
+            alert("2 "+error.text())
         })
         //alert("|"+title.value+"|"+content.value+"|")
         /*try{

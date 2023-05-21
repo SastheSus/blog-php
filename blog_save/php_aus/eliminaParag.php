@@ -4,7 +4,7 @@ $hint = array();
 $idArt = $_REQUEST["idArt"];
 $idPar = $_REQUEST["idPar"];
 try{
-    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+    $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
 
     $text ="CREATE VIEW paragMaggiori AS
             SELECT id-1 AS id, articolo, titolo, contenuto, stile 

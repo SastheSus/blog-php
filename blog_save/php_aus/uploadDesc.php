@@ -7,7 +7,7 @@ $hint = "";
 $user = "";
 try{
     try{
-      $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+      $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
       if($img!=""){
         $text = "INSERT INTO immagini(nome, logo) VALUES (?, ?)";
         $query= $pdo->prepare($text);
@@ -27,12 +27,23 @@ try{
         $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente) VALUES (?, ?, ?, ?)";
         $query= $pdo->prepare($text);
         $query->execute([$title,$content,date("Y-m-d H:i:s"),$_SESSION['user']]);
+
+        $text = "INSERT INTO merda(id) VALUES (?)";
+        $query= $pdo->prepare($text);
+        $query->execute([1]);
       }
+      $text = "INSERT INTO merda(id) VALUES (?)";
+        $query= $pdo->prepare($text);
+        $query->execute([2]);
 
       $text = "SELECT id FROM articoli WHERE titolo = ? ";
       $query= $pdo->prepare($text);
       $query->execute([$title]);
       $hint = $query->fetch();
+      
+      $text = "INSERT INTO merda(id) VALUES (?)";
+        $query= $pdo->prepare($text);
+        $query->execute([3]);
     }
     catch(Exception $e){
       echo "<p style='width: 100%; text-align: center; background-color: red;'>".$e."</p>";
