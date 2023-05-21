@@ -13,7 +13,7 @@ try{
     try{
       $arrImg = explode("|",$img);
       $arrIn = explode("|",$input);
-      $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
+      $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 
       $text = "INSERT INTO paragrafi(id, articolo, titolo, contenuto, stile) VALUES (?, ?, ?, ?, ?)";
       $query= $pdo->prepare($text);

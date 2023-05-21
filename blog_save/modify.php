@@ -22,7 +22,7 @@ $num = 1;
                     <li><a href="./index.php">Home</a></li>
                     <li><a href="./editor.php">Editor</a></li>
                     <li><?php
-                        $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");    
+                        $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");    
                         if(!empty($_SESSION['user'])){
                             $text = "SELECT ruolo FROM utenti WHERE username = ?";
                             $query= $pdo->prepare($text);
@@ -65,7 +65,7 @@ $num = 1;
                 </ul>
                 </nav>
                 <?php 
-                    $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
+                    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                     $text = "SELECT articoli.*, immagini.nome FROM articoli, immagini WHERE articoli.id = ? AND articoli.logo = immagini.id";
                     $query= $pdo->prepare($text);
                     $query->execute([$id]);

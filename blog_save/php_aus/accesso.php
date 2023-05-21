@@ -6,7 +6,7 @@ $hint = "";
 $user = "";
 try{
     try{
-      $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");
+      $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
       
       $text = "SELECT username, email, password FROM utenti WHERE username = ? OR email = ?";
       

@@ -20,7 +20,7 @@ $elenco = '';
                     <li><a href="./index.php">Home</a></li>
                     <li><a href="./editor.php">Editor</a></li>
                     <li><?php
-                        $pdo = new PDO("mysql:host=localhost; dbname=database_blog", "root", "");    
+                        $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");    
                         if(!empty($_SESSION['user'])){
                             $text = "SELECT ruolo FROM utenti WHERE username = ?";
                             $query= $pdo->prepare($text);
@@ -63,7 +63,7 @@ $elenco = '';
                 </ul>
                 </nav>
                 <div class="App">
-                    <form action="editor.php?ok=1" method="post" enctype="multipart/form-data">
+                    <form action="./editor.php?ok=1" method="post" enctype="multipart/form-data">
                         <div id='editorContainer'>
                             <article>
                                 <div id="ediTitContainer">

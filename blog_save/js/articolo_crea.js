@@ -22,13 +22,14 @@ const hidden = () =>{
 }
 
 const invia = () =>{
+    
+    //e.preventDefault();
     const title = document.getElementById('editorTitolo')
     const img = document.getElementById('editorInputImg')
     const content = document.getElementById('editorDescArt')
     var artId = ''
 
     if(title.value!="" && content.value!=""){
-        alert("|"+title.value+"|"+content.value+"|")
         try{
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
@@ -66,7 +67,7 @@ const invia = () =>{
         
     }
 }
-const invia2 = (artId) =>{
+const invia2 = async (artId) =>{
     try{
     var style = 0;
     var i = 1;
@@ -109,7 +110,14 @@ const invia2 = (artId) =>{
             else{
                 style = 0;
             }
-            try {
+            
+/*let url = "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn
+
+            let response = await fetch(url);
+            let body = await response.text()
+
+            alert(body)
+            */try {
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
@@ -131,6 +139,7 @@ const invia2 = (artId) =>{
         //alert(parag.id)
     }
 }catch(e){alert (e)}
+//window.location.replace('./editor.php?ok=1')
 }
 
 
