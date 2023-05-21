@@ -2,7 +2,6 @@
 session_start();
 $hint = "";
 $idArt = $_REQUEST["idArt"];
-$idPar = $_REQUEST["idPar"];
 try{
     $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 
@@ -13,9 +12,9 @@ try{
         $query->execute([$idPar,$idArt]);
         $hint = $query->fetchAll();*/
 
-        $text = "DELETE FROM immaginiDiParagrafi WHERE idParagrafo = ? AND idArticolo = ?";
+        $text = "DELETE FROM immaginiDiParagrafi WHERE idArticolo = ?";
         $query= $pdo->prepare($text);
-        $query->execute([$idPar,$idArt]);
+        $query->execute([$idArt]);
         /* 
         foreach ($hint as $value) {
             $text = "DELETE FROM immagini WHERE id = ?";
@@ -28,18 +27,18 @@ try{
         echo $e;
     }
 
-    $text = "DELETE FROM paragrafi WHERE id = ? AND articolo = ?";
+    $text = "DELETE FROM paragrafi WHERE articolo = ?";
     $query= $pdo->prepare($text);
-    $query->execute([$idPar,$idArt]);
-     
-    $text = "UPDATE paragrafi SET id = id-1 WHERE id > ? AND articolo = ?";
+    $query->execute([$idArt]);
+    
+    $text = "DELETE FROM articoli WHERE id = ?";
     $query= $pdo->prepare($text);
-    $query->execute([$idPar,$idArt]);
+    $query->execute([$idArt]);
     
   }
   catch (Exception $e){
       $hint=$e;
   }
   $pdo=null;
-  echo $hint .= "DELETE FROM paragrafi WHERE id >= ".$idPar." AND articolo = ".$idArt;
+  echo $hint;
 ?>

@@ -272,3 +272,13 @@ function eliminaParag(idArt, idPar){
         location.reload();
     }
 }
+
+function eliminaArt(idArt){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "./php_aus/eliminaArt.php?idArt="+idArt, true);
+    xhr.send();
+    xhr.onload = () => {
+        alert(xhr.responseText)
+        location.reload();
+    }
+}
