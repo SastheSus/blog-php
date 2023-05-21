@@ -29,13 +29,24 @@ const hidden = () =>{
 }
 
 const invia = (id) =>{
-    var xhr = new XMLHttpRequest();
     const title = document.getElementById('editorTitolo')
     const img = document.getElementById('editorInputImg')
     const content = document.getElementById('editorDescArt')
     var artId = ''
 
     if(title.value!="" && content.value!=""){
+        fetch("./php_aus/updateDesc.php?id="+id+"&title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value)
+        .then(response => {
+            alert(response)
+            title.value=""
+            img.value=""
+            content.value=""
+            //invia2(id)
+        })
+        .catch(error =>{
+            alert(error)
+        })
+/* 
         alert("|"+title.value+"|"+content.value+"|")
         xhr.open("GET", "./php_aus/updateDesc.php?id="+id+"&title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
         xhr.send();
@@ -62,7 +73,7 @@ const invia = (id) =>{
         }
         xhr.onerror = function() {
             alert(`Network Error`);
-        }
+        }*/
     }
     return "ok"
 }

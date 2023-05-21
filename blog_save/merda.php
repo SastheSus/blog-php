@@ -1,21 +1,49 @@
 <?php
 session_start();
-$id = 0;
+$title = $_REQUEST["title"];
+$img = $_REQUEST["img"];
+$content = $_REQUEST["content"];
+$hint = "";
+$user = "";
 try{
-    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+    try{
+      $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+      if($img!=""){
+        $text = "INSERT INTO immagini(nome, logo) VALUES (?, ?)";
+        $query= $pdo->prepare($text);
+        $query->execute([$img,1]);
 
-    $text = "SELECT MAX(id) AS id FROM commenti WHERE idArticolo = ?";
-    $query= $pdo->prepare($text);
-    $query->execute([3]);
-    $id += $query->fetch()['id'];
-    echo $id;
+        $text = "SELECT id FROM immagini WHERE nome = ? ORDER BY id DESC";
+        $query= $pdo->prepare($text);
+        $query->execute([$img]);
+        $aus = $query->fetchAll();
+        $aus = $aus[0]['id'];
+        
+        $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente, logo) VALUES (?, ?, ?, ?, ?)";
+        $query= $pdo->prepare($text);
+        $query->execute([$title,$content,date("Y-m-d H:i:s"),$_SESSION['user'],$aus]);
+      }
+      else{
+        $text = "INSERT INTO articoli(titolo, descrizione, giorno, utente) VALUES (?, ?, ?, ?)";
+        $query= $pdo->prepare($text);
+        $query->execute([$title,$content,date("Y-m-d H:i:s"),$_SESSION['user']]);
+      }
 
-    $text = "INSERT INTO commenti(id,idArticolo,idCommento) VALUES (?,?,?)";
-    $query= $pdo->prepare($text);
-    $query->execute([10,1,NULL]);
-}
-catch (PDOException $e){
-    echo $e;
-    exit();
-}
+      $text = "SELECT id FROM articoli WHERE titolo = ? ";
+      $query= $pdo->prepare($text);
+      $query->execute([$title]);
+      $hint = $query->fetch();
+    }
+    catch(Exception $e){
+      echo "<p style='width: 100%; text-align: center; background-color: red;'>".$e."</p>";
+      $hint="";
+    }
+  }
+  catch (PDOException $e){
+      echo "<p style='width: 100%; text-align: center; background-color: red;'>".$e."</p>";
+      $hint="";
+      exit();
+  }
+  $pdo=null;
+  echo $hint === ""  ? "none" : $hint[0];
 ?>
