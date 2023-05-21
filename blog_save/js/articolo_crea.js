@@ -28,18 +28,9 @@ const invia = () =>{
     var artId = ''
 
     if(title.value!="" && content.value!=""){
-        fetch("./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value)
-        .then((response) => {
-            alert("eureka: "+response.text())
-        })
-        .catch((error) => {
-            alert("pene")
-            alert("1 "+error)
-            alert("2 "+error.text())
-        })
-        //alert("|"+title.value+"|"+content.value+"|")
-        /*try{
-            
+        alert("|"+title.value+"|"+content.value+"|")
+        try{
+            var xhr = new XMLHttpRequest();
             xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
             xhr.onprogress = () => {
                 alert("pino")
@@ -71,7 +62,7 @@ const invia = () =>{
             xhr.send();
         }catch(error){
             alert(error)
-        }*/
+        }
         
     }
 }

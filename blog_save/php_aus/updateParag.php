@@ -1,5 +1,4 @@
 <?php
-echo "leoncini merda";
 session_start();
 $article = $_REQUEST["article"];
 $paragrafo = $_REQUEST["paragrafo"];

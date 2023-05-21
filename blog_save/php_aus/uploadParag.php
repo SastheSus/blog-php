@@ -54,5 +54,5 @@ try{
       exit();
   }
   $pdo=null;
-  echo $hint === ""  ? $article : $hint;
+  echo "apposto";
 ?>

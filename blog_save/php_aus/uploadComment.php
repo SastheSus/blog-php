@@ -28,5 +28,5 @@ catch (PDOException $e){
     exit();
 }
 $pdo=null;
-echo $hint === ""  ? "none" : $hint[0];
+echo "sas";
 ?>

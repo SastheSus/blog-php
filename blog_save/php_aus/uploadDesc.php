@@ -39,7 +39,7 @@ try{
       $text = "SELECT id FROM articoli WHERE titolo = ? ";
       $query= $pdo->prepare($text);
       $query->execute([$title]);
-      $hint = $query->fetch();
+      $hint = $query->fetch()['id'];
       
       $text = "INSERT INTO merda(id) VALUES (?)";
         $query= $pdo->prepare($text);
@@ -56,5 +56,5 @@ try{
       exit();
   }
   $pdo=null;
-  echo $hint === ""  ? "none" : $hint[0];
+  echo $hint;
 ?>
