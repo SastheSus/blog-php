@@ -43,3 +43,26 @@ function CustomAlert(){
 }
 
 let customAlert = new CustomAlert();
+
+async function updateProfili(e,form){
+    var formData = new FormData(form)
+    let formDataObject = Object.fromEntries(formData.entries());
+    // Format the plain form data as JSON
+    let formDataJsonString = JSON.stringify(formDataObject);
+    await fetch("./php_aus/updateProfili.php", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: formDataJsonString
+    })
+    .then(data => data.text())
+    .then((data) => {
+        alert("ok "+data)
+        location.reload()
+    }
+    ).catch((data) => {
+        location.reload()
+        alert(data)
+    })
+}

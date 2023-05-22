@@ -57,18 +57,18 @@ function CustomAlert(){
 
 let customAlert = new CustomAlert();
 
-function sendComment(form){
+async function sendComment(form){
     var formData = new FormData(form),
         content = formData.get('content'),
         article = formData.get('article')
 
-    fetch("./php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
+    await fetch("./php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
     .then((data) => {
-        alert(data.status)
         alert("ok")
         location.reload()
     }
     ).catch((data) => {
+        location.reload()
         alert(data)
     })
 }

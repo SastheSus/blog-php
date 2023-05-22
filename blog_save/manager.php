@@ -96,6 +96,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         for($i=0;$i<sizeof($row);$i++){
                             echo "<div class='top' id='1'>
                             <h3 id='titleArtSec'>".$row[$i]['username']."</h3>
+                            <input type='hidden' name='username".$i."' value='".$row[$i]['username']."' form='roleform'></input>
                             <div class='passBtn'><button id='".$row[$i]['username']."' onclick='passChange()'></button></div>
                             <select id='choose' name='rolelist".$i."' form='roleform'>";
                             switch ($row[$i]['ruolo']) {
@@ -119,22 +120,25 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             echo "</select>
                             </div>";
                         }
-                        echo '
+                        /*echo '
                         <form action="" onsubmit="location.reload()" method="post" id="roleform">
                             <input name="btn" type="submit">
-                        </form>';
+                        </form>';*/
                     }
 
-                    if(!empty($_POST['btn'])){
+                    /*if(!empty($_POST['btn'])){
                         $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         for($i=0;$i<sizeof($row);$i++){
                             $text = "UPDATE utenti SET ruolo = ? WHERE username = ?";
                             $query= $pdo->prepare($text);
                             $query->execute([$_POST['rolelist'.$i], $row[$i]['username']]);
                         }
-                        header('./manager.php');
-                    }
+                        header('./index.php');
+                    }*/
                     ?>
+                    <form action="" onsubmit="return updateProfili(event,this)" method="post" id="roleform" enctype="multipart/form-data">                        
+                        <input id="send" type="submit">
+                    </form>
                 </div>
                 
             </div>
