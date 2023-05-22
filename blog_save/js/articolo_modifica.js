@@ -279,6 +279,6 @@ function delArt(idArt){
     xhr.send();
     xhr.onload = () => {
         alert(xhr.responseText)
-        location.reload();
+        window.location.replace('./index.php');
     }
 }
