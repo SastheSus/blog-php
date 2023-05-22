@@ -34,35 +34,35 @@ const invia = () =>{
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
             xhr.onprogress = () => {
-                alert("pino")
+                //alert("pino")
             }
             xhr.onload = () => {
                 try {
-                    alert("1 "+xhr.responseText)
+                    //alert("1 "+xhr.responseText)
                     if(xhr.response=="none"){
-                        alert("2 "+xhr.responseText)
+                        //alert("2 "+xhr.responseText)
                         document.getElementById('formArticolo').innerHTML+=xhr.responseText
                     }
                     else{
-                        alert("3 "+xhr.responseText)
+                        //alert("3 "+xhr.responseText)
                         title.value=""
                         img.value=""
                         content.value=""
                         artId = xhr.response
-                        alert("4 "+xhr.responseText)
+                        //alert("4 "+xhr.responseText)
                         invia2(artId)
                     }
                 } catch (error) {
-                    alert("5 "+error)
+                    //alert("5 "+error)
                 }
                 
             }
             xhr.onerror = function() {
-                alert(`Network Error`);
+                //alert(`Network Error`);
             }
             xhr.send();
         }catch(error){
-            alert(error)
+            //alert(error)
         }
         
     }
@@ -88,22 +88,22 @@ const invia2 = async (artId) =>{
                     if(immaginiParagrafo[q][0].startsWith(i)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
                         imgIn+=immaginiParagrafo[q][0]+"|";
-                        alert(imgStr+'€'+imgIn+'€')
+                        //alert(imgStr+'€'+imgIn+'€')
                     }
                     else{
-                        alert(immaginiParagrafo[q][0]+' '+i)
-                        alert(imgStr+'£'+imgIn+'£')
+                        //alert(immaginiParagrafo[q][0]+' '+i)
+                        //alert(imgStr+'£'+imgIn+'£')
                     }
                 }
             } catch (error) {
-                alert('invia2 error '+error+" "+i)
+                //alert('invia2 error '+error+" "+i)
             }
             
-            alert(imgStr+'€'+imgIn+'€')
+            //alert(imgStr+'€'+imgIn+'€')
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
 
-            alert('style '+style)
+            //alert('style '+style)
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
@@ -116,20 +116,20 @@ const invia2 = async (artId) =>{
             let response = await fetch(url);
             let body = await response.text()
 
-            alert(body)
+            //alert(body)
             */try {
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
                 xhr.onload = () => {
-                    alert(9)
-                    alert(xhr.responseText)
+                    //alert(9)
+                    //alert(xhr.responseText)
                 }
                 xhr.onerror = function() {
-                    alert(xhr.responseText)
+                    //alert(xhr.responseText)
                 }          
             } catch (error) {
-                alert(error)
+                //alert(error)
             }
         }
         i++;
@@ -237,6 +237,16 @@ function insertParag(){
         clone.querySelector(".immagine").remove()
     }*/
     area.appendChild(clone)
+}
+
+function test(){
+    var area = document.getElementById('paragZone');
+
+    var arr = area.querySelectorAll(".paragrafo")
+
+    arr.forEach(val => {
+        alert(val.id)
+    });
 }
 
 function insertImg(id){

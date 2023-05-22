@@ -273,7 +273,7 @@ function eliminaParag(idArt, idPar){
     }
 }
 
-function eliminaArt(idArt){
+function delArt(idArt){
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "./php_aus/eliminaArt.php?idArt="+idArt, true);
     xhr.send();

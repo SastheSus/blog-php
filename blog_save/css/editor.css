@@ -138,3 +138,9 @@ border-radius: 10px;
 .subTitleContainer{
     width: 100%;
 }
+
+#eliminaArt{
+    float: right;
+    background-color: red;
+    padding: 0 1vw;
+}

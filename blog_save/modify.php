@@ -98,6 +98,7 @@ $num = 1;
                                 <div id="ediTitContainer">
                                     <h3 id="editorH3">Titolo:</h3>
                                     <input id="editorTitolo" type="text" placeholder="inserire un titolo" <?php echo 'value="'.$articolo['titolo'].'"'?>></input>
+                                    <button id="eliminaArt" type=button onclick="delArt(<?php echo $id?>)">el</button>
                                 </div>
                                 <textarea id='editorDescArt'placeholder="inserire una descrizione"><?php echo $articolo['descrizione']?></textarea>
                                 <div id='editorImmagine'>

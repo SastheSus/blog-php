@@ -31,6 +31,14 @@ try{
     $query= $pdo->prepare($text);
     $query->execute([$idArt]);
     
+    $text = "DELETE FROM commenti WHERE idArticoloRis = ?";
+    $query= $pdo->prepare($text);
+    $query->execute([$idArt]);
+
+    $text = "DELETE FROM commenti WHERE idArticolo = ?";
+    $query= $pdo->prepare($text);
+    $query->execute([$idArt]);
+
     $text = "DELETE FROM articoli WHERE id = ?";
     $query= $pdo->prepare($text);
     $query->execute([$idArt]);
