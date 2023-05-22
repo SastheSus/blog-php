@@ -63,11 +63,22 @@ function sendComment(form){
         article = formData.get('article')
 
     fetch("./php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
-    .then(data => {
+    .then((data) => {
+        alert(data.status)
         alert("ok")
         location.reload()
     }
-    ).catch(data => {
+    ).catch((data) => {
         alert(data)
     })
+}
+
+function delComment(id, idArt){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "./php_aus/eliminaComment.php?id="+id+"&idArt="+idArt, true);
+    xhr.send();
+    xhr.onload = () => {
+        alert(xhr.responseText)
+        location.reload();
+    }
 }

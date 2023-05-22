@@ -120,7 +120,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             </div>";
                         }
                         echo '
-                        <form action="./manager.php" method="post" id="roleform">
+                        <form action="" onsubmit="location.reload()" method="post" id="roleform">
                             <input name="btn" type="submit">
                         </form>';
                     }
@@ -131,7 +131,8 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             $text = "UPDATE utenti SET ruolo = ? WHERE username = ?";
                             $query= $pdo->prepare($text);
                             $query->execute([$_POST['rolelist'.$i], $row[$i]['username']]);
-                        }                        
+                        }
+                        header('./manager.php');
                     }
                     ?>
                 </div>

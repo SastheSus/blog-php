@@ -164,8 +164,11 @@ $query->execute([$id]);
                                     <div class="containerCommento" id="c'.$value['id'].'">
                                         <h3 class="userCommento">'.$value['utente'].'</h3><p class="dateCommento">'.$value['giorno'].'</p>
                                         <p class="contentCommento">'.$value['contenuto'].'</p>
-                                        <button class="buttonRispCommento" onclick="risposta('.$value['id'].')">rispondi</button>
-                                    </div>';
+                                        <button class="buttonRispCommento" onclick="risposta('.$value['id'].')">rispondi</button>';
+                                    if($_SESSION['user']==$value['utente']){
+                                        echo '<button class="buttonRispCommento" onclick="delComment('.$value['id'].','.$id.')">elimina</button>';
+                                    }
+                                    echo '</div>';
                                     $text = "SELECT * FROM commenti WHERE idArticoloRis = ? AND idRisposta = ? ORDER BY id";
                                     $query= $pdo->prepare($text);
                                     $query->execute([$id,$value['id']]);

@@ -20,14 +20,14 @@ try{
         $aus = $query->fetchAll();
         $aus = $aus[0]['id'];
         
-        $text = "UPDATE articoli SET titolo= ?, descrizione= ?, utente= ?, logo= ? WHERE id=? AND (titolo != ? OR descrizione != ? OR logo != ?)";
+        $text = "UPDATE articoli SET titolo= ?, descrizione= ?, logo= ? WHERE id=? AND (titolo != ? OR descrizione != ? OR logo != ?)";
         $query= $pdo->prepare($text);
-        $query->execute([$title,$content,$_SESSION['user'],$aus,$id,$title,$content,$aus]);
+        $query->execute([$title,$content,$aus,$id,$title,$content,$aus]);
       }
       else{
-        $text = "UPDATE articoli SET titolo= ?, descrizione= ?, utente= ? WHERE id=? AND (titolo != ? OR descrizione != ?)";
+        $text = "UPDATE articoli SET titolo= ?, descrizione= ? WHERE id=? AND (titolo != ? OR descrizione != ?)";
         $query= $pdo->prepare($text);
-        $query->execute([$title,$content,$_SESSION['user'],$id,$title,$content]);
+        $query->execute([$title,$content,$id,$title,$content]);
       }
       /* 
       $text = "SELECT id FROM articoli WHERE titolo = ? ";
