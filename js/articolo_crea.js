@@ -68,21 +68,22 @@ const invia2 = async (artId) =>{
     try{
     var style = 0;
     var i = 1;
-    var parag = document.getElementById('paragrafo'+i)
+    /*var parag = document.getElementById('paragrafo'+i)*/
+    var area = document.getElementById('paragZone');
+    var arr = area.querySelectorAll(".paragrafo")
     imgStr = ''
     imgIn = ''
     
     //alert("6 "+imgStr)
-    while(parag!=null){
-        var test = document.getElementById('subTitle'+i).value
-        if(test!=""){
-            //alert(parag.id)
-            idAus = 'subTitle'+i
-            const titPar = document.getElementById('subTitle'+i)
-            const contentPar = document.getElementById('textarea'+i)
+    //while(parag!=null){
+    arr.forEach(par => {
+        var paragNum = par.id.replace("paragrafo","")
+        var subTitle = par.querySelector(".subTitle")
+        var textarea = par.querySelector(".paragrafoContent")
+        if(textarea!=""){
             try {
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
-                    if(immaginiParagrafo[q][0].startsWith(i)){
+                    if(immaginiParagrafo[q][0].startsWith(paragNum)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
                         imgIn+=immaginiParagrafo[q][0]+"|";
                         //alert(imgStr+'€'+imgIn+'€')
@@ -93,48 +94,36 @@ const invia2 = async (artId) =>{
                     }
                 }
             } catch (error) {
-                //alert('invia2 error '+error+" "+i)
+                alert('invia2 error '+error+" "+i)
             }
-            
-            //alert(imgStr+'€'+imgIn+'€')
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
-
-            //alert('style '+style)
-            if(parag.style.flexDirection=='row-reverse'){
+            if(par.style.flexDirection=='row-reverse'){
                 style=1;
             }
             else{
                 style = 0;
             }
-            
-/*let url = "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn
-
-            let response = await fetch(url);
-            let body = await response.text()
-
-            //alert(body)
-            */try {
+            try {
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "http://localhost/blog-php/php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + subTitle.value + "&content=" + textarea.value + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
                 xhr.onload = () => {
                     //alert(9)
                     //alert(xhr.responseText)
                 }
                 xhr.onerror = function() {
-                    //alert(xhr.responseText)
+                    alert(xhr.responseText)
                 }          
             } catch (error) {
-                //alert(error)
+                alert(error)
             }
+            i++
         }
-        i++;
         imgStr = ''
         imgIn = ''
-        parag = document.getElementById('paragrafo'+i)
-        //alert(parag.id)
-    }
+    });
+        
 }catch(e){alert (e)}
 //window.location.replace('./editor.php?ok=1')
 }
@@ -207,10 +196,10 @@ function CustomAlert(){
 
 let customAlert = new CustomAlert();
 
-function insertParag(){
+function insertParag(p){
     var area = document.getElementById('paragZone');
 
-    var tag = document.getElementById('paragrafo'+parags);
+    var tag = document.getElementById('paragrafo'+p);
     const clone = tag.cloneNode(true);
     parags++;
     clone.id = 'paragrafo'+parags;
@@ -218,7 +207,9 @@ function insertParag(){
     clone.querySelector(".subTitle").id = "subTitle"+parags;
     clone.querySelector(".subTitle").value = null;
     clone.querySelector(".immagini").id = parags;
+    clone.querySelector(".delBtn").setAttribute('onclick','annullaParag('+parags+')');
     clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
+    clone.querySelector(".insertParag").setAttribute('onclick','insertParag('+parags+')');
     clone.querySelector(".paragrafoContent").id = "textarea"+parags;
     clone.querySelector(".paragrafoContent").value = null;
     while(clone.querySelector(".imgAndBtnContainer")!=null){
@@ -233,7 +224,8 @@ function insertParag(){
     while(clone.querySelector(".immagine")!=null){
         clone.querySelector(".immagine").remove()
     }*/
-    area.appendChild(clone)
+    tag.after(clone)
+    //area.appendChild(clone)
 }
 
 function test(){
@@ -282,4 +274,8 @@ function changePos(id,btn) {
     else{
         parag.style.flexDirection = "row";
     }
+}
+
+function annullaParag(id){
+    document.getElementById('paragrafo'+id).remove();
 }
