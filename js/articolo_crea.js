@@ -33,9 +33,6 @@ const invia = () =>{
         try{
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "http://localhost/blog-php/php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
-            xhr.onprogress = () => {
-                //alert("pino")
-            }
             xhr.onload = () => {
                 try {
                     //alert("1 "+xhr.responseText)
