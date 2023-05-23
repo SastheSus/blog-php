@@ -13,7 +13,7 @@ function risposta(id){
 
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', './php_aus/chiudi.php', true);
+    xhr.open('GET', 'http://localhost/blog-php/php_aus/chiudi.php', true);
     xhr.send();
     xhr.onload = () => {
         window.location.replace("./index.php");
@@ -62,7 +62,7 @@ async function sendComment(form){
         content = formData.get('content'),
         article = formData.get('article')
 
-    await fetch("./php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
+    await fetch("http://localhost/blog-php/php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
     .then((response) => {
         if (response.ok) {
           return response.text();
@@ -80,7 +80,17 @@ async function sendComment(form){
 
 function delComment(id, idArt){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./php_aus/eliminaComment.php?id="+id+"&idArt="+idArt, true);
+    xhr.open("GET", "http://localhost/blog-php/php_aus/eliminaComment.php?id="+id+"&idArt="+idArt, true);
+    xhr.send();
+    xhr.onload = () => {
+        alert(xhr.responseText)
+        location.reload();
+    }
+}
+
+function delRisp(id, idArt){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost/blog-php/php_aus/eliminaRisp.php?id="+id+"&idArt="+idArt, true);
     xhr.send();
     xhr.onload = () => {
         alert(xhr.responseText)

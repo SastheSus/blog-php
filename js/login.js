@@ -3,7 +3,7 @@ const accedi = () =>{
     var email = document.getElementById('usernameLogin');
     var password = document.getElementById('passwordLogin')
     var warning = document.getElementById('warningLogin')
-    xhr.open('GET', './php_aus/accesso.php?email='+email.value+'&password='+password.value, true);
+    xhr.open('GET', 'http://localhost/blog-php/php_aus/accesso.php?email='+email.value+'&password='+password.value, true);
     xhr.send();
     xhr.onload = () => {
         if(xhr.response=="none"){
@@ -32,7 +32,7 @@ const registrati = () =>{
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     if (email.value.match(validRegex)) {
-        xhr.open('GET', './php_aus/registra.php?email='+email.value+'&username='+username.value+'&password='+password.value, true);
+        xhr.open('GET', 'http://localhost/blog-php/php_aus/registra.php?email='+email.value+'&username='+username.value+'&password='+password.value, true);
         xhr.send();
         xhr.onload = () => {
             if(xhr.response=="none"){
@@ -58,7 +58,7 @@ const registrati = () =>{
 
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', './php_aus/chiudi.php', true);
+    xhr.open('GET', 'http://localhost/blog-php/php_aus/chiudi.php', true);
     xhr.send();
     xhr.onload = () => {
         window.location.replace("./index.php");

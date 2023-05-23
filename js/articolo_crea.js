@@ -32,7 +32,7 @@ const invia = () =>{
     if(title.value!="" && content.value!=""){
         try{
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "./php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
+            xhr.open("GET", "http://localhost/blog-php/php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
             xhr.onprogress = () => {
                 //alert("pino")
             }
@@ -119,7 +119,7 @@ const invia2 = async (artId) =>{
             //alert(body)
             */try {
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.open("GET", "http://localhost/blog-php/php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
                 xhr.onload = () => {
                     //alert(9)

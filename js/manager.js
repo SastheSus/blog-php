@@ -1,6 +1,6 @@
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', './php_aus/chiudi.php', true);
+    xhr.open('GET', 'http://localhost/blog-php/php_aus/chiudi.php', true);
     xhr.send();
     xhr.onload = () => {
         window.location.replace("./index.php");
@@ -49,7 +49,7 @@ async function updateProfili(e,form){
     let formDataObject = Object.fromEntries(formData.entries());
     // Format the plain form data as JSON
     let formDataJsonString = JSON.stringify(formDataObject);
-    await fetch("./php_aus/updateProfili.php", {
+    await fetch("http://localhost/blog-php/php_aus/updateProfili.php", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

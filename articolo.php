@@ -177,8 +177,11 @@ $query->execute([$id]);
                                         echo '
                                         <div class="containerRisposta" id="c'.$val['id'].'">
                                             <h3 class="userCommento">'.$val['utente'].'</h3><p class="dateCommento">'.$val['giorno'].'</p>
-                                            <p class="contentCommento">'.$val['contenuto'].'</p>
-                                        </div>';
+                                            <p class="contentCommento">'.$val['contenuto'].'</p>';
+                                            if($_SESSION['user']==$value['utente']){
+                                                echo '<button class="buttonRispCommento" onclick="delRisp('.$val['id'].','.$id.')">elimina</button>';
+                                            }
+                                            echo '</div>';
                                     }
                                 }
                             ?></div>

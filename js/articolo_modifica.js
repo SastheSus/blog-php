@@ -5,7 +5,7 @@ var paragsPhp = 0;
 
 const close_session = () =>{
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', './php_aus/chiudi.php', true);
+    xhr.open('GET', 'http://localhost/blog-php/php_aus/chiudi.php', true);
     xhr.send();
     xhr.onload = () => {
         window.location.replace("./index.php");
@@ -18,7 +18,7 @@ const close_session = () =>{
 function setVar(val) {
     paragsPhp = val-1;
     parags +=val;
-    alert(parags);
+    //alert(parags);
 }
 
 const hidden = () =>{
@@ -36,23 +36,23 @@ const invia = (id) =>{
     var artId = ''
 
     if(title.value!="" && content.value!=""){
-        alert("|"+title.value+"|"+content.value+"|")
-        xhr.open("GET", "./php_aus/updateDesc.php?id="+id+"&title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
+        //alert("|"+title.value+"|"+content.value+"|")
+        xhr.open("GET", "http://localhost/blog-php/php_aus/updateDesc.php?id="+id+"&title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
         xhr.send();
         xhr.onload = () => {
             try {
-                alert("1 "+xhr.responseText)
+                //alert("1 "+xhr.responseText)
                 if(xhr.response=="none"){
-                    alert("2 "+xhr.responseText)
+                    //alert("2 "+xhr.responseText)
                     document.getElementById('formArticolo').innerHTML+=xhr.responseText
                 }
                 else{
-                    alert("3 "+xhr.responseText)
+                    //alert("3 "+xhr.responseText)
                     title.value=""
                     img.value=""
                     content.value=""
                     artId = xhr.response
-                    alert("4 "+xhr.responseText)
+                    //alert("4 "+xhr.responseText)
                     invia2(id)
                 }
             } catch (error) {
@@ -87,22 +87,22 @@ const invia2 = (artId) =>{
                     if(immaginiParagrafo[q][0].startsWith(i)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
                         imgIn+=immaginiParagrafo[q][0]+"|";
-                        alert(imgStr+'€'+imgIn+'€')
+                        //alert(imgStr+'€'+imgIn+'€')
                     }
                     else{
-                        alert('invia2 for '+immaginiParagrafo[q][0]+' '+i)
-                        alert(imgStr+'£'+imgIn+'£')
+                        //alert('invia2 for '+immaginiParagrafo[q][0]+' '+i)
+                        //alert(imgStr+'£'+imgIn+'£')
                     }
                 }
             } catch (error) {
                 alert('invia2 error '+error+" "+i)
             }
             
-            alert(imgStr+'€'+imgIn+'€')
+            //alert(imgStr+'€'+imgIn+'€')
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
-            alert(imgStr+'€'+imgIn+'€')
-            alert('pre-style '+style)
+            //alert(imgStr+'€'+imgIn+'€')
+            //alert('pre-style '+style)
             if(parag.style.flexDirection=='row-reverse'){
                 style=1;
             }
@@ -111,11 +111,11 @@ const invia2 = (artId) =>{
             }
                 
             try {var xhr = new XMLHttpRequest();
-                xhr.open("GET", "./php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.open("GET", "http://localhost/blog-php/php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
                 xhr.onload = () => {
-                    alert(9)
-                    alert(xhr.responseText)
+                    //alert(9)
+                    //alert(xhr.responseText)
                 }
                 xhr.onerror = function() {
                     alert(xhr.responseText)
@@ -149,18 +149,18 @@ function getImgData(idImg, idInput) {
             editorImgArt.src= this.result;
             console.log(this.result);
             for(let i=0; i<immaginiParagrafo.length;i++){
-                alert(1)
+                //alert(1)
                 if(immaginiParagrafo[i].includes(idInput)){
-                    alert(2+immaginiParagrafo[i]);
+                    //alert(2+immaginiParagrafo[i]);
                     pos = 1;
                     immaginiParagrafo[i][1] = input.value.replace('C:\\fakepath\\','')
-                    alert(immaginiParagrafo)
+                    //alert(immaginiParagrafo)
                     break
                 }
             }
             if(pos==-1){
                 immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
-                alert(immaginiParagrafo)
+                //alert(immaginiParagrafo)
             }
         });    
     }
@@ -229,11 +229,11 @@ function insertParag(){
 function insertImg(id){
     if(imgInputs[id]!=1){
         imgInputs[id]=1
-        alert("1 "+imgInputs[id])
+        //alert("1 "+imgInputs[id])
     }
     else{
         imgInputs[id]++;
-        alert("2 "+imgInputs[id])
+        //alert("2 "+imgInputs[id])
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
@@ -265,20 +265,20 @@ function changePos(id) {
 
 function eliminaParag(idArt, idPar){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./php_aus/eliminaParag.php?idArt="+idArt+"&idPar="+idPar, true);
+    xhr.open("GET", "http://localhost/blog-php/php_aus/eliminaParag.php?idArt="+idArt+"&idPar="+idPar, true);
     xhr.send();
     xhr.onload = () => {
-        alert(xhr.responseText)
+        //alert(xhr.responseText)
         location.reload();
     }
 }
 
 function delArt(idArt){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "./php_aus/eliminaArt.php?idArt="+idArt, true);
+    xhr.open("GET", "http://localhost/blog-php/php_aus/eliminaArt.php?idArt="+idArt, true);
     xhr.send();
     xhr.onload = () => {
-        alert(xhr.responseText)
+        //alert(xhr.responseText)
         window.location.replace('./index.php');
     }
 }
