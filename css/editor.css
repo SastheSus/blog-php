@@ -124,6 +124,11 @@ border-radius: 10px;
     font-size: 200%;
     padding: 0 1vw;
 }
+.delBtn{
+    background-color: red;
+    font-size: 200%;
+    padding: 0 1vw;
+}
 .changePos{
     background-color: grey;
     font-size: 150%;

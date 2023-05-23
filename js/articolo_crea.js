@@ -153,18 +153,18 @@ function getImgData(idImg, idInput) {
             editorImgArt.src= this.result;
             console.log(this.result);
             for(let i=0; i<immaginiParagrafo.length;i++){
-                alert(1)
+                //alert(1)
                 if(immaginiParagrafo[i].includes(idInput)){
-                    alert(2+immaginiParagrafo[i]);
+                    //alert(2+immaginiParagrafo[i]);
                     pos = 1;
                     immaginiParagrafo[i][1] = input.value.replace('C:\\fakepath\\','')
-                    alert(immaginiParagrafo)
+                    //alert(immaginiParagrafo)
                     break
                 }
             }
             if(pos==-1){
                 immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
-                alert(immaginiParagrafo)
+                //alert(immaginiParagrafo)
             }
         });    
     }
@@ -247,17 +247,17 @@ function test(){
 }
 
 function insertImg(id){
-    if(imgInputs[id]!=1){
+    if(imgInputs[id]==null){
         imgInputs[id]=1
-        alert("1 "+imgInputs[id])
+        //alert("1 "+imgInputs[id])
     }
     else{
         imgInputs[id]++;
-        alert("2 "+imgInputs[id])
+        //alert("2 "+imgInputs[id])
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
-        elem.innerHTML += '<div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div><button class="changePos" type="button" onclick="changePos('+id+')"></button></div>'
+        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">⮞</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
     }
     else{
         var tag = document.getElementById(''+id+'').lastChild;
@@ -272,11 +272,12 @@ function insertImg(id){
         elem.appendChild(clone)
     }
 }
-function changePos(id) {
+function changePos(id,btn) {
     var parag = document.getElementById('paragrafo'+id);
     console.log(parag.style.flexDirection)
     if(parag.style.flexDirection=="row" || parag.style.flexDirection==""){
         parag.style.flexDirection = "row-reverse";
+        btn.setAttribute('innerHtml','')
     }
     else{
         parag.style.flexDirection = "row";

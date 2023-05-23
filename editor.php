@@ -88,7 +88,7 @@ $elenco = '';
                                                     <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
                                                 <div id="1" class="immagini">
-                                                    <button type="button" class="insertImgBtn" onclick="insertImg(1)"></button>
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg(1)">+</button>
                                                 </div>
                                                 <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
                                             </div>

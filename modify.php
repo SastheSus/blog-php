@@ -123,7 +123,7 @@ $num = 1;
                                                 </div>
                                                 <div id="'.$num.'" class="immagini">
                                                     <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')">+</button>
-                                                    <button type="button" class="insertImgBtn" onclick="eliminaParag('.$id.','.$value['id'].')">El</button>'
+                                                    <button type="button" class="delBtn" onclick="eliminaParag('.$id.','.$value['id'].')">El</button>'
                                             ;
                                             $i = 0;
                                             foreach ($immagini as $val) {
@@ -156,7 +156,7 @@ $num = 1;
                                                     <input id="subTitle<?php echo $num?>" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
                                                 <div id="<?php echo $num?>" class="immagini">
-                                                    <button type="button" class="insertImgBtn" onclick="insertImg(<?php echo $num?>)"></button>
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg(<?php echo $num?>)">+</button>
                                                 </div>
                                                 <textarea id="textarea<?php echo $num?>" type="text" class="paragrafoContent"></textarea>
                                             </div>
