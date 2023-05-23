@@ -53,12 +53,12 @@ const invia = () =>{
                         invia2(artId)
                     }
                 } catch (error) {
-                    //alert("5 "+error)
+                    alert("5 "+error)
                 }
                 
             }
             xhr.onerror = function() {
-                //alert(`Network Error`);
+                alert(`Network Error`);
             }
             xhr.send();
         }catch(error){

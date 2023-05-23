@@ -55,8 +55,12 @@ async function updateProfili(e,form){
             'Content-Type': 'application/json'
         },
         body: formDataJsonString
-    })
-    .then(data => data.text())
+    }).then((response) => {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error('Something went wrong');
+      })
     .then((data) => {
         alert("ok "+data)
         location.reload()
@@ -65,4 +69,14 @@ async function updateProfili(e,form){
         location.reload()
         alert(data)
     })
+}
+
+function passChange(btn){
+    var parent = btn.parentElement;
+    btn.remove();
+    var child = document.createElement("input");
+    child.setAttribute("type", "text");
+    child.setAttribute("name", "password");
+    child.setAttribute("form", "roleform");
+    parent.appendChild(child)
 }

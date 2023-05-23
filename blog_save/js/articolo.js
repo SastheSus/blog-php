@@ -63,7 +63,12 @@ async function sendComment(form){
         article = formData.get('article')
 
     await fetch("./php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
-    .then((data) => {
+    .then((response) => {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error('Something went wrong');
+      }).then((data) => {
         alert("ok")
         location.reload()
     }

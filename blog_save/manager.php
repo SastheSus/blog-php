@@ -97,7 +97,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             echo "<div class='top' id='1'>
                             <h3 id='titleArtSec'>".$row[$i]['username']."</h3>
                             <input type='hidden' name='username".$i."' value='".$row[$i]['username']."' form='roleform'></input>
-                            <div class='passBtn'><button id='".$row[$i]['username']."' onclick='passChange()'></button></div>
+                            <div class='passBtn'><button id='".$row[$i]['username']."' onclick='passChange(this)'></button></div>
                             <select id='choose' name='rolelist".$i."' form='roleform'>";
                             switch ($row[$i]['ruolo']) {
                                 case 'BASE':
