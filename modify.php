@@ -156,12 +156,16 @@ $num = 1;
                                                     <input id="subTitle<?php echo $num?>" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
                                                 <div id="<?php echo $num?>" class="immagini">
+                                                    <button type="button" class="delBtnImg" onclick="annullaImg(<?php echo $num?>)">El</button>
                                                     <button type="button" class="insertImgBtn" onclick="insertImg(<?php echo $num?>)">+</button>
                                                 </div>
                                                 <textarea id="textarea<?php echo $num?>" type="text" class="paragrafoContent"></textarea>
+                                                <div style="width=fit-content; margin-left:auto; margin-right:auto;">
+                                                    <button type="button" class="delBtn" onclick="annullaParag(<?php echo $num?>)">El</button>
+                                                    <button type="button" class="insertParag" onclick="insertParag(<?php echo $num?>)">+</button>
+                                                </div>
                                             </div>
                                 </article>
-                            <button type="button" onclick="insertParag()"></button>
                             <input type="submit" value="carica" onclick="invia(<?php echo $id;?>)"/>
                             </div> 
                         </div>

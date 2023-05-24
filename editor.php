@@ -69,7 +69,6 @@ $elenco = '';
                                 <div id="ediTitContainer">
                                     <h3 id="editorH3">Titolo:</h3>
                                     <input id="editorTitolo" type="text" placeholder="inserire un titolo"></input>
-                                    <button type="button" onclick="test()"></button>
                                 </div>
                                 <textarea id='editorDescArt'placeholder="inserire una descrizione"></textarea>
                                 <div id='editorImmagine'>

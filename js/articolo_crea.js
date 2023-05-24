@@ -249,7 +249,7 @@ function insertImg(id){
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
-        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">⮞</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
+        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">posizione</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
     }
     else{
         var tag = document.getElementById(''+id+'').lastChild;
@@ -264,12 +264,11 @@ function insertImg(id){
         elem.appendChild(clone)
     }
 }
-function changePos(id,btn) {
+function changePos(id) {
     var parag = document.getElementById('paragrafo'+id);
     console.log(parag.style.flexDirection)
     if(parag.style.flexDirection=="row" || parag.style.flexDirection==""){
         parag.style.flexDirection = "row-reverse";
-        btn.setAttribute('innerHtml','')
     }
     else{
         parag.style.flexDirection = "row";
