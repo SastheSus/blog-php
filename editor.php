@@ -88,11 +88,14 @@ $elenco = '';
                                                     <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
                                                 </div>
                                                 <div id="1" class="immagini">
-                                                    <button type="button" class="delBtn" onclick="annullaParag(1)">El</button>
+                                                    <button type="button" class="delBtnImg" onclick="annullaImg(1)">El</button>
                                                     <button type="button" class="insertImgBtn" onclick="insertImg(1)">+</button>
                                                 </div>
                                                 <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
-                                                <button type="button" class="insertParag" onclick="insertParag(1)"></button>
+                                                <div style="width=fit-content; margin-left:auto; margin-right:auto;">
+                                                    <button type="button" class="delBtn" onclick="annullaParag(1)">El</button>
+                                                    <button type="button" class="insertParag" onclick="insertParag(1)">+</button>
+                                                </div>
                                             </div>
                                 </article>
                             <input type="submit" value="carica" onclick="invia()"/>
