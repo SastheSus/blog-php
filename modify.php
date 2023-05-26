@@ -152,16 +152,17 @@ $num = 1;
                                         }
                                     ?>
                                     <div id="paragrafo<?php echo $num?>" class="paragrafo">
-                                                <div id="subTitleContainer<?php echo $num?>" class="subTitleContainer">
-                                                    <input id="subTitle<?php echo $num?>" class="subTitle" type="text" placeholder="inserire un titolo"></input>
-                                                </div>
-                                                <div id="<?php echo $num?>" class="immagini">
-                                                    <button type="button" class="insertImgBtn" onclick="insertImg(<?php echo $num?>)">+</button>
-                                                </div>
-                                                <textarea id="textarea<?php echo $num?>" type="text" class="paragrafoContent"></textarea>
-                                            </div>
+                                        <div id="subTitleContainer<?php echo $num?>" class="subTitleContainer">
+                                            <input id="subTitle<?php echo $num?>" class="subTitle" type="text" placeholder="inserire un titolo"></input>
+                                        </div>
+                                        <div id="<?php echo $num?>" class="immagini">
+                                            <button type="button" class="delBtn" onclick="annullaParag(1)">El</button>
+                                            <button type="button" class="insertImgBtn" onclick="insertImg(<?php echo $num?>)">+</button>
+                                        </div>
+                                        <textarea id="textarea<?php echo $num?>" type="text" class="paragrafoContent"></textarea>
+                                        <button type="button" onclick="insertParag(<?php echo $num?>)"></button>
+                                    </div>
                                 </article>
-                            <button type="button" onclick="insertParag()"></button>
                             <input type="submit" value="carica" onclick="invia(<?php echo $id;?>)"/>
                             </div> 
                         </div>
