@@ -282,3 +282,24 @@ function delArt(idArt){
         window.location.replace('./index.php');
     }
 }
+
+function annullaParag(id){
+    var l = document.querySelectorAll('.paragrafo').length;
+    if(l>1){
+        document.getElementById('paragrafo'+id).remove();
+    }
+}
+
+function annullaImg(id){
+    var div = document.getElementById('paragrafo'+id).querySelector('.immagini')
+    var all = document.querySelectorAll("#imgAndBtnContainer"+id).length
+    if(all!=null){
+        if(all==1){
+            imgInputs[id]=null
+            div.querySelector('.changePos').remove()
+        }
+        var last = document.querySelectorAll("#imgAndBtnContainer"+id+":last-child")
+        last[0].remove()
+    }
+    
+}

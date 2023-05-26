@@ -69,7 +69,6 @@ $elenco = '';
                                 <div id="ediTitContainer">
                                     <h3 id="editorH3">Titolo:</h3>
                                     <input id="editorTitolo" type="text" placeholder="inserire un titolo"></input>
-                                    <button type="button" onclick="test()"></button>
                                 </div>
                                 <textarea id='editorDescArt'placeholder="inserire una descrizione"></textarea>
                                 <div id='editorImmagine'>
@@ -84,16 +83,19 @@ $elenco = '';
                             <div id='formArticolo'>
                                 <article id="paragZone">
                                     <div id="paragrafo1" class="paragrafo">
-                                        <div id="subTitleContainer1" class="subTitleContainer">
-                                            <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
-                                        </div>
-                                        <div id="1" class="immagini">
-                                            <button type="button" class="delBtn" onclick="annullaParag(1)">El</button>
-                                            <button type="button" class="insertImgBtn" onclick="insertImg(1)">+</button>
-                                        </div>
-                                        <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
-                                        <button type="button" class="insertParag" onclick="insertParag(1)"></button>
-                                    </div>
+                                                <div id="subTitleContainer1" class="subTitleContainer">
+                                                    <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
+                                                </div>
+                                                <div id="1" class="immagini">
+                                                    <button type="button" class="delBtnImg" onclick="annullaImg(1)">El</button>
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg(1)">+</button>
+                                                </div>
+                                                <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
+                                                <div style="width=fit-content; margin-left:auto; margin-right:auto;">
+                                                    <button type="button" class="delBtn" onclick="annullaParag(1)">El</button>
+                                                    <button type="button" class="insertParag" onclick="insertParag(1)">+</button>
+                                                </div>
+                                            </div>
                                 </article>
                             <input type="submit" value="carica" onclick="invia()"/>
                             </div> 
