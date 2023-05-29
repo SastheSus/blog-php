@@ -282,8 +282,8 @@ function annullaParag(id){
         par.remove();
     }
     else{
-        par.querySelector('subTitle'+id).value = ''
-        par.querySelector('text'+id).value = ''
+        par.querySelector('#subTitle'+id).value = ''
+        par.querySelector('#textarea'+id).value = ''
     }
 }
 
