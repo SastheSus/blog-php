@@ -277,8 +277,13 @@ function changePos(id) {
 
 function annullaParag(id){
     var l = document.querySelectorAll('.paragrafo').length;
+    par = document.getElementById('paragrafo'+id)
     if(l>1){
-        document.getElementById('paragrafo'+id).remove();
+        par.remove();
+    }
+    else{
+        par.querySelector('subTitle'+id).value = ''
+        par.querySelector('text'+id).value = ''
     }
 }
 
