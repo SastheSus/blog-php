@@ -136,15 +136,19 @@ const invia2 = async (artId) =>{
 function getImgData(idImg, idInput) {
     const input = document.getElementById(""+idInput+"");
     const editorImgArt = document.getElementById(""+idImg+"");
+    idInput = idInput.replace('inputImg','')
+    const imgName = document.getElementById("imgName"+idInput+"");
     const files = input.files[0];
     var pos = -1;
     if (files) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
-        fileReader.addEventListener("load", function () {
-            idInput = idInput.replace('inputImg','')
-            editorImgArt.src= this.result;
-            console.log(this.result);
+        fileReader.addEventListener("load", function f () {
+            editorImgArt.src= fileReader.result;
+            console.log(fileReader.result);
+            imgName.value = input.value.replace('C:\\fakepath\\','')
+            alert(imgName.value)
+            /*
             for(let i=0; i<immaginiParagrafo.length;i++){
                 //alert(1)
                 if(immaginiParagrafo[i].includes(idInput)){
@@ -158,11 +162,12 @@ function getImgData(idImg, idInput) {
             if(pos==-1){
                 immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
                 //alert(immaginiParagrafo)
-            }
-        });    
+            } */
+        });   
     }
     pos=-1
 }
+
 
 function richiedi() {
     alert(
@@ -244,7 +249,7 @@ function insertImg(id){
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
-        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">posizione</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input type="hidden" id="imgName'+id+''+imgInputs[id]+'" ><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
+        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">posizione</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input type="hidden" class="imgName" id="imgName'+id+''+imgInputs[id]+'" /><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
     }
     else{
         var tag = document.getElementById(''+id+'').lastChild;
@@ -256,6 +261,8 @@ function insertImg(id){
         clone.querySelector(".inputImg").name = 'inputImg'+id+''+imgInputs[id];
         clone.querySelector(".inputImg").setAttribute('onchange','getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')');
         clone.querySelector(".inputImg").value = null;
+        clone.querySelector(".imgName").id = 'imgName'+id+''+imgInputs[id];
+        clone.querySelector(".imgName").value = null;
         elem.appendChild(clone)
     }
 }
