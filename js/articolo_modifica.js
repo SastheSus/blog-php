@@ -30,14 +30,16 @@ const hidden = () =>{
 
 const invia = (id) =>{
     var xhr = new XMLHttpRequest();
-    const title = document.getElementById('editorTitolo')
-    const img = document.getElementById('editorInputImg')
-    const content = document.getElementById('editorDescArt')
+    var title = document.getElementById('editorTitolo')
+    var img = document.getElementById('editorInputImg')
+    var content = document.getElementById('editorDescArt')
+    var titleVal = title.value.toLowerCase()
+    var contentVal = content.value.toLowerCase()
     var artId = ''
 
     if(title.value!="" && content.value!=""){
         //alert("|"+title.value+"|"+content.value+"|")
-        xhr.open("GET", "http://localhost/blog-php/php_aus/updateDesc.php?id="+id+"&title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
+        xhr.open("GET", "http://localhost/blog-php/php_aus/updateDesc.php?id="+id+"&title=" + titleVal + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + contentVal, true);
         xhr.send();
         xhr.onload = () => {
             try {
@@ -48,9 +50,9 @@ const invia = (id) =>{
                 }
                 else{
                     //alert("3 "+xhr.responseText)
-                    title.value=""
+                    title.val=""
                     img.value=""
-                    content.value=""
+                    content.val=""
                     artId = xhr.response
                     //alert("4 "+xhr.responseText)
                     invia2(id)
@@ -70,48 +72,45 @@ const invia2 = (artId) =>{
     try{
     var style = 0;
     var i = 1;
-    var parag = document.getElementById('paragrafo'+i)
+    var area = document.getElementById('paragZone');
+    var arr = area.querySelectorAll(".paragrafo")
     imgStr = ''
     imgIn = ''
     
     //alert("6 "+imgStr)
-    while(parag!=null){
-        var test = document.getElementById('subTitle'+i).value
-        if(test!=""){
-            //alert(parag.id)
-            idAus = 'subTitle'+i
-            const titPar = document.getElementById('subTitle'+i)
-            const contentPar = document.getElementById('textarea'+i)
+    //while(parag!=null){
+    arr.forEach(par => {
+        var paragNum = par.id.replace("paragrafo","")
+        var subTitle = par.querySelector(".subTitle")
+        var textarea = par.querySelector(".paragrafoContent")
+        var subTitleVal = subTitle.value.toLowerCase()
+        var textareaVal = textarea.value.toLowerCase()
+        if(textarea.value!=""){
             try {
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
-                    if(immaginiParagrafo[q][0].startsWith(i)){
+                    if(immaginiParagrafo[q][0].startsWith(paragNum)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
                         imgIn+=immaginiParagrafo[q][0]+"|";
                         //alert(imgStr+'€'+imgIn+'€')
                     }
                     else{
-                        //alert('invia2 for '+immaginiParagrafo[q][0]+' '+i)
+                        //alert(immaginiParagrafo[q][0]+' '+i)
                         //alert(imgStr+'£'+imgIn+'£')
                     }
                 }
             } catch (error) {
                 alert('invia2 error '+error+" "+i)
             }
-            
-            //alert(imgStr+'€'+imgIn+'€')
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
-            //alert(imgStr+'€'+imgIn+'€')
-            //alert('pre-style '+style)
-            if(parag.style.flexDirection=='row-reverse'){
+            if(par.style.flexDirection=='row-reverse'){
                 style=1;
             }
             else{
                 style = 0;
             }
-                
             try {var xhr = new XMLHttpRequest();
-                xhr.open("GET", "http://localhost/blog-php/php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + titPar.value + "&content=" + contentPar.value + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.open("GET", "http://localhost/blog-php/php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + subTitleVal + "&content=" + textareaVal + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
                 xhr.onload = () => {
                     //alert(9)
@@ -119,19 +118,16 @@ const invia2 = (artId) =>{
                 }
                 xhr.onerror = function() {
                     alert(xhr.responseText)
-                }          
+                }
             } catch (error) {
                 alert(error)
             }
-            
+            i++
         }
-        i++;
-        //style=0
         imgStr = ''
         imgIn = ''
-        parag = document.getElementById('paragrafo'+i)
-        //alert(parag.id)
-    }
+    });
+    //}
 }catch(e){alert (e)}
 }
 
@@ -203,27 +199,31 @@ function CustomAlert(){
 
 let customAlert = new CustomAlert();
 
-function insertParag(){
+function insertParag(p){
     var area = document.getElementById('paragZone');
 
-    var tag = document.getElementById('paragrafo'+(parags-1));
+    var tag = document.getElementById('paragrafo'+p);
     const clone = tag.cloneNode(true);
+    parags++;
     clone.id = 'paragrafo'+parags;
     clone.querySelector(".subTitleContainer").id = 'subTitleContainer'+parags;
     clone.querySelector(".subTitle").id = "subTitle"+parags;
     clone.querySelector(".subTitle").value = null;
     clone.querySelector(".immagini").id = parags;
-    clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+(parags)+')');
-    clone.querySelector(".paragrafoContent").id = "textarea"+(parags);
+    while(clone.querySelector(".imgAndBtnContainer")!=null){
+        clone.querySelector(".imgAndBtnContainer").remove()
+    }
+    clone.querySelector(".delBtn").setAttribute('onclick','annullaParag('+parags+')');
+    clone.querySelector(".delBtn").setAttribute('onclick','annullaParag('+parags+')');
+    clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
+    clone.querySelector(".insertParag").setAttribute('onclick','insertParag('+parags+')');
+    clone.querySelector(".paragrafoContent").id = "textarea"+parags;
     clone.querySelector(".paragrafoContent").value = null;
-    if(clone.querySelector(".inputImg")!=null)
-        clone.querySelector(".inputImg").remove()
-    if(clone.querySelector(".changePos")!=null)
-        clone.querySelector(".changePos").remove()
-    if(clone.querySelector(".immagine")!=null)
-    clone.querySelector(".immagine").remove()
-        area.appendChild(clone)
-        parags++;
+    while(clone.querySelector(".imgAndBtnContainer")!=null){
+        clone.querySelector(".imgAndBtnContainer").remove()
+    }
+    tag.after(clone)
+    //area.appendChild(clone)
 }
 
 function insertImg(id){

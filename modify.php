@@ -146,6 +146,10 @@ $num = 1;
                                             echo'
                                                 </div>
                                                 <textarea id="textarea'.$num.'" type="text" class="paragrafoContent">'.$value['contenuto'].'</textarea>
+                                                <div style="width=fit-content; margin-left:auto; margin-right:auto;">
+                                                    <button type="button" class="delBtn" onclick="eliminaParag('.$id.','.$value['id'].')">El</button>
+                                                    <button type="button" class="insertParag" onclick="insertParag('.$num.')">+</button>
+                                                </div>
                                             </div>
                                             ';
                                             $num++;

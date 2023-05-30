@@ -24,15 +24,17 @@ const hidden = () =>{
 const invia = () =>{
     
     //e.preventDefault();
-    const title = document.getElementById('editorTitolo')
-    const img = document.getElementById('editorInputImg')
-    const content = document.getElementById('editorDescArt')
+    var title = document.getElementById('editorTitolo')
+    var img = document.getElementById('editorInputImg')
+    var content = document.getElementById('editorDescArt')
+    var titleVal = title.value.toLowerCase()
+    var contentVal = content.value.toLowerCase()
     var artId = ''
 
     if(title.value!="" && content.value!=""){
         try{
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "http://localhost/blog-php/php_aus/uploadDesc.php?title=" + title.value + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + content.value, true);
+            xhr.open("GET", "http://localhost/blog-php/php_aus/uploadDesc.php?title=" + titleVal + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + contentVal, true);
             xhr.onload = () => {
                 try {
                     //alert("1 "+xhr.responseText)
@@ -42,9 +44,9 @@ const invia = () =>{
                     }
                     else{
                         //alert("3 "+xhr.responseText)
-                        title.value=""
+                        title.val=""
                         img.value=""
-                        content.value=""
+                        content.val=""
                         artId = xhr.response
                         //alert("4 "+xhr.responseText)
                         invia2(artId)
@@ -80,7 +82,9 @@ const invia2 = async (artId) =>{
         var paragNum = par.id.replace("paragrafo","")
         var subTitle = par.querySelector(".subTitle")
         var textarea = par.querySelector(".paragrafoContent")
-        if(textarea!=""){
+        var subTitleVal = subTitle.value.toLowerCase()
+        var textareaVal = textarea.value.toLowerCase()
+        if(textarea.value!=""){
             try {
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
                     if(immaginiParagrafo[q][0].startsWith(paragNum)){
@@ -106,7 +110,7 @@ const invia2 = async (artId) =>{
             }
             try {
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + subTitle.value + "&content=" + textarea.value + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.open("GET", "./php_aus/uploadParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + subTitleVal + "&content=" + textareaVal + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
                 xhr.onload = () => {
                     //alert(9)
@@ -214,16 +218,7 @@ function insertParag(p){
     clone.querySelector(".paragrafoContent").value = null;
     while(clone.querySelector(".imgAndBtnContainer")!=null){
         clone.querySelector(".imgAndBtnContainer").remove()
-    }/*
-    while(clone.querySelector(".inputImg")!=null){
-        clone.querySelector(".inputImg").remove()
     }
-    while(clone.querySelector(".changePos")!=null){
-        clone.querySelector(".changePos").remove()
-    }
-    while(clone.querySelector(".immagine")!=null){
-        clone.querySelector(".immagine").remove()
-    }*/
     tag.after(clone)
     //area.appendChild(clone)
 }
@@ -249,7 +244,7 @@ function insertImg(id){
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
-        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">posizione</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
+        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">posizione</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input type="hidden" id="imgName'+id+''+imgInputs[id]+'" ><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
     }
     else{
         var tag = document.getElementById(''+id+'').lastChild;
