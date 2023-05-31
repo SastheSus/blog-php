@@ -175,43 +175,6 @@ function getImgData(idImg, idInput) {
     pos=-1
 }
 
-
-function richiedi() {
-    alert(
-        "Non sei abilitato ad accedere a questa pagina.\nè necessario essere Autori o Admin per poter creare nuovi articoli. Manda una richiesta all'Admin per promuoverti."
-    )    
-}
-
-
-function CustomAlert(){
-    this.alert = function(message,title){
-      document.body.innerHTML = document.body.innerHTML + '<div id="dialogoverlay"></div><div id="dialogbox" class="slit-in-vertical"><div><div id="dialogboxhead"></div><div id="dialogboxbody"></div><div id="dialogboxfoot"></div></div></div>';
-  
-      let dialogoverlay = document.getElementById('dialogoverlay');
-      let dialogbox = document.getElementById('dialogbox');
-      
-      let winH = window.innerHeight;
-      dialogoverlay.style.height = winH+"px";
-      
-      dialogbox.style.top = "100px";
-  
-      dialogoverlay.style.display = "block";
-      dialogbox.style.display = "block";
-      
-      document.getElementById('dialogboxhead').style.display = 'block';
-      document.getElementById('dialogboxhead').innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> '+ title;
-      document.getElementById('dialogboxbody').innerHTML = message;
-      document.getElementById('dialogboxfoot').innerHTML = '<button id="annulla" class="pure-material-button-contained active" onclick="customAlert.ok()">Annulla</button><button id="ok" class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
-    }
-    
-    this.ok = function(){
-      document.getElementById('dialogbox').style.display = "none";
-      document.getElementById('dialogoverlay').style.display = "none";
-    }
-}
-
-let customAlert = new CustomAlert();
-
 function insertParag(p){
     var area = document.getElementById('paragZone');
 
@@ -235,15 +198,6 @@ function insertParag(p){
     //area.appendChild(clone)
 }
 
-function test(){
-    var area = document.getElementById('paragZone');
-
-    var arr = area.querySelectorAll(".paragrafo")
-
-    arr.forEach(val => {
-        alert(val.id)
-    });
-}
 
 function insertImg(id){
     if(imgInputs[id]==null){
@@ -308,4 +262,52 @@ function annullaImg(id){
         last[0].remove()
     }
     
+}
+
+function richiedi() {
+    alert(
+        "Non sei abilitato ad accedere a questa pagina.\nè necessario essere Autori o Admin per poter creare nuovi articoli. Manda una richiesta all'Admin per promuoverti."
+    )    
+}
+
+
+function CustomAlert(){
+    this.alert = function(message,title){
+      document.body.innerHTML = document.body.innerHTML + '<div id="dialogoverlay"></div><div id="dialogbox" class="slit-in-vertical"><div><div id="dialogboxhead"></div><div id="dialogboxbody"></div><div id="dialogboxfoot"></div></div></div>';
+  
+      let dialogoverlay = document.getElementById('dialogoverlay');
+      let dialogbox = document.getElementById('dialogbox');
+      
+      let winH = window.innerHeight;
+      dialogoverlay.style.height = winH+"px";
+      
+      dialogbox.style.top = "100px";
+  
+      dialogoverlay.style.display = "block";
+      dialogbox.style.display = "block";
+      
+      document.getElementById('dialogboxhead').style.display = 'block';
+      document.getElementById('dialogboxhead').innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> '+ title;
+      document.getElementById('dialogboxbody').innerHTML = message;
+      document.getElementById('dialogboxfoot').innerHTML = '<button id="annulla" class="pure-material-button-contained active" onclick="customAlert.ok()">Annulla</button><button id="ok" class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
+    }
+    
+    this.ok = function(){
+      document.getElementById('dialogbox').style.display = "none";
+      document.getElementById('dialogoverlay').style.display = "none";
+    }
+}
+
+let customAlert = new CustomAlert();
+
+
+
+function test(){
+    var area = document.getElementById('paragZone');
+
+    var arr = area.querySelectorAll(".paragrafo")
+
+    arr.forEach(val => {
+        alert(val.id)
+    });
 }
