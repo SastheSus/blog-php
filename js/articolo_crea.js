@@ -85,7 +85,14 @@ const invia2 = async (artId) =>{
         var subTitleVal = subTitle.value.toLowerCase()
         var textareaVal = textarea.value.toLowerCase()
         if(textarea.value!=""){
-            try {
+            if(par.querySelector('.imgAndBtnContainer')!=null && par.querySelector('.imgName').value!=""){
+                var images = par.querySelectorAll('.imgName')
+                images.forEach(i =>{
+                    imgStr+=i.value+"|"
+                    imgIn+=i.id.slice(-1)+"|";
+                })
+            }
+            /*try {
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
                     if(immaginiParagrafo[q][0].startsWith(paragNum)){
                         imgStr+=immaginiParagrafo[q][1]+"|";
@@ -99,7 +106,7 @@ const invia2 = async (artId) =>{
                 }
             } catch (error) {
                 alert('invia2 error '+error+" "+i)
-            }
+            }*/
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
             if(par.style.flexDirection=='row-reverse'){
