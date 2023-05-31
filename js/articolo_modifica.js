@@ -86,6 +86,13 @@ const invia2 = (artId) =>{
         var subTitleVal = subTitle.value.toLowerCase()
         var textareaVal = textarea.value.toLowerCase()
         if(textarea.value!=""){
+            if(par.querySelector('.imgAndBtnContainer')!=null && par.querySelector('.imgName').value!=""){
+                var images = par.querySelectorAll('.imgName')
+                images.forEach(i =>{
+                    imgStr+=i.value+"|"
+                    imgIn+=i.id.slice(-1)+"|";
+                })
+            }/* 
             try {
                 for (let q = 0; q<immaginiParagrafo.length; q++) {
                     if(immaginiParagrafo[q][0].startsWith(paragNum)){
@@ -100,7 +107,7 @@ const invia2 = (artId) =>{
                 }
             } catch (error) {
                 alert('invia2 error '+error+" "+i)
-            }
+            }*/
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
             if(par.style.flexDirection=='row-reverse'){
@@ -135,69 +142,23 @@ const invia2 = (artId) =>{
 function getImgData(idImg, idInput) {
     const input = document.getElementById(""+idInput+"");
     const editorImgArt = document.getElementById(""+idImg+"");
+    idInput = idInput.replace('inputImg','')
+    const imgName = document.getElementById("imgName"+idInput+"");
     const files = input.files[0];
     var pos = -1;
     if (files) {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(files);
-        fileReader.addEventListener("load", function () {
-            idInput = idInput.replace('inputImg','')
-            editorImgArt.src= this.result;
-            console.log(this.result);
-            for(let i=0; i<immaginiParagrafo.length;i++){
-                //alert(1)
-                if(immaginiParagrafo[i].includes(idInput)){
-                    //alert(2+immaginiParagrafo[i]);
-                    pos = 1;
-                    immaginiParagrafo[i][1] = input.value.replace('C:\\fakepath\\','')
-                    //alert(immaginiParagrafo)
-                    break
-                }
-            }
-            if(pos==-1){
-                immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
-                //alert(immaginiParagrafo)
-            }
-        });    
+        fileReader.addEventListener("load", function f () {
+            editorImgArt.src= fileReader.result;
+            console.log(fileReader.result);
+            imgName.value = input.value.replace('C:\\fakepath\\','')
+            alert(imgName.value)
+        });   
     }
     pos=-1
 }
 
-function richiedi() {
-    alert(
-        "Non sei abilitato ad accedere a questa pagina.\nè necessario essere Autori o Admin per poter creare nuovi articoli. Manda una richiesta all'Admin per promuoverti."
-    )    
-}
-
-
-function CustomAlert(){
-    this.alert = function(message,title){
-      document.body.innerHTML = document.body.innerHTML + '<div id="dialogoverlay"></div><div id="dialogbox" class="slit-in-vertical"><div><div id="dialogboxhead"></div><div id="dialogboxbody"></div><div id="dialogboxfoot"></div></div></div>';
-  
-      let dialogoverlay = document.getElementById('dialogoverlay');
-      let dialogbox = document.getElementById('dialogbox');
-      
-      let winH = window.innerHeight;
-      dialogoverlay.style.height = winH+"px";
-      
-      dialogbox.style.top = "100px";
-  
-      dialogoverlay.style.display = "block";
-      dialogbox.style.display = "block";
-      
-      document.getElementById('dialogboxhead').style.display = 'block';
-      document.getElementById('dialogboxhead').innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> '+ title;
-      document.getElementById('dialogboxbody').innerHTML = message;
-      document.getElementById('dialogboxfoot').innerHTML = '<button id="annulla" class="pure-material-button-contained active" onclick="customAlert.ok()">Annulla</button><button id="ok" class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
-    }
-    
-    this.ok = function(){
-      document.getElementById('dialogbox').style.display = "none";
-      document.getElementById('dialogoverlay').style.display = "nonee";
-    }
-}
-
-let customAlert = new CustomAlert();
 
 function insertParag(p){
     var area = document.getElementById('paragZone');
@@ -303,3 +264,39 @@ function annullaImg(id){
     }
     
 }
+
+function richiedi() {
+    alert(
+        "Non sei abilitato ad accedere a questa pagina.\nè necessario essere Autori o Admin per poter creare nuovi articoli. Manda una richiesta all'Admin per promuoverti."
+    )    
+}
+
+
+function CustomAlert(){
+    this.alert = function(message,title){
+      document.body.innerHTML = document.body.innerHTML + '<div id="dialogoverlay"></div><div id="dialogbox" class="slit-in-vertical"><div><div id="dialogboxhead"></div><div id="dialogboxbody"></div><div id="dialogboxfoot"></div></div></div>';
+  
+      let dialogoverlay = document.getElementById('dialogoverlay');
+      let dialogbox = document.getElementById('dialogbox');
+      
+      let winH = window.innerHeight;
+      dialogoverlay.style.height = winH+"px";
+      
+      dialogbox.style.top = "100px";
+  
+      dialogoverlay.style.display = "block";
+      dialogbox.style.display = "block";
+      
+      document.getElementById('dialogboxhead').style.display = 'block';
+      document.getElementById('dialogboxhead').innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> '+ title;
+      document.getElementById('dialogboxbody').innerHTML = message;
+      document.getElementById('dialogboxfoot').innerHTML = '<button id="annulla" class="pure-material-button-contained active" onclick="customAlert.ok()">Annulla</button><button id="ok" class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
+    }
+    
+    this.ok = function(){
+      document.getElementById('dialogbox').style.display = "none";
+      document.getElementById('dialogoverlay').style.display = "nonee";
+    }
+}
+
+let customAlert = new CustomAlert();
