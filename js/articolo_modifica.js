@@ -69,7 +69,7 @@ const invia = (id) =>{
     return "ok"
 }
 const invia2 = (artId) =>{
-    try{
+    //try{
     var style = 0;
     var i = 1;
     var area = document.getElementById('paragZone');
@@ -83,13 +83,20 @@ const invia2 = (artId) =>{
         var paragNum = par.id.replace("paragrafo","")
         var subTitle = par.querySelector(".subTitle")
         var textarea = par.querySelector(".paragrafoContent")
+        alert("1")
         var subTitleVal = subTitle.value.toLowerCase()
+        alert("2")
         var textareaVal = textarea.value.toLowerCase()
+        alert("3")
         if(textarea.value!=""){
-            if(par.querySelector('.imgAndBtnContainer')!=null && par.querySelector('.imgName').value!=""){
+            alert("4")
+            if(par.querySelector('.imgAndBtnContainer')!=null && (par.querySelector('.imgName').value!=null || par.querySelector('.imgName').value!="")){
+                alert("5")
                 var images = par.querySelectorAll('.imgName')
                 images.forEach(i =>{
+                    alert("6")
                     imgStr+=i.value+"|"
+                    alert("7")
                     imgIn+=i.id.slice(-1)+"|";
                 })
             }/* 
@@ -124,10 +131,10 @@ const invia2 = (artId) =>{
                     //alert(xhr.responseText)
                 }
                 xhr.onerror = function() {
-                    alert(xhr.responseText)
+                    alert("1"+xhr.responseText)
                 }
             } catch (error) {
-                alert(error)
+                alert("2"+error)
             }
             i++
         }
@@ -135,7 +142,7 @@ const invia2 = (artId) =>{
         imgIn = ''
     });
     //}
-}catch(e){alert (e)}
+//}catch(e){alert ("3"+e)}
 }
 
 
@@ -153,7 +160,7 @@ function getImgData(idImg, idInput) {
             editorImgArt.src= fileReader.result;
             console.log(fileReader.result);
             imgName.value = input.value.replace('C:\\fakepath\\','')
-            alert(imgName.value)
+            alert("3"+imgName.value)
         });   
     }
     pos=-1
@@ -198,7 +205,7 @@ function insertImg(id){
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
-        elem.innerHTML += '<div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div><button class="changePos" type="button" onclick="changePos('+id+')"></button></div>'
+        elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">posizione</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input type="hidden" class="imgName" id="imgName'+id+''+imgInputs[id]+'" value=""/><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
     }
     else{
         var tag = document.getElementById(''+id+'').lastChild;
@@ -210,6 +217,8 @@ function insertImg(id){
         clone.querySelector(".inputImg").name = 'inputImg'+id+''+imgInputs[id];
         clone.querySelector(".inputImg").setAttribute('onchange','getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')');
         clone.querySelector(".inputImg").value = null;
+        clone.querySelector(".imgName").id = 'imgName'+id+''+imgInputs[id];
+        clone.querySelector(".imgName").value = "";
         elem.appendChild(clone)
     }
 }
