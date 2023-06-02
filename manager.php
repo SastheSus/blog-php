@@ -136,7 +136,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                         header('./index.php');
                     }*/
                     ?>
-                    <form action="" onsubmit="return updateProfili(event,this)" method="post" id="roleform" enctype="multipart/form-data">                        
+                    <form action="" onsubmit="return updateProfil(event,this)" method="post" id="roleform" enctype="multipart/form-data">                        
                         <input id="send" type="submit">
                     </form>
                 </div>
@@ -144,7 +144,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
             </div>
         </div>
     </div>
-<footer>
+    </div><footer>
     <div class="foot" id="crediti">
         <h5>Author:</h5>
         <h5>Michele Bardotti</h5>

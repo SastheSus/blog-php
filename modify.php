@@ -125,6 +125,7 @@ $num = 1;
                                                     <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')">+</button>
                                                     <button type="button" class="delBtnImg" onclick="annullaImg('.$num.')">El</button>'
                                             ;
+                                            if($immagini.l)
                                             $i = 0;
                                             foreach ($immagini as $val) {
                                                 if($val['idParagrafo']==$value['id']){
