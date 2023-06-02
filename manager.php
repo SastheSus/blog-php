@@ -142,21 +142,21 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                 </div>
                 
             </div>
-        </div><footer>
-                    <div class="foot" id="crediti">
-                        <h5>Author:</h5>
-                        <h5>Michele Bardotti</h5>
-                    </div>
-                    <div class="foot" id="contatti">
-                        <h5>Contatti:</h5><a href="mailto:michele.bardotti.2004@calvino.edu.it">michele.bardotti.2004@calvino.edu.it</a>
-                    </div>
-                    <div class="foot" id="links">
-                        <h5>Links:</h5><a>https://www.esempio.com</a>
-                    </div>
-                    <div>© Copyright 2023, Tutti i diritti riservati</div>
-                </footer>
+        </div>
     </div>
-
+<footer>
+    <div class="foot" id="crediti">
+        <h5>Author:</h5>
+        <h5>Michele Bardotti</h5>
+    </div>
+    <div class="foot" id="contatti">
+        <h5>Contatti:</h5><a href="mailto:michele.bardotti.2004@calvino.edu.it">michele.bardotti.2004@calvino.edu.it</a>
+    </div>
+    <div class="foot" id="links">
+        <h5>Links:</h5><a>https://www.esempio.com</a>
+    </div>
+    <div>© Copyright 2023, Tutti i diritti riservati</div>
+</footer>
 </body>
 
 </html>

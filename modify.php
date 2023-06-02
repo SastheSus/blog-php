@@ -123,7 +123,7 @@ $num = 1;
                                                 </div>
                                                 <div id="'.$num.'" class="immagini">
                                                     <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')">+</button>
-                                                    <button type="button" class="delBtn" onclick="eliminaParag('.$id.','.$value['id'].')">El</button>'
+                                                    <button type="button" class="delBtnImg" onclick="annullaImg('.$num.')">El</button>'
                                             ;
                                             $i = 0;
                                             foreach ($immagini as $val) {
@@ -132,6 +132,7 @@ $num = 1;
                                                     echo '  <div id="imgAndBtnContainer'.$num.'" class="imgAndBtnContainer">
                                                                 <img id="immagine'.$num.''.$i.'" class="immagine" src="./img/'.$val['nome'].'">
                                                                 <div class="onputImgContainer">
+                                                                    <input type="hidden" class="imgName" id="imgName'.$num.''.$i.'" value="'.$val['nome'].'"/>
                                                                     <input class="inputImg" id="inputImg'.$num.''.$i.'" name="inputImg'.$num.''.$i.'" type="file" accept="image/*" onchange="getImgData(\'immagine'.$num.''.$i.'\',\'inputImg'.$num.''.$i.'\')"/>
                                                                 </div>
                                                                 </div>
@@ -147,7 +148,7 @@ $num = 1;
                                                 </div>
                                                 <textarea id="textarea'.$num.'" type="text" class="paragrafoContent">'.$value['contenuto'].'</textarea>
                                                 <div style="width=fit-content; margin-left:auto; margin-right:auto;">
-                                                    <button type="button" class="delBtn" onclick="eliminaParag('.$id.','.$value['id'].')">El</button>
+                                                    <button type="button" class="delBtnPar" onclick="annullaParag('.$num.')">El</button>
                                                     <button type="button" class="insertParag" onclick="insertParag('.$num.')">+</button>
                                                 </div>
                                             </div>
@@ -165,7 +166,7 @@ $num = 1;
                                                 </div>
                                                 <textarea id="textarea<?php echo $num?>" type="text" class="paragrafoContent"></textarea>
                                                 <div style="width=fit-content; margin-left:auto; margin-right:auto;">
-                                                    <button type="button" class="delBtn" onclick="annullaParag(<?php echo $num?>)">El</button>
+                                                    <button type="button" class="delBtnPar" onclick="annullaParag(<?php echo $num?>)">El</button>
                                                     <button type="button" class="insertParag" onclick="insertParag(<?php echo $num?>)">+</button>
                                                 </div>
                                             </div>

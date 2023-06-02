@@ -69,52 +69,27 @@ const invia = (id) =>{
     return "ok"
 }
 const invia2 = (artId) =>{
-    //try{
     var style = 0;
     var i = 1;
     var area = document.getElementById('paragZone');
     var arr = area.querySelectorAll(".paragrafo")
     imgStr = ''
     imgIn = ''
-    
-    //alert("6 "+imgStr)
-    //while(parag!=null){
-    arr.forEach(par => {
+    try {
+        arr.forEach(par => {
         var paragNum = par.id.replace("paragrafo","")
         var subTitle = par.querySelector(".subTitle")
         var textarea = par.querySelector(".paragrafoContent")
-        alert("1")
         var subTitleVal = subTitle.value.toLowerCase()
-        alert("2")
         var textareaVal = textarea.value.toLowerCase()
-        alert("3")
         if(textarea.value!=""){
-            alert("4")
             if(par.querySelector('.imgAndBtnContainer')!=null && (par.querySelector('.imgName').value!=null || par.querySelector('.imgName').value!="")){
-                alert("5")
                 var images = par.querySelectorAll('.imgName')
                 images.forEach(i =>{
-                    alert("6")
                     imgStr+=i.value+"|"
-                    alert("7")
                     imgIn+=i.id.slice(-1)+"|";
                 })
-            }/* 
-            try {
-                for (let q = 0; q<immaginiParagrafo.length; q++) {
-                    if(immaginiParagrafo[q][0].startsWith(paragNum)){
-                        imgStr+=immaginiParagrafo[q][1]+"|";
-                        imgIn+=immaginiParagrafo[q][0]+"|";
-                        //alert(imgStr+'€'+imgIn+'€')
-                    }
-                    else{
-                        //alert(immaginiParagrafo[q][0]+' '+i)
-                        //alert(imgStr+'£'+imgIn+'£')
-                    }
-                }
-            } catch (error) {
-                alert('invia2 error '+error+" "+i)
-            }*/
+            }
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
             if(par.style.flexDirection=='row-reverse'){
@@ -128,7 +103,7 @@ const invia2 = (artId) =>{
                 xhr.send();
                 xhr.onload = () => {
                     //alert(9)
-                    //alert(xhr.responseText)
+                    alert(xhr.responseText)
                 }
                 xhr.onerror = function() {
                     alert("1"+xhr.responseText)
@@ -141,8 +116,10 @@ const invia2 = (artId) =>{
         imgStr = ''
         imgIn = ''
     });
-    //}
-//}catch(e){alert ("3"+e)}
+    } catch (error) {
+        alert(error)
+    }
+    
 }
 
 
@@ -181,8 +158,8 @@ function insertParag(p){
     while(clone.querySelector(".imgAndBtnContainer")!=null){
         clone.querySelector(".imgAndBtnContainer").remove()
     }
-    clone.querySelector(".delBtn").setAttribute('onclick','annullaParag('+parags+')');
-    clone.querySelector(".delBtn").setAttribute('onclick','annullaParag('+parags+')');
+    clone.querySelector(".delBtnImg").setAttribute('onclick','annullaImg('+parags+')');
+    clone.querySelector(".delBtnPar").setAttribute('onclick','annullaParag('+parags+')');
     clone.querySelector(".insertImgBtn").setAttribute('onclick','insertImg('+parags+')');
     clone.querySelector(".insertParag").setAttribute('onclick','insertParag('+parags+')');
     clone.querySelector(".paragrafoContent").id = "textarea"+parags;
@@ -195,19 +172,23 @@ function insertParag(p){
 }
 
 function insertImg(id){
-    if(imgInputs[id]!=1){
+    if(imgInputs[id]==null){
+        console.log("null = "+imgInputs[id])
         imgInputs[id]=1
         //alert("1 "+imgInputs[id])
     }
     else{
+        console.log("!null = "+imgInputs[id])
         imgInputs[id]++;
         //alert("2 "+imgInputs[id])
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
+        console.log(imgInputs[id])
         elem.innerHTML += '<button class="changePos" type="button" onclick="changePos('+id+',this)">posizione</button><div id="imgAndBtnContainer'+id+'" class="imgAndBtnContainer"><img id="immagine'+id+''+imgInputs[id]+'" class="immagine"><div class="onputImgContainer"><input type="hidden" class="imgName" id="imgName'+id+''+imgInputs[id]+'" value=""/><input class="inputImg" id="inputImg'+id+''+imgInputs[id]+'" name="inputImg'+id+''+imgInputs[id]+'" type="file" accept="image/*" onchange="getImgData(\'immagine'+id+''+imgInputs[id]+'\',\'inputImg'+id+''+imgInputs[id]+'\')"/></div></div>'
     }
     else{
+        console.log(imgInputs[id])
         var tag = document.getElementById(''+id+'').lastChild;
         const clone = tag.cloneNode(true);
         clone.id = 'imgAndBtnContainer'+id;
@@ -257,20 +238,30 @@ function annullaParag(id){
     var l = document.querySelectorAll('.paragrafo').length;
     if(l>1){
         document.getElementById('paragrafo'+id).remove();
+        imgInputs[id]=null
+    }
+    else{
+        document.getElementById('subTitle'+id).value = ''
+        document.getElementById('textarea'+id).value = ''
+        while(imgInputs[id]>0){
+            annullaImg(id)
+        }
     }
 }
 
 function annullaImg(id){
     var div = document.getElementById('paragrafo'+id).querySelector('.immagini')
     var all = document.querySelectorAll("#imgAndBtnContainer"+id).length
-    if(all!=null){
+    console.log("before="+imgInputs[id]+" "+all)
+    if(all>0){
         if(all==1){
-            imgInputs[id]=null
             div.querySelector('.changePos').remove()
         }
         var last = document.querySelectorAll("#imgAndBtnContainer"+id+":last-child")
+        imgInputs[id]--
         last[0].remove()
     }
+    console.log("before="+imgInputs[id])
     
 }
 
