@@ -14,16 +14,7 @@ const close_session = () =>{
     };
 }
 
-const hidden = () =>{
-    var warning = document.getElementById('warningLogin')
-
-    warning.style.display="hidden"
-    warning.innerHTML=""
-}
-
 const invia = () =>{
-    
-    //e.preventDefault();
     var title = document.getElementById('editorTitolo')
     var img = document.getElementById('editorInputImg')
     var content = document.getElementById('editorDescArt')
@@ -37,9 +28,7 @@ const invia = () =>{
             xhr.open("GET", "http://localhost/blog-php/php_aus/uploadDesc.php?title=" + titleVal + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + contentVal, true);
             xhr.onload = () => {
                 try {
-                    //alert("1 "+xhr.responseText)
                     if(xhr.response=="none"){
-                        //alert("2 "+xhr.responseText)
                         document.getElementById('formArticolo').innerHTML+=xhr.responseText
                     }
                     else{
@@ -61,23 +50,17 @@ const invia = () =>{
             }
             xhr.send();
         }catch(error){
-            //alert(error)
         }
-        
     }
 }
 const invia2 = async (artId) =>{
-    try{
     var style = 0;
     var i = 1;
-    /*var parag = document.getElementById('paragrafo'+i)*/
     var area = document.getElementById('paragZone');
     var arr = area.querySelectorAll(".paragrafo")
     imgStr = ''
     imgIn = ''
-    
-    //alert("6 "+imgStr)
-    //while(parag!=null){
+    try{
     arr.forEach(par => {
         var paragNum = par.id.replace("paragrafo","")
         var subTitle = par.querySelector(".subTitle")
@@ -92,21 +75,6 @@ const invia2 = async (artId) =>{
                     imgIn+=i.id.slice(-1)+"|";
                 })
             }
-            /*try {
-                for (let q = 0; q<immaginiParagrafo.length; q++) {
-                    if(immaginiParagrafo[q][0].startsWith(paragNum)){
-                        imgStr+=immaginiParagrafo[q][1]+"|";
-                        imgIn+=immaginiParagrafo[q][0]+"|";
-                        //alert(imgStr+'€'+imgIn+'€')
-                    }
-                    else{
-                        //alert(immaginiParagrafo[q][0]+' '+i)
-                        //alert(imgStr+'£'+imgIn+'£')
-                    }
-                }
-            } catch (error) {
-                alert('invia2 error '+error+" "+i)
-            }*/
             imgStr = imgStr.slice(0,-1);
             imgIn = imgIn.slice(0,-1);
             if(par.style.flexDirection=='row-reverse'){
@@ -121,22 +89,22 @@ const invia2 = async (artId) =>{
                 xhr.send();
                 xhr.onload = () => {
                     //alert(9)
-                    //alert(xhr.responseText)
+                    alert(xhr.responseText)
                 }
                 xhr.onerror = function() {
-                    alert(xhr.responseText)
-                }          
+                    alert("1 "+xhr.responseText)
+                }
             } catch (error) {
-                alert(error)
+                alert("2 "+error)
             }
             i++
         }
         imgStr = ''
         imgIn = ''
     });
-        
-}catch(e){alert (e)}
-//window.location.replace('./editor.php?ok=1')
+    } catch (error) {
+        alert(error)
+    }
 }
 
 
@@ -155,21 +123,6 @@ function getImgData(idImg, idInput) {
             console.log(fileReader.result);
             imgName.value = input.value.replace('C:\\fakepath\\','')
             alert(imgName.value)
-            /*
-            for(let i=0; i<immaginiParagrafo.length;i++){
-                //alert(1)
-                if(immaginiParagrafo[i].includes(idInput)){
-                    //alert(2+immaginiParagrafo[i]);
-                    pos = 1;
-                    immaginiParagrafo[i][1] = input.value.replace('C:\\fakepath\\','')
-                    //alert(immaginiParagrafo)
-                    break
-                }
-            }
-            if(pos==-1){
-                immaginiParagrafo.push([""+idInput+"", input.value.replace('C:\\fakepath\\','')])
-                //alert(immaginiParagrafo)
-            } */
         });   
     }
     pos=-1
@@ -177,7 +130,6 @@ function getImgData(idImg, idInput) {
 
 function insertParag(p){
     var area = document.getElementById('paragZone');
-
     var tag = document.getElementById('paragrafo'+p);
     const clone = tag.cloneNode(true);
     parags++;
@@ -202,11 +154,9 @@ function insertParag(p){
 function insertImg(id){
     if(imgInputs[id]==null){
         imgInputs[id]=1
-        //alert("1 "+imgInputs[id])
     }
     else{
         imgInputs[id]++;
-        //alert("2 "+imgInputs[id])
     }
     var elem = document.getElementById(''+id+'');
     if(imgInputs[id]==1){
@@ -243,33 +193,31 @@ function annullaParag(id){
     par = document.getElementById('paragrafo'+id)
     if(l>1){
         par.remove();
+        imgInputs[id]=null
     }
     else{
-        par.querySelector('#subTitle'+id).value = ''
-        par.querySelector('#textarea'+id).value = ''
+        document.getElementById('subTitle'+id).value = ''
+        document.getElementById('textarea'+id).value = ''
+        while(imgInputs[id]>0){
+            annullaImg(id)
+        }
     }
 }
 
 function annullaImg(id){
     var div = document.getElementById('paragrafo'+id).querySelector('.immagini')
     var all = document.querySelectorAll("#imgAndBtnContainer"+id).length
-    if(all!=null){
+    console.log("before="+imgInputs[id]+" "+all)
+    if(all>0){
         if(all==1){
-            imgInputs[id]=null
             div.querySelector('.changePos').remove()
         }
         var last = document.querySelectorAll("#imgAndBtnContainer"+id+":last-child")
+        imgInputs[id]--
         last[0].remove()
     }
-    
+    console.log("before="+imgInputs[id])
 }
-
-function richiedi() {
-    alert(
-        "Non sei abilitato ad accedere a questa pagina.\nè necessario essere Autori o Admin per poter creare nuovi articoli. Manda una richiesta all'Admin per promuoverti."
-    )    
-}
-
 
 function CustomAlert(){
     this.alert = function(message,title){
@@ -299,15 +247,3 @@ function CustomAlert(){
 }
 
 let customAlert = new CustomAlert();
-
-
-
-function test(){
-    var area = document.getElementById('paragZone');
-
-    var arr = area.querySelectorAll(".paragrafo")
-
-    arr.forEach(val => {
-        alert(val.id)
-    });
-}
