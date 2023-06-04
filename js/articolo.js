@@ -57,25 +57,24 @@ function CustomAlert(){
 
 let customAlert = new CustomAlert();
 
-async function sendComment(form){
-    var formData = new FormData(form),
-        content = formData.get('content'),
-        article = formData.get('article')
+async function sendComment(form) {
+    try {
+        var formData = new FormData(form);
+        var content = formData.get('content');
+        var article = formData.get('article');
 
-    await fetch("http://localhost/blog-php/php_aus/uploadComment.php?content="+content+"&article="+article+"&risposta="+idRisposta)
-    .then((response) => {
+        var response = await fetch(`http://localhost/blog-php/php_aus/uploadComment.php?content=${content}&article=${article}&risposta=${idRisposta}`);
         if (response.ok) {
-          return response.text();
+            alert("ok");
+            location.reload();
+        } else {
+            throw new Error('Something went wrong');
         }
-        throw new Error('Something went wrong');
-      }).then((data) => {
-        alert("ok")
-        location.reload()
+    } catch (error) {
+        location.reload();
+        alert(error);
     }
-    ).catch((data) => {
-        location.reload()
-        alert(data)
-    })
+    return false; // Prevent form submission
 }
 
 function delComment(id, idArt){

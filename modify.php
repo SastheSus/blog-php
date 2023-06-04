@@ -1,8 +1,21 @@
 <?php
 session_start();
 $elenco = '';
-$id = $_GET["id"];
+$id = -1;
+if(!empty($_GET["id"]))
+    $id = $_GET["id"];
 $num = 1;
+if(!empty($_SESSION['user'])){
+    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+    $text = "SELECT * FROM utenti WHERE username = ?";
+    $query= $pdo->prepare($text);
+    $query->execute([$_SESSION['user']]);
+    $row = $query->fetch();
+}
+else{
+    header("Location: ./index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="it" >
@@ -12,7 +25,7 @@ $num = 1;
         <title>Blog</title>
         <link rel="stylesheet" href="./css/common.css">
         <link rel="stylesheet" href="./css/editor.css">
-        <script src="./js/articolo_modifica.js"></script>
+        <script src="./js/editor.js"></script>
     </head>
     <body onload="alert('load')">
         <div id="root">
@@ -22,17 +35,9 @@ $num = 1;
                     <li><a href="./index.php">Home</a></li>
                     <li><a href="./editor.php">Editor</a></li>
                     <li><?php
-                        $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");    
-                        if(!empty($_SESSION['user'])){
-                            $text = "SELECT ruolo FROM utenti WHERE username = ?";
-                            $query= $pdo->prepare($text);
-                            $query->execute([$_SESSION['user']]);
-                            $row = $query->fetch();
-                            if($row['ruolo']=='ADMIN'){
-                                echo '<a href="./manager.php">users manager</a>';
-                            }
+                        if($row['ruolo']=='ADMIN'){
+                            echo '<a href="./manager.php">users manager</a>';
                         }
-                        $pdo = null;
                         ?>
                     </li>
                     <li id="logli"><div id="loginBtn" 
@@ -97,12 +102,12 @@ $num = 1;
                             <article>
                                 <div id="ediTitContainer">
                                     <h3 id="editorH3">Titolo:</h3>
-                                    <input id="editorTitolo" type="text" placeholder="inserire un titolo" <?php echo 'value="'.$articolo['titolo'].'"'?>></input>
-                                    <button id="eliminaArt" type=button onclick="delArt(<?php echo $id?>)">el</button>
+                                    <input id="editorTitolo" type="text" placeholder="inserire un titolo" <?php if($articolo!=null)echo 'value="'.$articolo['titolo'].'"'?>></input>
+                                    <?php if($id != -1)echo '<button id="eliminaArt" type=button onclick="delArt('.$id.')">el</button>'?>
                                 </div>
-                                <textarea id='editorDescArt'placeholder="inserire una descrizione"><?php echo $articolo['descrizione']?></textarea>
+                                <textarea id='editorDescArt'placeholder="inserire una descrizione"><?php if($articolo!=null)echo $articolo['descrizione']?></textarea>
                                 <div id='editorImmagine'>
-                                    <img id='editorImgArt' <?php echo 'src="./img/'.$articolo['nome'].'"'?>>
+                                    <img id='editorImgArt' <?php if($articolo!=null)echo 'src="./img/'.$articolo['nome'].'"'?>>
                                 </div>
                                 <div id='editorInputs'>
                                     <input id="editorInputImg" type="file" accept="image/*" name="inputImg0" onchange="getImgData('editorImgArt','editorInputImg')"/>
@@ -125,7 +130,6 @@ $num = 1;
                                                     <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')">+</button>
                                                     <button type="button" class="delBtnImg" onclick="annullaImg('.$num.')">El</button>'
                                             ;
-                                            if($immagini.l)
                                             $i = 0;
                                             foreach ($immagini as $val) {
                                                 if($val['idParagrafo']==$value['id']){
@@ -216,6 +220,14 @@ $num = 1;
         alert('end')
         <?php 
         if(!empty($_GET['m'])){
+            if($id == -1){
+                $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                $text = "SELECT MAX(id) AS id FROM articoli ";
+                $query= $pdo->prepare($text);
+                $query->execute();
+                $id = $query->fetch()['id'];
+            }
+            
             echo "location.replace('articolo.php?id=$id')";
         }
         ?>

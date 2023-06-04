@@ -44,7 +44,7 @@ const invia = (id) =>{
                     content.val=""
                     artId = xhr.response
                     //alert("4 "+xhr.responseText)
-                    invia2(id)
+                    invia2(artId)
                 }
             } catch (error) {
                 alert("5 "+error)

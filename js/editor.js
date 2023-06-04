@@ -20,6 +20,94 @@ function setVar(val) {
     parags +=val;
 }
 
+const invia = (id) =>{
+    var title = document.getElementById('editorTitolo')
+    var img = document.getElementById('editorInputImg')
+    var content = document.getElementById('editorDescArt')
+    var titleVal = title.value.toLowerCase()
+    var contentVal = content.value.toLowerCase()
+    var artId = ''
+
+    if(title.value!="" && content.value!=""){
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://localhost/blog-php/php_aus/uploadDesc.php?id="+id+"&title=" + titleVal + "&img=" +img.value.replace('C:\\fakepath\\','')+"&content=" + contentVal, true);
+        xhr.send();
+        xhr.onload = () => {
+            try {
+                if(xhr.response=="none"){
+                    document.getElementById('formArticolo').innerHTML+=xhr.responseText
+                }
+                else{
+                    title.val=""
+                    img.value=""
+                    content.val=""
+                    artId = xhr.response
+                    //alert("4 "+xhr.responseText)
+                    invia2(artId)
+                }
+            } catch (error) {
+                alert("5 "+error)
+            }
+            
+        }
+        xhr.onerror = function() {
+            alert(`Network Error`);
+        }
+    }
+}
+const invia2 = (artId) =>{
+    var style = 0;
+    var i = 1;
+    var area = document.getElementById('paragZone');
+    var arr = area.querySelectorAll(".paragrafo")
+    imgStr = ''
+    imgIn = ''
+    try {
+        arr.forEach(par => {
+        var paragNum = par.id.replace("paragrafo","")
+        var subTitle = par.querySelector(".subTitle")
+        var textarea = par.querySelector(".paragrafoContent")
+        var subTitleVal = subTitle.value.toLowerCase()
+        var textareaVal = textarea.value.toLowerCase()
+        if(textarea.value!=""){
+            if(par.querySelector('.imgAndBtnContainer')!=null && (par.querySelector('.imgName').value!=null || par.querySelector('.imgName').value!="")){
+                var images = par.querySelectorAll('.imgName')
+                images.forEach(i =>{
+                    imgStr+=i.value+"|"
+                    imgIn+=i.id.slice(-1)+"|";
+                })
+            }
+            imgStr = imgStr.slice(0,-1);
+            imgIn = imgIn.slice(0,-1);
+            if(par.style.flexDirection=='row-reverse'){
+                style=1;
+            }
+            else{
+                style = 0;
+            }
+            try {var xhr = new XMLHttpRequest();
+                xhr.open("GET", "http://localhost/blog-php/php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + subTitleVal + "&content=" + textareaVal + "&img=" + imgStr + "&input=" + imgIn, true);
+                xhr.send();
+                xhr.onload = () => {
+                    //alert(9)
+                    alert(xhr.responseText)
+                }
+                xhr.onerror = function() {
+                    alert("1 "+xhr.responseText)
+                }
+            } catch (error) {
+                alert("2 "+error)
+            }
+            i++
+        }
+        imgStr = ''
+        imgIn = ''
+    });
+    } catch (error) {
+        alert(error)
+    }
+}
+
 function getImgData(idImg, idInput) {
     const input = document.getElementById(""+idInput+"");
     const editorImgArt = document.getElementById(""+idImg+"");
