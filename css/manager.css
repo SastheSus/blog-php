@@ -52,7 +52,6 @@ width: 50%;
 overflow: hidden;
 margin: 0;
 }
-
 .toArticolo{
 margin-right: 2vw;
 background-color: white;
@@ -78,6 +77,9 @@ background-color: black;
     width: 80%;
     margin:1vh 0;
 }
-.passBtn{
+.passBtnContainer{
     width: 100%;
+}
+.passBtn{
+    background-color: darkgray;
 }

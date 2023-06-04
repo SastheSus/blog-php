@@ -5,12 +5,16 @@ $id = -1;
 if(!empty($_GET["id"]))
     $id = $_GET["id"];
 $num = 1;
+$pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 if(!empty($_SESSION['user'])){
-    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
-    $text = "SELECT * FROM utenti WHERE username = ?";
+    $text = "SELECT articoli.utente AS username FROM articoli WHERE articoli.id = ?";
     $query= $pdo->prepare($text);
-    $query->execute([$_SESSION['user']]);
-    $row = $query->fetch();
+    $query->execute([$id]);
+    $n = $query->fetch();
+    if($_SESSION['user'] != $n['username']){
+        header("Location: ./index.php");
+        die();
+    }
 }
 else{
     header("Location: ./index.php");
@@ -35,6 +39,10 @@ else{
                     <li><a href="./index.php">Home</a></li>
                     <li><a href="./editor.php">Editor</a></li>
                     <li><?php
+                        $text = "SELECT * FROM utenti WHERE username = ?";
+                        $query= $pdo->prepare($text);
+                        $query->execute([$_SESSION['user']]);
+                        $row = $query->fetch();
                         if($row['ruolo']=='ADMIN'){
                             echo '<a href="./manager.php">users manager</a>';
                         }

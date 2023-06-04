@@ -1,6 +1,20 @@
 <?php
 session_start();
 $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+if(!empty($_SESSION['user'])){
+    $text = "SELECT utenti.ruolo AS ruolo FROM utenti WHERE username = ?";
+    $query= $pdo->prepare($text);
+    $query->execute([$_SESSION['user']]);
+    $n = $query->fetch();
+    if($n['ruolo'] != 'ADMIN'){
+        header("Location: ./index.php");
+        die();
+    }
+}
+else{
+    header("Location: ./index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -22,18 +36,16 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                 <li><a href="./index.php">Home</a></li>
                 <li>
                     <?php
-                    if(!empty($_SESSION['user'])){
-                        $text = "SELECT ruolo FROM utenti WHERE username = ?";
-                        $query= $pdo->prepare($text);
-                        $query->execute([$_SESSION['user']]);
-                        $row = $query->fetch();
-                        if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
-                            echo '<a href="./editor.php">Editor</a>';
-                        }else{
-                            $title = "'ALT!'";
-                            $content = "'Questa sezione è accessibile solo alle persone autorizzate. Vuoi richiedere un ruolo da autore o admin?'";
-                            echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
-                        }
+                    $text = "SELECT ruolo FROM utenti WHERE username = ?";
+                    $query= $pdo->prepare($text);
+                    $query->execute([$_SESSION['user']]);
+                    $row = $query->fetch();
+                    if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
+                        echo '<a href="./editor.php">Editor</a>';
+                    }else{
+                        $title = "'ALT!'";
+                        $content = "'Questa sezione è accessibile solo alle persone autorizzate. Vuoi richiedere un ruolo da autore o admin?'";
+                        echo '<a onclick="customAlert.alert('.$content.','.$title.')">Editor</a>';
                     }
                     ?>
                 </li>
@@ -97,7 +109,7 @@ $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
                             echo "<div class='top' id='1'>
                             <h3 id='titleArtSec'>".$row[$i]['username']."</h3>
                             <input type='hidden' name='username".$i."' value='".$row[$i]['username']."' form='roleform'></input>
-                            <div class='passBtn'><button id='".$row[$i]['username']."' onclick='passChange(this)'></button></div>
+                            <div class='passBtnContainer'><button class='passBtn' id='".$row[$i]['username']."' onclick='passChange(this)'>cambia password</button></div>
                             <select id='choose' name='rolelist".$i."' form='roleform'>";
                             switch ($row[$i]['ruolo']) {
                                 case 'BASE':
