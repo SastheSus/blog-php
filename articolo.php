@@ -94,7 +94,7 @@ $query->execute([$id]);
                                 $query->execute([$_SESSION['user']]);
                                 $row = $query->fetch();
                                 if(($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR') && $_SESSION['user']==$articolo['utente']){
-                                    echo '<a type="button" href="./modify.php?id='.$id.'" class="toArticolo">modifica</a>';
+                                    echo '<a type="button" href="./editor.php?id='.$id.'" class="toArticolo">modifica</a>';
                                 }
                             }
 

@@ -13,12 +13,10 @@ $user = "";
 try{
   $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 
-  $text ="DELETE immagini.*, immaginidiparagrafi.* 
-          FROM immagini,immaginidiparagrafi 
-          WHERE immagini.id = immaginidiparagrafi.idImmagine 
-          AND immaginidiparagrafi.idArticolo = ?
-          AND immaginidiparagrafi.idParagrafo = ?
-          AND logo = 0 ";
+  $text ="DELETE immaginidiparagrafi.* 
+          FROM immaginidiparagrafi 
+          WHERE immaginidiparagrafi.idArticolo = ?
+          AND immaginidiparagrafi.idParagrafo = ?";
   $query= $pdo->prepare($text);
   $query->execute([$article, $paragrafo]);
 

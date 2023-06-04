@@ -7,14 +7,12 @@ const accedi = () =>{
     xhr.send();
     xhr.onload = () => {
         if(xhr.response=="none"){
-            alert("oks");
             email.value=""
             password.value=""
             warning.style.display="block"
             warning.innerHTML="Email o password incorrette"
         }
         else{
-            alert("oks");
             window.location.replace("./index.php");
         }
     }

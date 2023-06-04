@@ -56,6 +56,7 @@ const invia = (id) =>{
     }
 }
 const invia2 = (artId) =>{
+    alert('1')
     var style = 0;
     var i = 1;
     var area = document.getElementById('paragZone');
@@ -63,7 +64,9 @@ const invia2 = (artId) =>{
     imgStr = ''
     imgIn = ''
     try {
+        alert('2')
         arr.forEach(par => {
+            alert('3')
         var paragNum = par.id.replace("paragrafo","")
         var subTitle = par.querySelector(".subTitle")
         var textarea = par.querySelector(".paragrafoContent")
@@ -85,18 +88,23 @@ const invia2 = (artId) =>{
             else{
                 style = 0;
             }
-            try {var xhr = new XMLHttpRequest();
+            alert('pino')
+            try {
+                alert('4')
+                var xhr = new XMLHttpRequest();
                 xhr.open("GET", "http://localhost/blog-php/php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + subTitleVal + "&content=" + textareaVal + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
+                alert(xhr.onabort)
                 xhr.onload = () => {
                     //alert(9)
-                    alert(xhr.responseText)
+                    console.log(xhr.responseText)
                 }
                 xhr.onerror = function() {
-                    alert("1 "+xhr.responseText)
+                    console.log("1 "+xhr.responseText)
                 }
+                alert(xhr.statusText)
             } catch (error) {
-                alert("2 "+error)
+                console.log("2 "+error)
             }
             i++
         }
@@ -104,7 +112,7 @@ const invia2 = (artId) =>{
         imgIn = ''
     });
     } catch (error) {
-        alert(error)
+        console.log(error)
     }
 }
 

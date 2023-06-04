@@ -1,18 +1,33 @@
 <?php
 session_start();
 $elenco = '';
+$id = -1;
+if(!empty($_GET["id"]))
+    $id = $_GET["id"];
+$num = 1;
+if(!empty($_SESSION['user'])){
+    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+    $text = "SELECT * FROM utenti WHERE username = ?";
+    $query= $pdo->prepare($text);
+    $query->execute([$_SESSION['user']]);
+    $row = $query->fetch();
+}
+else{
+    header("Location: ./index.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" >
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="gif" href="./img/tank.gif" />
         <title>Blog</title>
         <link rel="stylesheet" href="./css/common.css">
         <link rel="stylesheet" href="./css/editor.css">
-        <script src="./js/articolo_crea.js"></script>
+        <script src="./js/editor.js"></script>
     </head>
-    <body >
+    <body>
         <div id="root">
             <div>
             <nav>
@@ -20,17 +35,9 @@ $elenco = '';
                     <li><a href="./index.php">Home</a></li>
                     <li><a href="./editor.php">Editor</a></li>
                     <li><?php
-                        $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");    
-                        if(!empty($_SESSION['user'])){
-                            $text = "SELECT ruolo FROM utenti WHERE username = ?";
-                            $query= $pdo->prepare($text);
-                            $query->execute([$_SESSION['user']]);
-                            $row = $query->fetch();
-                            if($row['ruolo']=='ADMIN'){
-                                echo '<a href="./manager.php">users manager</a>';
-                            }
+                        if($row['ruolo']=='ADMIN'){
+                            echo '<a href="./manager.php">users manager</a>';
                         }
-                        $pdo = null;
                         ?>
                     </li>
                     <li id="logli"><div id="loginBtn" 
@@ -62,17 +69,43 @@ $elenco = '';
                 </li>
                 </ul>
                 </nav>
+                <?php 
+                    $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                    $text = "SELECT articoli.*, immagini.nome FROM articoli, immagini WHERE articoli.id = ? AND articoli.logo = immagini.id";
+                    $query= $pdo->prepare($text);
+                    $query->execute([$id]);
+                    $articolo = $query->fetch();
+
+                    $text = "SELECT * FROM paragrafi WHERE articolo = ?";
+                    $query= $pdo->prepare($text);
+                    $query->execute([$id]);
+                    $paragrafi = $query->fetchAll();
+                    //$num += sizeof($paragrafi);
+
+                    $immagini=array();
+                    $aus=array();
+                    $text = "SELECT nome, idParagrafo FROM immagini, immaginiDiParagrafi WHERE immagini.id = idImmagine AND idParagrafo = ? AND idArticolo = ?";
+                    $query= $pdo->prepare($text);
+                    foreach ($paragrafi as $value) {
+                        $query->execute([$value['id'], $value['articolo']]);
+                        $aus = $query->fetchAll();
+                        foreach ($aus as $val) {
+                            array_push($immagini,$val);
+                        }
+                    };
+                ?>
                 <div class="App">
-                    <form action="./editor.php?ok=1" method="post" enctype="multipart/form-data">
+                    <form action="editor.php?id=<?php echo $id ?>&m=1" method="post" enctype="multipart/form-data">
                         <div id='editorContainer'>
                             <article>
                                 <div id="ediTitContainer">
                                     <h3 id="editorH3">Titolo:</h3>
-                                    <input id="editorTitolo" type="text" placeholder="inserire un titolo"></input>
+                                    <input id="editorTitolo" type="text" placeholder="inserire un titolo" <?php if($articolo!=null)echo 'value="'.$articolo['titolo'].'"'?>></input>
+                                    <?php if($id != -1)echo '<button id="eliminaArt" type=button onclick="delArt('.$id.')">el</button>'?>
                                 </div>
-                                <textarea id='editorDescArt'placeholder="inserire una descrizione"></textarea>
+                                <textarea id='editorDescArt'placeholder="inserire una descrizione"><?php if($articolo!=null)echo $articolo['descrizione']?></textarea>
                                 <div id='editorImmagine'>
-                                    <img id='editorImgArt'>
+                                    <img id='editorImgArt' <?php if($articolo!=null)echo 'src="./img/'.$articolo['nome'].'"'?>>
                                 </div>
                                 <div id='editorInputs'>
                                     <input id="editorInputImg" type="file" accept="image/*" name="inputImg0" onchange="getImgData('editorImgArt','editorInputImg')"/>
@@ -82,22 +115,66 @@ $elenco = '';
                         <div id='bodyArticolo'>
                             <div id='formArticolo'>
                                 <article id="paragZone">
-                                    <div id="paragrafo1" class="paragrafo">
-                                                <div id="subTitleContainer1" class="subTitleContainer">
-                                                    <input id="subTitle1" class="subTitle" type="text" placeholder="inserire un titolo"></input>
+                                    <?php 
+                                        foreach ($paragrafi as $value) {
+                                            echo '
+                                            <div id="paragrafo'.$num.'" class="paragrafo" ';
+                                            if($value['stile']==1)echo 'style="flex-direction: row-reverse;"';
+                                            echo '>
+                                                <div id="subTitleContainer'.$num.'" class="subTitleContainer">
+                                                    <input id="subTitle'.$num.'" class="subTitle" type="text" placeholder="inserire un titolo" value='.$value['titolo'].'></input>
                                                 </div>
-                                                <div id="1" class="immagini">
-                                                    <button type="button" class="delBtnImg" onclick="annullaImg(1)">El</button>
-                                                    <button type="button" class="insertImgBtn" onclick="insertImg(1)">+</button>
+                                                <div id="'.$num.'" class="immagini">
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg('.$num.')">+</button>
+                                                    <button type="button" class="delBtnImg" onclick="annullaImg('.$num.')">El</button>'
+                                            ;
+                                            $i = 0;
+                                            foreach ($immagini as $val) {
+                                                if($val['idParagrafo']==$value['id']){
+                                                    $i++;
+                                                    echo '  <div id="imgAndBtnContainer'.$num.'" class="imgAndBtnContainer">
+                                                                <img id="immagine'.$num.''.$i.'" class="immagine" src="./img/'.$val['nome'].'">
+                                                                <div class="onputImgContainer">
+                                                                    <input type="hidden" class="imgName" id="imgName'.$num.''.$i.'" value="'.$val['nome'].'"/>
+                                                                    <input class="inputImg" id="inputImg'.$num.''.$i.'" name="inputImg'.$num.''.$i.'" type="file" accept="image/*" onchange="getImgData(\'immagine'.$num.''.$i.'\',\'inputImg'.$num.''.$i.'\')"/>
+                                                                </div>
+                                                                </div>
+                                                                '
+                                                    ;
+                                                }
+                                            }
+                                            if($i>0){
+                                                echo '<button class="changePos" type="button" onclick="changePos('.$num.')">posizione</button>';
+                                            }
+
+                                            echo'
                                                 </div>
-                                                <textarea id="textarea1" type="text" class="paragrafoContent"></textarea>
+                                                <textarea id="textarea'.$num.'" type="text" class="paragrafoContent">'.$value['contenuto'].'</textarea>
                                                 <div style="width=fit-content; margin-left:auto; margin-right:auto;">
-                                                    <button type="button" class="delBtn" onclick="annullaParag(1)">El</button>
-                                                    <button type="button" class="insertParag" onclick="insertParag(1)">+</button>
+                                                    <button type="button" class="delBtnPar" onclick="annullaParag('.$num.')">El</button>
+                                                    <button type="button" class="insertParag" onclick="insertParag('.$num.')">+</button>
+                                                </div>
+                                            </div>
+                                            ';
+                                            $num++;
+                                        }
+                                    ?>
+                                    <div id="paragrafo<?php echo $num?>" class="paragrafo">
+                                                <div id="subTitleContainer<?php echo $num?>" class="subTitleContainer">
+                                                    <input id="subTitle<?php echo $num?>" class="subTitle" type="text" placeholder="inserire un titolo"></input>
+                                                </div>
+                                                <div id="<?php echo $num?>" class="immagini">
+                                                    <button type="button" class="delBtnImg" onclick="annullaImg(<?php echo $num?>)">El</button>
+                                                    <button type="button" class="insertImgBtn" onclick="insertImg(<?php echo $num?>)">+</button>
+                                                </div>
+                                                <textarea id="textarea<?php echo $num?>" type="text" class="paragrafoContent"></textarea>
+                                                <div style="width=fit-content; margin-left:auto; margin-right:auto;">
+                                                    <button type="button" class="delBtnPar" onclick="annullaParag(<?php echo $num?>)">El</button>
+                                                    <button type="button" class="insertParag" onclick="insertParag(<?php echo $num?>)">+</button>
                                                 </div>
                                             </div>
                                 </article>
-                            <input type="submit" value="carica" onclick="invia()"/>
+                            <input type="submit" value="carica" onclick="invia(<?php echo $id;?>)"/>
                             </div> 
                         </div>
                     </form>
@@ -132,9 +209,25 @@ $elenco = '';
                     }
                 }
             }
-            //header("location:index.php");
         }
+        //echo "<script>  </script>";
         }
         ?>
+        <script>
+        setVar(<?php echo $num;?>)
+        <?php 
+        if(!empty($_GET['m'])){
+            if($id == -1){
+                $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
+                $text = "SELECT MAX(id) AS id FROM articoli ";
+                $query= $pdo->prepare($text);
+                $query->execute();
+                $id = $query->fetch()['id'];
+            }
+            
+            echo "location.replace('articolo.php?id=$id')";
+        }
+        ?>
+        </script>
     </body>
 </html>
