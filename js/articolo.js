@@ -65,7 +65,6 @@ async function sendComment(form) {
 
         var response = await fetch(`http://localhost/blog-php/php_aus/uploadComment.php?content=${content}&article=${article}&risposta=${idRisposta}`);
         if (response.ok) {
-            alert("ok");
             location.reload();
         } else {
             throw new Error('Something went wrong');
@@ -82,7 +81,6 @@ function delComment(id, idArt){
     xhr.open("GET", "http://localhost/blog-php/php_aus/eliminaComment.php?id="+id+"&idArt="+idArt, true);
     xhr.send();
     xhr.onload = () => {
-        alert(xhr.responseText)
         location.reload();
     }
 }
@@ -92,7 +90,6 @@ function delRisp(id, idArt){
     xhr.open("GET", "http://localhost/blog-php/php_aus/eliminaRisp.php?id="+id+"&idArt="+idArt, true);
     xhr.send();
     xhr.onload = () => {
-        alert(xhr.responseText)
         location.reload();
     }
 }

@@ -62,12 +62,11 @@ async function updateProfili(e,form){
         throw new Error('Something went wrong');
       })
     .then((data) => {
-        alert("ok "+data)
         location.reload()
     }
     ).catch((data) => {
-        location.reload()
         alert(data)
+        location.reload()
     })
 }
 

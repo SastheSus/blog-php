@@ -146,7 +146,7 @@ $query->execute([$id]);
                         <div id="formCommenti">
                             <form action="" onsubmit="return sendComment(this)" method="post" enctype="multipart/form-data">
                                 <input type="hidden" name="article" value="<?php echo $id?>"></input>
-                                <input id="inputCommento" type="text" name='content'></input>
+                                <input id="inputCommento" type="text" name='content' placeholder="scrivi qualcosa..." ></input>
                                 
                                 <input id="send" type="submit">
                             </form>

@@ -148,7 +148,7 @@ else{
                         header('./index.php');
                     }*/
                     ?>
-                    <form action="" onsubmit="return updateProfil(event,this)" method="post" id="roleform" enctype="multipart/form-data">                        
+                    <form action="" onsubmit="updateProfili(event,this)" method="post" id="roleform" enctype="multipart/form-data">                        
                         <input id="send" type="submit">
                     </form>
                 </div>
