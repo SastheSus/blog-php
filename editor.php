@@ -7,14 +7,27 @@ if(!empty($_GET["id"]))
 $num = 1;
 $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
 if(!empty($_SESSION['user'])){
-    $text = "SELECT articoli.utente AS username FROM articoli WHERE articoli.id = ?";
-    $query= $pdo->prepare($text);
-    $query->execute([$id]);
-    $n = $query->fetch();
-    if($_SESSION['user'] != $n['username']){
-        header("Location: ./index.php");
-        die();
+    if($id>-1){
+        $text = "SELECT articoli.utente AS username FROM articoli WHERE articoli.id = ?";
+        $query= $pdo->prepare($text);
+        $query->execute([$id]);
+        $n = $query->fetch();
+        if($_SESSION['user'] != $n['username']){
+            header("Location: ./index.php");
+            die();
+        }
     }
+    else{
+        $text = "SELECT * FROM utenti WHERE username = ?";
+        $query= $pdo->prepare($text);
+        $query->execute([$_SESSION['user']]);
+        $r = $query->fetch()['ruolo'];
+        if($r != 'ADMIN' && $r != 'AUTHOR'){
+            header("Location: ./index.php");
+            die();
+        }
+    }
+    
 }
 else{
     header("Location: ./index.php");

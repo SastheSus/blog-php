@@ -41,6 +41,9 @@ border-radius: 20px;
     border: 0;
     border-bottom: 3px solid white;
 }
+#inputCommento::placeholder {
+    color: mintcream;
+  }
 #send{
     width:5%;
 }

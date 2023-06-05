@@ -42,7 +42,8 @@ $query->execute([$id]);
                         }
                         ?>
                     </li>
-                    <li></li>
+                    <li>
+                    </li>
                     <li id="logli">
                         <div id="loginBtn" 
                         <?php
