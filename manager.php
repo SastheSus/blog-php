@@ -109,7 +109,7 @@ else{
                             echo "<div class='top' id='1'>
                             <h3 id='titleArtSec'>".$row[$i]['username']."</h3>
                             <input type='hidden' name='username".$i."' value='".$row[$i]['username']."' form='roleform'></input>
-                            <div class='passBtnContainer'><button class='passBtn' id='".$row[$i]['username']."' onclick='passChange(this)'>cambia password</button></div>
+                            <div class='passBtnContainer'><button class='passBtn' id='button".$i."' onclick='passChange(this)'>cambia password</button></div>
                             <select id='choose' name='rolelist".$i."' form='roleform'>";
                             switch ($row[$i]['ruolo']) {
                                 case 'BASE':

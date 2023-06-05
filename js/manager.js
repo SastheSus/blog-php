@@ -72,10 +72,12 @@ async function updateProfili(e,form){
 
 function passChange(btn){
     var parent = btn.parentElement;
+    var id = btn.id.replace('button','')
+    var name = 'password'+id
     btn.remove();
     var child = document.createElement("input");
     child.setAttribute("type", "text");
-    child.setAttribute("name", "password");
+    child.setAttribute("name", name);
     child.setAttribute("form", "roleform");
     parent.appendChild(child)
 }

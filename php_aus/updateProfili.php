@@ -15,7 +15,7 @@ try{
       if(!empty($data['password'.$i])){
         $text = "UPDATE utenti SET password = ? WHERE username = ?";
         $query= $pdo->prepare($text);
-        $query->execute([$data['password'.$i], $data['username'.$i]]);
+        $query->execute([password_hash($data['password'.$i], PASSWORD_DEFAULT), $data['username'.$i]]);
       }
     }
   }
