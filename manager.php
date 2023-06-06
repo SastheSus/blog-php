@@ -104,6 +104,7 @@ else{
                         echo "Nessun utente modificabile: solo tu sei registrato quì".$e;
                         exit();
                     }
+
                     if ($row != null) {
                         for($i=0;$i<sizeof($row);$i++){
                             echo "<div class='top' id='1'>
@@ -134,24 +135,10 @@ else{
                             echo "</select>
                             </div>";
                         }
-                        /*echo '
-                        <form action="" onsubmit="location.reload()" method="post" id="roleform">
-                            <input name="btn" type="submit">
-                        </form>';*/
-                    }
-
-                    /*if(!empty($_POST['btn'])){
-                        $pdo = new PDO("mysql:host=localhost; dbname=blog", "root", "");
-                        for($i=0;$i<sizeof($row);$i++){
-                            $text = "UPDATE utenti SET ruolo = ? WHERE username = ?";
-                            $query= $pdo->prepare($text);
-                            $query->execute([$_POST['rolelist'.$i], $row[$i]['username']]);
-                        }
-                        header('./index.php');
-                    }*/
+                    } 
                     ?>
                     <form action="" onsubmit="updateProfili(event,this)" method="post" id="roleform" enctype="multipart/form-data">                        
-                        <input id="send" type="submit">
+                        <input id="invio" type="submit">
                     </form>
                 </div>
                 

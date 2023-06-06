@@ -195,7 +195,7 @@ else{
                                                 </div>
                                             </div>
                                 </article>
-                            <input type="submit" value="carica" onclick="invia(<?php echo $id;?>)"/>
+                            <input id="invio" type="submit" value="carica" onclick="invia(<?php echo $id;?>)"/>
                             </div> 
                         </div>
                     </form>
