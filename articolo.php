@@ -31,7 +31,6 @@ $query->execute([$id]);
                         $query= $pdo->prepare($text);
                         $query->execute([$_SESSION['user']]);
                         $row = $query->fetch();
-                        $pdo = null;
                         if($row['ruolo']=='ADMIN' || $row['ruolo']=='AUTHOR'){
                         echo '<a href="./editor.php">Editor</a>';
                         }else{
@@ -42,7 +41,15 @@ $query->execute([$id]);
                         }
                         ?>
                     </li>
-                    <li>
+                    <li><?php
+                        $text = "SELECT * FROM utenti WHERE username = ?";
+                        $query= $pdo->prepare($text);
+                        $query->execute([$_SESSION['user']]);
+                        $row = $query->fetch();
+                        if($row['ruolo']=='ADMIN'){
+                            echo '<a href="./manager.php">users manager</a>';
+                        }
+                        ?>
                     </li>
                     <li id="logli">
                         <div id="loginBtn" 
@@ -72,6 +79,7 @@ $query->execute([$id]);
                             <a onclick='".$t."'>Logout</a>
                         </div>";
                         }
+                        $pdo = null;
                         ?>
                     </li>
                 </ul>

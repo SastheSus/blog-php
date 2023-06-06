@@ -81,3 +81,21 @@ function passChange(btn){
     child.setAttribute("form", "roleform");
     parent.appendChild(child)
 }
+
+async function delProfilo(nome){
+    await fetch("http://localhost/blog-php/php_aus/eliminaProfilo.php?nome="+nome)
+    .then((response) => {
+        if (response.ok) {
+          return response.text();
+        }
+        throw new Error('Something went wrong');
+      })
+    .then((data) => {
+        alert(data)
+        location.reload()
+    }
+    ).catch((data) => {
+        alert(data)
+        location.reload()
+    })
+}

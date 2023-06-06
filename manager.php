@@ -107,7 +107,9 @@ else{
                     if ($row != null) {
                         for($i=0;$i<sizeof($row);$i++){
                             echo "<div class='top' id='1'>
-                            <h3 id='titleArtSec'>".$row[$i]['username']."</h3>
+                            <div class='c'>
+                            <h3 id='titleArtSec'>".$row[$i]['username']."</h3><button id='eliminaUser' type=button onclick='delProfilo(\"".$row[$i]['username']."\")'>el</button>
+                            </div>
                             <input type='hidden' name='username".$i."' value='".$row[$i]['username']."' form='roleform'></input>
                             <div class='passBtnContainer'><button class='passBtn' id='button".$i."' onclick='passChange(this)'>cambia password</button></div>
                             <select id='choose' name='rolelist".$i."' form='roleform'>";
