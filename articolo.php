@@ -126,29 +126,44 @@ $query->execute([$id]);
                             ?>
                             <h3 id="h3formArticolo"><?php echo $articolo['titolo'];?></h3>
                             <?php 
-
-                            foreach ($paragrafi as $value) {
-                                if($value['stile']==1){
-                                    echo '<div class="notParagrafo">';
-                                }
-                                else{
-                                    echo '<div class="paragrafo">';
-                                }
-                                if($immagini!=null){
-                                    echo '<div class="immagini">';
+                            try {
+                                foreach ($paragrafi as $value) {
+                                    $cmp=1;
                                     foreach ($immagini as $val) {
-                                        if($value['id']==$val['idParagrafo']){
-                                            echo '<div class="immagine"><img class="imgPar" src="./img/'.$val['nome'].'"></div>';
+                                        if(strcmp($val['idParagrafo'],$value['id'])==0){
+                                            $cmp=0;
+                                            break;
                                         }
                                     }
+                                    if($value['stile']==1){
+                                        echo '<div class="notParagrafo">';
+                                    }
+                                    else{
+                                        echo '<div class="paragrafo">';
+                                    }
+                                    
+                                    if($cmp==0){
+                                        echo '<div class="immagini">';
+                                        foreach ($immagini as $val) {
+                                            if($value['id']==$val['idParagrafo']){
+                                                echo '<div class="immagine"><img class="imgPar" src="./img/'.$val['nome'].'"></div>';
+                                            }
+                                        }
+                                        echo '</div>';
+                                    }
+                                    if($cmp!=0){
+                                        echo '  <div id='.$value['id'].' class="paragrafoContentFull">';
+                                    }
+                                    else{echo '  <div id='.$value['id'].' class="paragrafoContent">';}
+                                    echo '<h2 class="paragrafoTitle">'.$value['titolo'].'</h2>
+                                    <p class="paragrafoText">'.$value['contenuto'].'</p>
+                                    </div>';
                                     echo '</div>';
                                 }
-                                echo '  <div id='.$value['id'].' class="paragrafoContent">
-                                <h2 class="paragrafoTitle">'.$value['titolo'].'</h2>
-                                <p class="paragrafoText">'.$value['contenuto'].'</p>
-                                </div>';
-                                echo '</div>';
+                            } catch (Exception $e) {
+                                echo "<p>$e</p>";
                             }
+                            
 
                             ?>
                         </article>
