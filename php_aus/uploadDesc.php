@@ -1,9 +1,9 @@
 <?php
 session_start();
 $id = $_REQUEST["id"];
-$title = $_REQUEST["title"];
+$title = strip_tags($_REQUEST["title"]);
 $img = $_REQUEST["img"];
-$content = $_REQUEST["content"];
+$content = strip_tags($_REQUEST["content"]);
 $hint = "";
 $user = "";
 try{
@@ -47,7 +47,9 @@ try{
   $query= $pdo->prepare($text);
   $query->execute();
 
-  $hint = $query->fetch()['id'];
+  if($id == ""){$hint = $query->fetch()['id'];}else{
+    $hint = $id;
+  };
 }
 catch (PDOException $e){
   echo $e;

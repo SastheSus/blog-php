@@ -1,6 +1,6 @@
 <?php
 session_start();
-$content = $_REQUEST["content"];
+$content = strip_tags($_REQUEST["content"]);
 $article = $_REQUEST["article"];
 $risposta = $_REQUEST["risposta"];
 $articleRis = $article;

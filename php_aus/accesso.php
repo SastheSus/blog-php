@@ -1,6 +1,6 @@
 <?php
 session_start();
-$email = $_REQUEST["email"];
+$email = strip_tags($_REQUEST["email"]);
 $password = $_REQUEST["password"];
 $hint = "";
 $user = "";

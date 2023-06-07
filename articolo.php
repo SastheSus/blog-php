@@ -169,11 +169,11 @@ $query->execute([$id]);
                             ?>
                         </article>
                         <div id="formCommenti">
-                            <form action="" onsubmit="return sendComment(this)" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="article" value="<?php echo $id?>"></input>
-                                <input id="inputCommento" type="text" name='content' placeholder="scrivi qualcosa..." ></input>
+                            <form action=<?php if(!empty($_SESSION['user'])){echo'"" onsubmit="return sendComment(this)"';}else{echo '"./login.php"';}?>  method="post" enctype="multipart/form-data">
+                                <input type="hidden" <?php if(!empty($_SESSION['user'])){echo'name="article"';}?> value="<?php echo $id?>"></input>
+                                <input id="inputCommento" type="text" <?php if(!empty($_SESSION['user'])){echo'name="content"';}?> placeholder="scrivi qualcosa..." ></input>
                                 
-                                <input id="send" type="submit">
+                                <input id="send" type="submit" >
                             </form>
                             <div id="commentZone">
                             <?php
@@ -190,7 +190,7 @@ $query->execute([$id]);
                                         <h3 class="userCommento">'.$value['utente'].'</h3><p class="dateCommento">'.$value['giorno'].'</p>
                                         <p class="contentCommento">'.$value['contenuto'].'</p>
                                         <button class="buttonRispCommento" onclick="risposta('.$value['id'].')">rispondi</button>';
-                                    if($_SESSION['user']==$value['utente']){
+                                    if(!empty($_SESSION['user']) && $_SESSION['user']==$value['utente']){
                                         echo '<button class="buttonRispCommento" onclick="delComment('.$value['id'].','.$id.')">elimina</button>';
                                     }
                                     echo '</div>';

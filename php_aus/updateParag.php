@@ -3,10 +3,10 @@ session_start();
 $article = $_REQUEST["article"];
 $paragrafo = $_REQUEST["paragrafo"];
 $style = $_REQUEST["style"];
-$title = $_REQUEST["title"];
+$title = strip_tags($_REQUEST["title"]);
 $img = $_REQUEST["img"];
 $input = $_REQUEST["input"];
-$content = $_REQUEST["content"];
+$content = strip_tags($_REQUEST["content"]);
 $hint = "";
 $user = "";
 
@@ -56,7 +56,7 @@ try{
 }
 catch (PDOException $e){
     echo "<p style='width: 100%; text-align: center; background-color: red;'>".$e."</p>";
-    $hint="";
+    $hint="<p style='width: 100%; text-align: center; background-color: red;'>".$e."</p>";
     exit();
 }
 

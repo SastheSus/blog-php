@@ -90,11 +90,12 @@ const invia2 = (artId) =>{
                 xhr.open("GET", "http://localhost/blog-php/php_aus/updateParag.php?article="+artId+"&paragrafo="+i+"&style=" + style + "&title=" + subTitleVal + "&content=" + textareaVal + "&img=" + imgStr + "&input=" + imgIn, true);
                 xhr.send();
                 xhr.onload = () => {
-                    //alert(9)
+                    alert(9)
+                    alert(xhr.responseText)
                     console.log(xhr.responseText)
                 }
                 xhr.onerror = function() {
-                    console.log("1 "+xhr.responseText)
+                    allert("1 "+xhr.responseText)
                 }
             } catch (error) {
                 console.log("2 "+error)
