@@ -42,13 +42,14 @@ $query->execute([$id]);
                         ?>
                     </li>
                     <li><?php
+                        if(!empty($_SESSION['user'])){
                         $text = "SELECT * FROM utenti WHERE username = ?";
                         $query= $pdo->prepare($text);
                         $query->execute([$_SESSION['user']]);
                         $row = $query->fetch();
                         if($row['ruolo']=='ADMIN'){
                             echo '<a href="./manager.php">users manager</a>';
-                        }
+                        }}
                         ?>
                     </li>
                     <li id="logli">
