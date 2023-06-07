@@ -16,6 +16,10 @@ const close_session = () =>{
 }
 
 function setVar(val) {
+    var par = document.querySelectorAll(".paragrafo")
+    par.forEach(element => {
+        imgInputs[element['id']] = element.querySelectorAll("#imgAndBtnContainer"+element['id']).length
+    });
     paragsPhp = val-1;
     parags +=val;
 }
